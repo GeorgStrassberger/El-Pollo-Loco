@@ -1,6 +1,10 @@
 class Chicken extends MovableObject {
 
 
+    y = 350;
+    height = 80;
+    width = 80;
+
     constructor() {
 
         // das Bild für Chicken laden
