@@ -8,37 +8,51 @@ class World {
     canvas;
     ctx;
     clouds = [
-        new Cloud()
+        new Cloud(),
     ];
+    backgroundObjects = [
+        new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png')
+    ];
+
+
+
+
 
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.draw();
-
     }
 
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clear the Canvas 
 
+        this.addToMap(this.character); // draw the Character
+        this.addObjectsToMap(this.backgroundObjects); // draw the backgroundObjects
+        this.addObjectsToMap(this.clouds); // draw the clouds
+        this.addObjectsToMap(this.enemies); // draw the chicken enemies
 
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height)
-        });
-
-
-        this.clouds.forEach(cloud => {
-            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height)
-        });
-
-        // Draw wird immer wieder aufgerufen
+        // Draw wird immer wieder aufgerufen so oft wie die Garfikkarte kann -> fps
         let self = this; //requestAnimationFrame kennt die this methode nicht und wird deshalb in eine Variable gepackt.
         requestAnimationFrame(function() {
             self.draw();
         });
     }
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
+    }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    }
+
+
+
+
 
 }

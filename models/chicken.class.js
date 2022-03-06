@@ -1,5 +1,6 @@
 class Chicken extends MovableObject {
 
+
     constructor() {
 
         // das Bild für Chicken laden
