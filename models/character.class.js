@@ -2,6 +2,7 @@ class Character extends MovableObject {
 
 
     height = 300;
+    width = 100;
     y = 135;
     IMAGES_WALKING_CHARACTER = [
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -11,7 +12,7 @@ class Character extends MovableObject {
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png',
     ];
-    currentImage = 0;
+
 
 
     constructor() {
@@ -22,12 +23,12 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_WALKING_CHARACTER.length; // let i = 7 % 6; => 1, Rest 1
+            let i = this.currentWalkingImage % this.IMAGES_WALKING_CHARACTER.length; // let i = 7 % 6; => 1, Rest 1
             // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
             let path = this.IMAGES_WALKING_CHARACTER[i];
             this.img = this.imageCache[path];
-            this.currentImage++;
-        }, 250);
+            this.currentWalkingImage++;
+        }, 1000 / 4);
     }
 
     jump() {

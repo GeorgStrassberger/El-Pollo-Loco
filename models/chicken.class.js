@@ -10,7 +10,7 @@ class Chicken extends MovableObject {
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/2-Ga_centro.png',
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png',
     ];
-    currentImage = 0;
+
 
     constructor() {
 
@@ -35,12 +35,12 @@ class Chicken extends MovableObject {
 
     animateChickensWaking() {
         setInterval(() => {
-            let i = this.currentImage % this.IMAGES_WALKING_CHICKEN.length; // let i = 7 % 6; => 1, Rest 1
+            let i = this.currentWalkingImage % this.IMAGES_WALKING_CHICKEN.length; // let i = 7 % 6; => 1, Rest 1
             // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
             let path = this.IMAGES_WALKING_CHICKEN[i];
             this.img = this.imageCache[path];
-            this.currentImage++;
-        }, 250);
+            this.currentWalkingImage++;
+        }, 1000 / 5);
     }
 
 
