@@ -1,23 +1,21 @@
 class World {
+    canvas;
+    ctx;
     character = new Character();
     enemies = [
         new Chicken(),
         new Chicken(),
         new Chicken(),
     ];
-    canvas;
-    ctx;
     clouds = [
         new Cloud(),
     ];
     backgroundObjects = [
+        new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0),
         new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png', 0),
         new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/1.png', 0),
         new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0),
     ];
-
-
-
 
 
     constructor(canvas) {
@@ -30,7 +28,6 @@ class World {
     draw() { // es wird der reihe nach gezeichnet. -> 0)leer zeichnen 1) background 2) cloud 3) enemy 4) character.
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clear the Canvas 
-
         this.addObjectsToMap(this.backgroundObjects); // draw the backgroundObjects
         this.addObjectsToMap(this.clouds); // draw the clouds
         this.addObjectsToMap(this.enemies); // draw the chicken enemies
