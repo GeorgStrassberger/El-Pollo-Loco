@@ -19,21 +19,15 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING_CHICKEN);
         //Start Koordinate in X-Richtung angeben 
         this.x = 200 + Math.random() * 500; //Normale Mathe regeln "Punkt vor Stricht", 200 + (0-1) * 500 ## min. 200 - max. 700. 
+        this.speed = this.speed + Math.random() * 0.25; // speed wird überschrieben mit speed 0.2 + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
         // lässt die Hünchen nach links laufen,
         this.moveChickensLeft();
-        this.animateChickensWaking();
+        this.animate();
     }
 
-    moveChickensLeft() {
-        setInterval(() => {
-            if (this.x < -79) {
-                this.x = 720;
-            }
-            this.x -= 0.5;
-        }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
-    };
+    animate() {
+        this.moveLeft();
 
-    animateChickensWaking() {
         setInterval(() => {
             let i = this.currentWalkingImage % this.IMAGES_WALKING_CHICKEN.length; // let i = 7 % 6; => 1, Rest 1
             // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
@@ -42,6 +36,18 @@ class Chicken extends MovableObject {
             this.currentWalkingImage++;
         }, 1000 / 5);
     }
+
+
+    moveChickensLeft() {
+        setInterval(() => {
+            if (this.x < -79) {
+                this.x = 720;
+            }
+            this.x -= this.speed;
+        }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
+    };
+
+
 
 
 

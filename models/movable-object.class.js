@@ -7,6 +7,8 @@ class MovableObject {
     width = 100;
     imageCache = {};
     currentWalkingImage = 0;
+    speed = 0.2;
+
 
 
     loadImage(path) { // loadImage('img/test.png')
@@ -31,7 +33,13 @@ class MovableObject {
         console.log('Moving right');
     }
 
+
     moveLeft() {
-        console.log('Moving left');
-    }
+        setInterval(() => {
+            if (this.x < 0) {
+                this.x = Math.random() * 700;
+            }
+            this.x -= this.speed;
+        }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
+    };
 }
