@@ -12,7 +12,7 @@ class Character extends MovableObject {
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png',
     ];
-
+    world;
 
 
     constructor() {
@@ -22,13 +22,24 @@ class Character extends MovableObject {
     }
 
     animate() {
+
+
+
+
+
+
+
         setInterval(() => {
-            let i = this.currentWalkingImage % this.IMAGES_WALKING_CHARACTER.length; // let i = 7 % 6; => 1, Rest 1
-            // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
-            let path = this.IMAGES_WALKING_CHARACTER[i];
-            this.img = this.imageCache[path];
-            this.currentWalkingImage++;
-        }, 1000 / 4);
+            if (this.world.keyboard.RIGHT) {
+
+                // Walk animation
+                let i = this.currentWalkingImage % this.IMAGES_WALKING_CHARACTER.length; // let i = 7 % 6; => 1, Rest 1
+                // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
+                let path = this.IMAGES_WALKING_CHARACTER[i];
+                this.img = this.imageCache[path];
+                this.currentWalkingImage++;
+            }
+        }, 1000 / 10);
     }
 
     jump() {
