@@ -3,9 +3,18 @@ class World {
     ctx;
     keyboard;
     character = new Character();
-    enemies = [new Chicken(), new Chicken(), new Chicken()];
+    enemies = [
+        new Chicken(),
+        new Chicken(),
+        new Chicken()
+    ];
     clouds = [new Cloud()];
-    backgroundObjects = [new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0), new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png', 0), new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/1.png', 0), new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0)];
+    backgroundObjects = [
+        new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0),
+        new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png', 0),
+        new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/1.png', 0),
+        new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0)
+    ];
 
 
     constructor(canvas, keyboard) {
@@ -41,8 +50,21 @@ class World {
         });
     }
 
-    addToMap(mo) {
+
+
+    addToMap(mo) { // MO = Movable Objects
+
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 
 

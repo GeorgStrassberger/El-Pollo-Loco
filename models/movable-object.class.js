@@ -8,6 +8,7 @@ class MovableObject {
     imageCache = {};
     currentWalkingImage = 0;
     speed = 0.2;
+    otherDirection = false;
 
 
 

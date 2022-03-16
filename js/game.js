@@ -19,33 +19,33 @@ window.addEventListener('keydown', (event) => {
         keyboard.RIGHT = true;
     }
     if (event.keyCode == 37) { // ArrowLEFT
-        keyboard.LEFT == true;
+        keyboard.LEFT = true;
     }
     if (event.keyCode == 38) { // ArrowUP
-        keyboard.UP == true;
+        keyboard.UP = true;
     }
     if (event.keyCode == 40) { // ArrowDOWN
-        keyboard.DOWN == true;
+        keyboard.DOWN = true;
     }
-    if (event.keyCode == 32) { // ArrowSPACE
-        keyboard.SPACE == true;
+    if (event.keyCode == 32) { // SPACE
+        keyboard.SPACE = true;
     }
-})
+});
 
 window.addEventListener('keyup', (event) => {
     if (event.keyCode == 39) { // ArrowRIGHT
         keyboard.RIGHT = false;
     }
     if (event.keyCode == 37) { // ArrowLEFT
-        keyboard.LEFT == false;
+        keyboard.LEFT = false;
     }
     if (event.keyCode == 38) { // ArrowUP
-        keyboard.UP == false;
+        keyboard.UP = false;
     }
     if (event.keyCode == 40) { // ArrowDOWN
-        keyboard.DOWN == false;
+        keyboard.DOWN = false;
     }
-    if (event.keyCode == 32) { // ArrowSPACE
-        keyboard.SPACE == false;
+    if (event.keyCode == 32) { // SPACE
+        keyboard.SPACE = false;
     }
-})
+});
