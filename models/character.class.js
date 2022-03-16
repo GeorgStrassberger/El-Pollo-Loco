@@ -14,7 +14,7 @@ class Character extends MovableObject {
         '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png',
     ];
     world;
-
+    walking_sound = new Audio("../audio/walking.mp3");
 
     constructor() {
         super().loadImage('../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
@@ -25,15 +25,19 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.walking_sound.pause(); // sound alle 1000/60 millisekunden anhalten & und wieder starten
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { // && X-Koordinate größer als _end_x (bedingung) FALSE 
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.walking_sound.play();
             }
-            if (this.world.keyboard.LEFT) {
+
+            if (this.world.keyboard.LEFT && this.x > 0) { // && X-Koordinate ist größer als 0 --> bei NULL wird die (bedingung) FALSE und der Character kann nicht weiter Links laufen.
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.walking_sound.play();
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 100; // Character weiter nach rechts setzen
         }, 1000 / 60);
 
         setInterval(() => {

@@ -5,9 +5,7 @@ class World {
     camera_x = 0;
 
     character = new Character();
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    backgroundObjects = level1.backgroundObjects;
+    level = level1;
 
 
     constructor(canvas, keyboard) {
@@ -28,12 +26,12 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); // verschiebt das CTX nach links. 
 
-        this.addObjectsToMap(this.backgroundObjects); // draw the backgroundObjects
-        this.addObjectsToMap(this.clouds); // draw the clouds
-        this.addObjectsToMap(this.enemies); // draw the chicken enemies
+        this.addObjectsToMap(this.level.backgroundObjects); // draw the backgroundObjects
+        this.addObjectsToMap(this.level.clouds); // draw the clouds
+        this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
         this.addToMap(this.character); // draw the Character
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen
 
         // Draw wird immer wieder aufgerufen so oft wie die Garfikkarte kann -> fps
         let self = this; //requestAnimationFrame kennt die this methode nicht und wird deshalb in eine Variable gepackt.
