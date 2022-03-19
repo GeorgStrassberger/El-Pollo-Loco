@@ -9,7 +9,24 @@ class MovableObject {
     currentWalkingImage = 0;
     speed = 0.2;
     otherDirection = false;
+    speedY = 0;
+    acceleration = 2.5;
 
+
+    applyGravity() {
+        setInterval(
+            () => {
+                if (this.isAboveGround() || this.speedY > 0) {
+                    this.y -= this.speedY;
+                    this.speedY -= this.acceleration;
+                }
+            }, 1000 / 25);
+    }
+
+    //befindet sich der Charcter am Boden?
+    isAboveGround() {
+        return this.y < 135;
+    }
 
 
     loadImage(path) { // loadImage('img/test.png')
@@ -29,18 +46,24 @@ class MovableObject {
         });
     }
 
-
-    moveRight() {
-        console.log('Moving right');
+    playAnimation(images) {
+        // Walk animation
+        let i = this.currentWalkingImage % this.IMAGES_WALKING.length; // let i = 7 % 6; => 1, Rest 1
+        // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentWalkingImage++;
     }
 
+    moveRight() {
+        this.x += this.speed;
+    }
 
     moveLeft() {
-        setInterval(() => {
-            if (this.x < 0) {
-                this.x = Math.random() * 700;
-            }
-            this.x -= this.speed;
-        }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
+        this.x -= this.speed;
+    };
+
+    jump() {
+        this.speedY = 30;
     };
 }
