@@ -38,7 +38,10 @@ class Character extends MovableObject {
         '../img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png',
     ];
     world;
-    walking_sound = new Audio("../audio/walking.mp3");
+    walking_sound = new Audio('../audio/walking.mp3');
+    jumping_sound = new Audio('../audio/jump.mp3');
+    hurt_sound = new Audio('../audio/hurt.mp3');
+
 
     constructor() {
         super().loadImage('../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
@@ -69,6 +72,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
+                this.jumping_sound.play();
             }
             this.world.camera_x = -this.x + 100; // Character weiter nach rechts setzen
         }, 1000 / 60);
@@ -76,8 +80,10 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.hurt_sound.pause();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.hurt_sound.play();
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
@@ -86,7 +92,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 1000 / 20);
+        }, 1000 / 10);
     }
 
 

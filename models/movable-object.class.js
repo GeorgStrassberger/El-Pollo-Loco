@@ -1,12 +1,4 @@
-class MovableObject {
-
-    x = 120;
-    y = 280;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
@@ -28,28 +20,6 @@ class MovableObject {
     //befindet sich der Charcter am Boden?
     isAboveGround() {
         return this.y < 135;
-    }
-
-
-    loadImage(path) { // loadImage('img/test.png')
-        this.img = new Image(); // this.img = document.getElementById('Image') <img id="image">
-        this.img.src = path;
-    }
-
-    draw(ctx) {
-        //Contect Zeichne Build (BIld, Start X, StartY, Breite, Höhe)
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) { // Rand wird nur noch auf die beiden Objecte CHARATER & CHICKEN angewannt
-            // Blue rectangle
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
     }
 
     // character.isColliding(Chicken)
@@ -78,20 +48,6 @@ class MovableObject {
 
     isDead() {
         return this.energy == 0;
-    }
-
-
-
-    /**
-     * 
-     * @param {Array} arr -['img/image1.png', 'img/image3.png', ...] 
-     */
-    loadImages(arr) { // läd alle Bilder in das JSON rein.
-        arr.forEach((path) => { // forEach -> fürJeden, durch das JSON durch Iterieren.
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
     playAnimation(images) {
