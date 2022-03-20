@@ -6,11 +6,13 @@ class MovableObject {
     height = 150;
     width = 100;
     imageCache = {};
-    currentWalkingImage = 0;
+    currentImage = 0;
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
+    lastHit = 0;
 
 
     applyGravity() {
@@ -58,6 +60,28 @@ class MovableObject {
             this.y < mo.y + mo.height;
     }
 
+    hit() {
+        this.energy -= 5; //energy wird immer bei kolision abgezogen immer wenn kolision true ist und das bild neu gemalt wird.
+        if (this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        //Millisekunden Aktuell - Millisekunden lastHit
+        let timepassed = new Date().getTime() - this.lastHit; //Unterschied ausrechnen wieviel Zeit ist vergangen? 
+        timepassed = timepassed / 1000; // Millisekunden durch 1000 Teilen = Sekunden. 
+        return timepassed < 0.5; // true or false
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+
+
     /**
      * 
      * @param {Array} arr -['img/image1.png', 'img/image3.png', ...] 
@@ -72,11 +96,11 @@ class MovableObject {
 
     playAnimation(images) {
         // Walk animation
-        let i = this.currentWalkingImage % this.IMAGES_WALKING.length; // let i = 7 % 6; => 1, Rest 1
+        let i = this.currentImage % images.length; // let i = 7 % 6; => 1, Rest 1
         // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentWalkingImage++;
+        this.currentImage++;
     }
 
     moveRight() {

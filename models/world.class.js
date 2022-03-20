@@ -3,7 +3,6 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-
     character = new Character();
     level = level1;
 
@@ -26,7 +25,8 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    console.log('Collision with Character: ', enemy);
+                    this.character.hit();
+                    //                    console.log('Collision with Character: ', this.character.energy); // logt mir die aktuelle energy anzeige raus.
                 }
             });
         }, 200);
@@ -59,7 +59,6 @@ class World {
     }
 
     addToMap(mo) { // MO = Movable Objects
-
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
