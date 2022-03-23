@@ -19,7 +19,11 @@ class MovableObject extends DrawableObject {
 
     //befindet sich der Charcter am Boden?
     isAboveGround() {
-        return this.y < 135;
+        if (this instanceof ThrowableObject) { // wenn es aus der klasse TO kommt soll es immer falllen (aus dem spielfeld)
+            return true;
+        } else {
+            return this.y < 135;
+        }
     }
 
     // character.isColliding(Chicken)

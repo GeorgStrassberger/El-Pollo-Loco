@@ -6,6 +6,7 @@ class World {
     character = new Character();
     level = level1;
     statusbar = new Statusbar();
+    throwableObjects = [];
 
 
     constructor(canvas, keyboard) {
@@ -15,6 +16,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.run();
     }
 
     // Verbindung zwischen World und Character .class
@@ -22,21 +24,32 @@ class World {
         this.character.world = this;
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy);
-                    console.log('Collision with Character: ', this.character.energy); // logt mir die aktuelle energy anzeige raus.
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);
     }
 
+    checkThrowObjects() {
+        if (this.keyboard.SPACE) {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            this.throwableObjects.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.statusbar.setPercentage(this.character.energy);
+                console.log('Collision with Character: ', this.character.energy); // logt mir die aktuelle energy anzeige raus.
+            }
+        });
+    }
 
     draw() { // es wird der reihe nach gezeichnet. -> 0)leer zeichnen 1) background 2) cloud 3) enemy 4) character.
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clear the Canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clear the Canvas from x,y ,x+breit, y+höhe (koordienaten = leihnwand größe)
 
         this.ctx.translate(this.camera_x, 0); // verschiebt das CTX nach links.
         this.addObjectsToMap(this.level.backgroundObjects); // draw the backgroundObjects
@@ -49,6 +62,7 @@ class World {
         this.addToMap(this.character); // draw the Character
         this.addObjectsToMap(this.level.clouds); // draw the clouds
         this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
+        this.addObjectsToMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen
 
         // Draw wird immer wieder aufgerufen so oft wie die Garfikkarte kann -> fps
@@ -57,6 +71,7 @@ class World {
             self.draw();
         });
     }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
