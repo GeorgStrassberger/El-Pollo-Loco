@@ -24,7 +24,7 @@ class Endboss extends MovableObject {
         // das Bild für ChickenBoss laden
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
-        this.x = 719 * 3;
+        this.x = 2500;
         this.animate();
 
     }

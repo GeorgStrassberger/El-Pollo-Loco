@@ -52,7 +52,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.animate();
         this.applyGravity();
-    }
+    };
 
     animate() {
         setInterval(() => {
@@ -84,7 +84,7 @@ class Character extends MovableObject {
                 this.hurt_sound.pause();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.hurt_sound.play();
+                //    this.hurt_sound.play();
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
@@ -94,7 +94,7 @@ class Character extends MovableObject {
                 }
             }
         }, 1000 / 10);
-    }
+    };
 
 
 
