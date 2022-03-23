@@ -1,3 +1,4 @@
+"use strict"
 class Chicken extends MovableObject {
 
     height = 80;

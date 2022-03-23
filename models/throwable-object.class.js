@@ -1,3 +1,4 @@
+"use strict"
 class ThrowableObject extends MovableObject {
 
     IMAGES_BOTTLES = [
@@ -13,17 +14,35 @@ class ThrowableObject extends MovableObject {
         this.x = x;
         this.y = y;
         this.height = 60;
-        this.width = 50;
-        this.throw();
+        this.width = 60;
+        this.directionToThrow();
     }
 
 
-    throw () {
+    directionToThrow() {
+        if (world.character.otherDirection === true) {
+            this.throwLeft();
+        } else {
+            this.throwRight();
+        }
+    }
+
+
+    throwRight() {
         this.speedY = 30;
         this.applyGravity();
         // geschwindigkeit der Flasche in X richtung
         setInterval(() => {
             this.x += 10;
+        }, 25);
+    }
+
+    throwLeft() {
+        this.speedY = 30;
+        this.applyGravity();
+        // geschwindigkeit der Flasche in X richtung
+        setInterval(() => {
+            this.x -= 10;
         }, 25);
     }
 

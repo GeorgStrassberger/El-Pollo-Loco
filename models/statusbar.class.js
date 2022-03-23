@@ -1,3 +1,4 @@
+"use strict"
 class Statusbar extends DrawableObject {
 
     IMAGES = [

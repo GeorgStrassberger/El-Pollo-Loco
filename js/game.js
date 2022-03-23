@@ -3,16 +3,17 @@ let world;
 let keyboard = new Keyboard();
 
 
+
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+
 
 
     console.log('My Character is: ', world.character);
     //    console.log('My Character is: ', world['character']); // andere SchreibweiseS
 
 }
-
 
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 39) { // ArrowRIGHT

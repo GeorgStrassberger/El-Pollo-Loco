@@ -1,3 +1,4 @@
+"use strict"
 class Character extends MovableObject {
     height = 300;
     width = 100;

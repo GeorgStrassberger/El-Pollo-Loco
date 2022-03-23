@@ -1,3 +1,4 @@
+"use strict"
 class Cloud extends MovableObject {
     // werden fest deklariert , weil sie sich nicht ändern.
     y = 20;

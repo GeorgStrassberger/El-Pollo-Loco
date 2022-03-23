@@ -1,3 +1,4 @@
+"use strict"
 class World {
     canvas; // canvas.getContext ## Leihnwand zusammenhang
     ctx;
@@ -16,7 +17,9 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
-        this.run();
+        this.timeToCheckCollisions();
+        this.timeToThrowObjects();
+
     }
 
     // Verbindung zwischen World und Character .class
@@ -24,16 +27,23 @@ class World {
         this.character.world = this;
     }
 
-    run() {
+    timeToCheckCollisions() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkThrowObjects();
-        }, 200);
+
+        }, 100);
     }
+    timeToThrowObjects() {
+        setInterval(() => {
+            this.checkThrowObjects();
+        }, 100);
+    }
+
+
 
     checkThrowObjects() {
         if (this.keyboard.SPACE) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
+            let bottle = new ThrowableObject(this.character.x + 40, this.character.y + 140)
             this.throwableObjects.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
         }
     }
@@ -53,7 +63,6 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); // verschiebt das CTX nach links.
         this.addObjectsToMap(this.level.backgroundObjects); // draw the backgroundObjects
-
         this.ctx.translate(-this.camera_x, 0); // Back
         // ----Spoace for FIXED Objects ------
         this.addToMap(this.statusbar);

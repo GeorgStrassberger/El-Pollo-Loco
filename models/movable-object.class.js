@@ -1,3 +1,4 @@
+"use strict"
 class MovableObject extends DrawableObject {
     speed = 0.2;
     otherDirection = false;
@@ -35,7 +36,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 5; //energy wird immer bei kolision abgezogen immer wenn kolision true ist und das bild neu gemalt wird.
+        this.energy -= 10; //energy wird immer bei kolision abgezogen immer wenn kolision true ist und das bild neu gemalt wird.
         if (this.energy <= 0) {
             this.energy = 0;
         } else {

@@ -26,6 +26,7 @@
     <script src="../models/endboss.class.js"></script>
     <script src="../levels/level1.js"></script>
     <script src="../js/game.js"></script>
+    <script src="../js/fullscreen.js"></script>
 
 
     <title>El Pollo Loco</title>
@@ -33,14 +34,20 @@
 </head>
 
 <body onload="init()">
+
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480">
+    <div class="canvas_aera">
+        <canvas id="canvas" width="720" height="480">
+        Your browser does not support the canvas element.
+        </canvas>
+        <div class="screen_images" onclick="goFullScreen()" title="Fullscreen">
+            <img src="../img/icons/fullscreen-12-32.png" alt="fullscreen">
+        </div>
+    </div>
 
-
-    </canvas>
-
-
+    <br>
+    <button onclick="goFullScreen()">Vollbild</button>
 </body>
 
 </html>

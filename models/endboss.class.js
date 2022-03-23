@@ -1,3 +1,4 @@
+"use strict"
 class Endboss extends MovableObject {
 
     height = 400;

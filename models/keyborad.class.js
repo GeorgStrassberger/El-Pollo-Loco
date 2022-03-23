@@ -1,3 +1,4 @@
+"use strict"
 class Keyboard {
 
     LEFT = false; // move lift, nach links
