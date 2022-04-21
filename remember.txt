@@ -1,0 +1,71 @@
+Was hab ich gemacht ?
+
+COIN_BAR ERSTELLT:
+1: JavaScrit-Datei erstellen - coinbar.class.js;
+2: class Coin erstellen und vererbung angeben (extends)
+3: funtionen mit im construtor übergeben
+4: Variablen anlegen
+5: funktionen aufrufen
+
+6: JS.datei im HTML-Header angeben zum laden der .js
+
+7: in world.class.js -> coin_bar = new CoinBar(); anlegen -> der Variable das Object CoinBar zuweisen.
+8: in world.class.js -> in der Draw function einfügen um sie im canvas zu zeichen
+
+COIN ERSTELLT:
+1: JavaScrit-Datei erstellten - coin.class.js;
+2: class Con erstellen und vererbung angeben.
+3: funtionen mit im construtor übergeben
+4: Variablen anlegen
+5: funktionen aufrufen (z.B. Animation)
+
+6: JS.datei im HTML-Header angeben
+
+7: in level1.js new Coin() Objecte in einem Array erstellen mit Positions angaben
+8: in world.class.js -> in der Draw function einfügen um sie im canvas zu zeichen
+
+
+To Liste:
+Mehr Münzen einfügen (mindestens 5)
+Flaschen erstellen & einfügen (mindestens 5)
+
+colisionsabfrage zwischen Character und Münzen
+colisionsabfrage zwischen Character und Flaschen
+
+wenn Collision mit Münze dann den Zähler erhöhen (anzeige wird gefüllt)
+wenn Collision mit Flasche dann den Zähler erhöhen (anzeige wird gefüllt)
+    -> freigabe Flasche kann geworfen werden bis zähler wieder auf 0 ist.
+
+Animation Flasche drehen beim werfen
+
+Animation Flasche Exprodiert bei collision mit Ground. (Bild andert sich)
+
+collisionsabfrage Flasche Hünchen zu töten
+collisionsabfrage Jump Character und Hühnchen
+
+todes animation Hühnchen einfügen + sound
+
+Steuerung  inder dem Canvas anzeigen
+
+Responsiv machen.
+
+Start bildschirm einfügen.
+Gameover bildschirm einfügen
+
+warte und schlaf animation einfügen + sounds
+
+hintergrund sound einfügen
+
+endboss angriffe einfügen -> sprint nach vorne.
+
+endboss HP einfügen 
+
+endboss todes animation einfügen
+
+küken einfügen.
+
+characterbild zuschneiden? ist zu groß!!
+
+
+
+2tes level erstellen in dem die Hünchen hüpfen
