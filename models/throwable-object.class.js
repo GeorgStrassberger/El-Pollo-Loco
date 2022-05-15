@@ -8,6 +8,7 @@ class ThrowableObject extends MovableObject {
         this.height = 60;
         this.width = 60;
         this.directionToThrow();
+        //this.animate();
     };
 
     IMAGES_BOTTLES = [
@@ -30,7 +31,7 @@ class ThrowableObject extends MovableObject {
 
     // wirft nach Links
     throwRight() {
-        this.speedY = 30;
+        this.speedY = 20;
         this.applyGravity();
         // geschwindigkeit der Flasche in X richtung
         setInterval(() => {
@@ -40,11 +41,27 @@ class ThrowableObject extends MovableObject {
 
     // wirft nach Rechts
     throwLeft() {
-        this.speedY = 30;
+        this.speedY = 20;
         this.applyGravity();
         // geschwindigkeit der Flasche in X richtung
         setInterval(() => {
             this.x -= 10;
         }, 25);
     };
+
+    IMAGES_THROWING_BOTTLES = [ // Array für die Münzanimation
+        '../img/6.botella/Rotación/Mesa de trabajo3.png',
+        '../img/6.botella/Rotación/Mesa de trabajo4.png',
+        '../img/6.botella/Rotación/Mesa de trabajo5.png',
+        '../img/6.botella/Rotación/Mesa de trabajo6.png',
+    ];
+
+    amountCoins = 0; // Anzahl der eingesammelten Münzen
+
+    animate() {
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_THROWING_BOTTLES);
+        }, 400);
+    };
+
 };

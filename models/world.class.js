@@ -21,6 +21,10 @@ class World {
     coin_bar = new CoinBar();
     bottle_bar = new BottleBar();
     throwableObjects = []; // muss noch gefüllt werden wenn Char mit Falschen colidiert
+    amountOfBottlesToThrow = 0;
+    throw_sound = new Audio('../audio/throw.mp3');
+    coin_sound = new Audio('../audio/coin.wav');
+    bottle_sound = new Audio('../audio/bottle.mp3');
 
     // Verbindung zwischen World und Character .class
     // Übergibt THIS als Objetct in WORLD
@@ -36,23 +40,32 @@ class World {
         }, 100);
     };
 
+
     timeToThrowObjects() {
         setInterval(() => {
-            this.checkThrowObjects();
-        }, 100);
+            this.throwObjects();
+        }, 500);
     };
+
     // Überprüfe Werfe Objekt (Flasche)
     // Abfrage: -aktuell- Flasche werfen wenn die Leertaste gedrückt wird.
     // Später: wenn Array gefüllt ist UND die Taste aktiv ist.
-    checkThrowObjects() {
-        if (this.keyboard.SPACE) {
-            let bottle = new ThrowableObject(this.character.x + 40, this.character.y + 140)
+
+    throwObjects() {
+        if (this.keyboard.SPACE && this.amountOfBottlesToThrow > 0) {
+            this.throw_sound.play(); // abspiele wurf sound
+            let bottle = new ThrowableObject(this.character.x + 40, this.character.y + 140) // erstelle neues FlasschenObject an der Koordinate x Y 
             this.throwableObjects.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
+            this.amountOfBottlesToThrow -= 1; //verringere hilfszähler
+            this.bottle_bar.collectedBottles -= 1; // //verringere zähler
+            setTimeout(() => this.throwableObjects.splice(0, 1), 1300); // entferne im array an der stelle 0 um 1 
+            this.bottle_bar.setBottleBar(); // flaschenAnzeige neu aufrufen zu aktuallisieren
         };
     };
+
     // Überprüfe Kollisionenen
     // Abrage: Schleife geht alle Gegner durch ob eine Kollision besteht.
-    // wenn ja(true) 
+    // wenn ja(true)
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -64,11 +77,13 @@ class World {
     };
 
     checkCollisionsWithBottles() {
-        this.level.bottle.forEach((bottles, index) => {
-            if (this.character.isColliding(bottles)) {
-                this.level.bottle.splice(index, 1);
-                this.bottle_bar.collectBottle();
-                this.bottle_bar.setBottleBar(this.bottle_bar.collectedBottles);
+        this.level.bottle.forEach((bottles, index) => { // checkt alle 0,1sek alle flaschen im level
+            if (this.character.isColliding(bottles)) { // wenn eine collision zwischen char und flasche eintritt
+                this.bottle_sound.play();
+                this.level.bottle.splice(index, 1); // entferne die flasche aus dem level
+                this.bottle_bar.collectBottle(); // führe sammelFlasche aus und erhöhe um 1
+                this.bottle_bar.setBottleBar(); // aktuallisiere flaschenBar mit dem wert von collectedBottles.
+                this.amountOfBottlesToThrow += 1; // erhöhe meine hilfsvariable um 1.
             };
         });
     };
@@ -76,6 +91,7 @@ class World {
     checkCollisionsWithCoins() {
         this.level.coin.forEach((coins, index) => {
             if (this.character.isColliding(coins)) {
+                this.coin_sound.play();
                 this.level.coin.splice(index, 1);
                 this.coin_bar.collectCoin();
                 this.coin_bar.setCoinBar(this.coin_bar.collectedCoins);

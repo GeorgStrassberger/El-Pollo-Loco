@@ -9,7 +9,7 @@ class CoinBar extends DrawableObject {
         this.width = 200; //Bild breite
         this.height = 60; // Bild höhe
         this.setCoinBar(0); // Übergibt den start wert 0
-        this.collectCoin();
+        //this.collectCoin();
     };
 
     IMAGES = [
