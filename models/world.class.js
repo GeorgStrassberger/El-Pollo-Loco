@@ -32,6 +32,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkCollisionsWithBottles();
+            this.checkCollisionsWithCoins();
         }, 100);
     };
 
@@ -63,10 +64,21 @@ class World {
     };
 
     checkCollisionsWithBottles() {
-        this.level.bottle.forEach((bottles) => {
+        this.level.bottle.forEach((bottles, index) => {
             if (this.character.isColliding(bottles)) {
+                this.level.bottle.splice(index, 1);
                 this.bottle_bar.collectBottle();
                 this.bottle_bar.setBottleBar(this.bottle_bar.collectedBottles);
+            };
+        });
+    };
+
+    checkCollisionsWithCoins() {
+        this.level.coin.forEach((coins, index) => {
+            if (this.character.isColliding(coins)) {
+                this.level.coin.splice(index, 1);
+                this.coin_bar.collectCoin();
+                this.coin_bar.setCoinBar(this.coin_bar.collectedCoins);
             };
         });
     };
@@ -80,7 +92,6 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // Back
 
         // ----Spoace for FIXED Objects ------
-
         this.addToMap(this.life_bar);
         this.addToMap(this.coin_bar);
         this.addToMap(this.bottle_bar);
@@ -91,7 +102,7 @@ class World {
         this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
         this.addObjectsToMap(this.throwableObjects); // draw the throwableObjects (Bottle'S)
 
-        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.bottle);
 
         this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen

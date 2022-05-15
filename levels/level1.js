@@ -1,7 +1,5 @@
 "use strict"
-
 const level1 = new Level(
-    // Coins und Flaschen dazufügen
     [
         new Chicken(700), //Die Start Koordinate X wird hier festgelegt
         new Chicken(1000),

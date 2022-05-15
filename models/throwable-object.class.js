@@ -16,6 +16,8 @@ class ThrowableObject extends MovableObject {
         '../img/6.botella/Rotación/Mesa de trabajo 1 copia 5.png',
         '../img/6.botella/Rotación/Mesa de trabajo 1 copia 6.png',
     ];
+
+    throw_sound = new Audio('../audio/throw.mp3');
     // Richtung zu werfen
     // Abfrage: ob der Cjaracter nach Links oder Rechts sieht
     directionToThrow() {

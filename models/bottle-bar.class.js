@@ -33,17 +33,19 @@ class BottleBar extends DrawableObject {
      * @param {number} collectedBottles 
      */
     setBottleBar(collectedBottles) {
+        console.log('collectedBottles: ', collectedBottles);
         this.collectedBottles = collectedBottles; // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     };
-
     /**
      * resolveImageIndex changes the status image of the bottlebar
      * @returns 
      */
     resolveImageIndex() {
-        if (this.collectedBottles == 1) {
+        if (this.collectedBottles == 0) {
+            return 0;
+        } else if (this.collectedBottles == 1) {
             return 1;
         } else if (this.collectedBottles == 2) {
             return 2;
@@ -53,8 +55,6 @@ class BottleBar extends DrawableObject {
             return 4;
         } else if (this.collectedBottles == 5) {
             return 5;
-        } else {
-            return 0;
         };
     };
 };

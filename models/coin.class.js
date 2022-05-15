@@ -16,7 +16,7 @@ class Coin extends MovableObject {
         '../img/8.Coin/Moneda2.png',
     ];
 
-    amountCoin = 0; // Anzahl der eingesammelten Münzen
+    amountCoins = 0; // Anzahl der eingesammelten Münzen
 
     animate() {
         setInterval(() => {

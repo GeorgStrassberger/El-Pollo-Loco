@@ -8,7 +8,8 @@ class CoinBar extends DrawableObject {
         this.y = 50; //Start Punkt in Y zum einfügen des Bildes
         this.width = 200; //Bild breite
         this.height = 60; // Bild höhe
-        this.setStatusBar(0); // Übergibt den start wert 0
+        this.setCoinBar(0); // Übergibt den start wert 0
+        this.collectCoin();
     };
 
     IMAGES = [
@@ -19,27 +20,35 @@ class CoinBar extends DrawableObject {
         '../img/7.Marcadores/Barra/Marcador moneda/Verde/80_.png',
         '../img/7.Marcadores/Barra/Marcador moneda/Verde/100_.png',
     ];
-    amountCoins = 0;
+    collectedCoins = 0;
 
-    setStatusBar(amountCoins) {
-        this.amountCoins = amountCoins; // => 0 ... 5
+    collectCoin() {
+        this.collectedCoins += 1;
+        if (this.collectedCoins > 5) {
+            this.collectedCoins = 5;
+        }
+    }
+
+    setCoinBar(collectedCoins) {
+        console.log('collectedCoins: ', collectedCoins);
+        this.collectedCoins = collectedCoins; // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     };
     // 
     resolveImageIndex() {
-        if (this.amountCoins == 1) {
-            return 1;
-        } else if (this.amountCoins == 2) {
-            return 2;
-        } else if (this.amountCoins == 3) {
-            return 3;
-        } else if (this.amountCoins == 4) {
-            return 4;
-        } else if (this.amountCoins == 5) {
-            return 5;
-        } else {
+        if (this.collectedCoins == 0) {
             return 0;
+        } else if (this.collectedCoins == 1) {
+            return 1;
+        } else if (this.collectedCoins == 2) {
+            return 2;
+        } else if (this.collectedCoins == 3) {
+            return 3;
+        } else if (this.collectedCoins == 4) {
+            return 4;
+        } else if (this.collectedCoins == 5) {
+            return 5;
         };
     };
 };

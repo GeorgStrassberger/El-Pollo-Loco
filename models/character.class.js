@@ -114,7 +114,7 @@ class Character extends MovableObject {
                 this.hurt_sound.pause(); // pauseire den TON für die trefferabfrage
             } else if (this.isHurt()) { // WENN die function isHurt() true zurückgiebt
                 this.playAnimation(this.IMAGES_HURT); // starte playAnimation( mit diesem Bilder array)
-                //    this.hurt_sound.play(); // spiele TON ab für treffer
+                this.hurt_sound.play(); // spiele TON ab für treffer
             } else if (this.isAboveGround()) { // WENN die function isAboveGround() true zurückgiebt
                 this.playAnimation(this.IMAGES_JUMPING); // starte playAnimation( mit diesem Bilder array) 
             } else { // SONST
