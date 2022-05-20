@@ -26,7 +26,9 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING_BOSS);
+            super.playAnimation(this.IMAGES_WALKING_BOSS);
         }, 1000 / 5);
     };
+
+    // benötigt noch eine HP pool bzw - min 3 falschen colisionen
 };

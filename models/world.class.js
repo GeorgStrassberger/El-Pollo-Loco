@@ -40,7 +40,6 @@ class World {
         }, 100);
     };
 
-
     timeToThrowObjects() {
         setInterval(() => {
             this.throwObjects();
@@ -50,7 +49,6 @@ class World {
     // Überprüfe Werfe Objekt (Flasche)
     // Abfrage: -aktuell- Flasche werfen wenn die Leertaste gedrückt wird.
     // Später: wenn Array gefüllt ist UND die Taste aktiv ist.
-
     throwObjects() {
         if (this.keyboard.SPACE && this.amountOfBottlesToThrow > 0) {
             this.throw_sound.play(); // abspiele wurf sound
@@ -65,10 +63,9 @@ class World {
 
     // Überprüfe Kollisionenen
     // Abrage: Schleife geht alle Gegner durch ob eine Kollision besteht.
-    // wenn ja(true)
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) { // bekommt nur schaden wenn er kolidiert und am boden ist 
                 this.character.hit();
                 this.life_bar.setLifeBar(this.character.energy);
                 // console.log('Collision with Character: ', this.character.energy); // logt mir die aktuelle energy (HP) raus.
@@ -156,4 +153,21 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     };
+
+
+    // Novh nicht aktive
+    gameEnd() {
+        if (this.life_bar.percentageHealthPoints == 0) {
+            gameWon(); // muss noch erstellt werden
+        }
+        if (this.endboss == 0) {
+            gameLost(); // muss noch erstellt werden
+        }
+
+    }
+
+
+
+
+
 };

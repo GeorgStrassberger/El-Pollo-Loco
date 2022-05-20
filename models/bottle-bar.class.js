@@ -10,7 +10,6 @@ class BottleBar extends DrawableObject {
         this.height = 60;
         this.setBottleBar();
         //this.collectBottle();
-        console.log('collectBottleConstrutor: ', this.collectedBottles);
     };
 
     IMAGES = [
@@ -24,7 +23,6 @@ class BottleBar extends DrawableObject {
     collectedBottles = 0;
 
     collectBottle() {
-        console.log('collectBottle: ', this.collectedBottles);
         this.collectedBottles += 1;
         if (this.collectedBottles > 5) {
             this.collectedBottles = 5;

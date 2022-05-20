@@ -20,7 +20,7 @@ class Cloud extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.moveLeft();
+            super.moveLeft();
             if (this.x < -79) {
                 this.x = (Math.random() * 10) + 2500;
             }

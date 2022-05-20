@@ -24,7 +24,7 @@ class Chicken extends MovableObject {
      */
     animate() {
         setInterval(() => {
-            this.moveLeft();
+            super.moveLeft();
             if (this.x < -79) { //WENN das Bild X-79 erreicht
                 this.x = (Math.random() * 10) + 2000; // setze es wieder auf X ... zurück
             }
@@ -32,7 +32,7 @@ class Chicken extends MovableObject {
         }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING_CHICKEN); // wiederhole die function playAnimate mit den Bilder aus diesem Array
+            super.playAnimation(this.IMAGES_WALKING_CHICKEN); // wiederhole die function playAnimate mit den Bilder aus diesem Array
         }, 1000 / 5);
     };
 };
