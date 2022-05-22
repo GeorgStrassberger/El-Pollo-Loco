@@ -25,6 +25,7 @@ class World {
     throw_sound = new Audio('../audio/throw.mp3');
     coin_sound = new Audio('../audio/coin.wav');
     bottle_sound = new Audio('../audio/bottle.mp3');
+    throw_sound = new Audio('../audio/throw.mp3');
 
     // Verbindung zwischen World und Character .class
     // Übergibt THIS als Objetct in WORLD
@@ -37,6 +38,7 @@ class World {
             this.checkCollisionsWithEnemies();
             this.checkCollisionsWithBottles();
             this.checkCollisionsWithCoins();
+            this.bottleHitEnemies();
         }, 100);
     };
 
@@ -60,13 +62,37 @@ class World {
             this.bottle_bar.setBottleBar(); // flaschenAnzeige neu aufrufen zu aktuallisieren
         };
     };
-
+    /*
+    bottleHitEnemies() {
+        this.level.enemies.forEach((enemy, index) => {
+            this.throwableObjects.forEach(bottle => {
+                if (bottle.isColliding(enemy)) {
+                    console.log('Treffer');
+                    return;
+                };
+            });
+        });
+    };
+    */
+    bottleHitEnemies() {
+        this.level.enemies.forEach((enemy, index) => {
+            this.throwableObjects.forEach(bottle => {
+                if (bottle.isColliding(enemy)) {
+                    //enemy.hit();
+                    console.log('Treffer');
+                    if (this.level.enemies.energy <= 0) {
+                        console.log('Killed Chicken');
+                        //this.level.enemies.splice(index, 1);
+                    };
+                };
+            });
+        });
+    };
     // Überprüfe Kollisionenen
     // Abrage: Schleife geht alle Gegner durch ob eine Kollision besteht.
     checkCollisionsWithEnemies() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !this.character.isAboveGround()) { // bekommt nur schaden wenn er kolidiert und am boden ist 
-                //console.log('-> KOLLISION <-');
                 this.character.hit();
                 this.life_bar.setLifeBar(this.character.energy);
             };
@@ -160,7 +186,7 @@ class World {
         if (this.life_bar.percentageHealthPoints == 0) {
             gameWon(); // muss noch erstellt werden
         }
-        if (this.endboss == 0) {
+        if (this.endbossHealthPoints == 0) {
             gameLost(); // muss noch erstellt werden
         }
 

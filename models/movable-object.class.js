@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     speed = 0.2;
     speedY = 0;
     otherDirection = false;
-    acceleration = 2.5;
+    acceleration = 2.5; //Beschleunigung
     energy = 100;
     lastHit = 0;
     // Schwerkraft anwenden
@@ -26,15 +26,12 @@ class MovableObject extends DrawableObject {
         };
     };
 
-
-
-
     // Kollisionsabfrage mit (MovableObject)
     // character.isColliding(Chicken)
     isColliding(mo) { // mo *aka* movableObject
         return this.x + this.width > mo.x && // true sobald sich 1 MO links vom Character befindet;  
-            this.y + this.height > mo.y && // true sobald die füße vom Character unterhalb vom kopf des MO sind
             this.x < mo.x + mo.width && // true solange sich rechts vom Character noch 1 MO befindet;
+            this.y + this.height > mo.y && // true sobald die füße vom Character unterhalb vom kopf des MO sind
             this.y < mo.y + mo.height; // true solange der Kopf vom Character über den Füßen vom MO ist  in dem fall nur für die COINS wichtig
     };
     // Treffer

@@ -2,9 +2,9 @@
 class Chicken extends MovableObject {
 
     constructor(x) {
-        // das Bild für Chicken laden
         super().loadImage('../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImages(this.IMAGES_WALKING_CHICKEN);
+        this.loadImages(this.IMAGES_DEAD_CHICKEN);
         this.x = x;
         this.speed = this.speed + Math.random() * 0.25; // speed wird überschrieben mit speed 0.2 aus MO + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
         this.animate();
@@ -13,12 +13,13 @@ class Chicken extends MovableObject {
     height = 80;
     width = 80;
     y = 350;
+    energy = 9;
     IMAGES_WALKING_CHICKEN = [
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png',
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/2-Ga_centro.png',
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png',
     ];
-    IMAGES_DEAD = [
+    IMAGES_DEAD_CHICKEN = [
         '../img/basic_chicken_enemies/brown_chicken/dead.png'
     ];
 
@@ -31,11 +32,14 @@ class Chicken extends MovableObject {
             if (this.x < -79) { //WENN das Bild X-79 erreicht
                 this.x = (Math.random() * 10) + 2000; // setze es wieder auf X ... zurück
             }
-            //this.x -= this.speed;
         }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
 
         setInterval(() => {
-            super.playAnimation(this.IMAGES_WALKING_CHICKEN); // wiederhole die function playAnimate mit den Bilder aus diesem Array
+            if (!this.isDead()) {
+                super.playAnimation(this.IMAGES_WALKING_CHICKEN);
+            } else {
+                super.playAnimation(this.IMAGES_DEAD_CHICKEN);
+            }
         }, 1000 / 5);
     };
 };

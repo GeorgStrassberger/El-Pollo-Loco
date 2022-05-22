@@ -31,16 +31,10 @@ class BottleBar extends DrawableObject {
      * setPercentage says how much bottles are collected
      * @param {number} collectedBottles 
      */
-    setBottleBar(collectedBottles) {
-        console.log('setBottleBar: ', this.collectedBottles);
+    setBottleBar() {
         let path = this.IMAGES[this.resolveImageIndex()];
-        console.log('path: ', this.resolveImageIndex());
         this.img = this.imageCache[path];
     };
-    /**
-     * resolveImageIndex changes the status image of the bottlebar
-     * @returns 
-     */
     resolveImageIndex() {
         if (this.collectedBottles == 0) {
             return 0;

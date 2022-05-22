@@ -1,7 +1,7 @@
 "use strict"
 class ThrowableObject extends MovableObject {
 
-    constructor(x, y) { // übergibt die X & Y koordinaten an THIS.X & This.Y
+    constructor(x, y) {
         super().loadImage('../img/7.Marcadores/Icono/Botella.png');
         this.loadImages(this.IMAGES_BOTTLES_THROWING);
         this.loadImages(this.IMAGES_BOTTLES_SPLASH);
@@ -26,7 +26,8 @@ class ThrowableObject extends MovableObject {
         '../img/6.botella/Rotación/Mesa de trabajo5.png',
         '../img/6.botella/Rotación/Mesa de trabajo6.png',
     ];
-    throw_sound = new Audio('../audio/throw.mp3');
+
+    x_movement = 10;
     // Richtung zu werfen
     // Abfrage: ob der Cjaracter nach Links oder Rechts sieht
     directionToThrow() {
@@ -36,37 +37,33 @@ class ThrowableObject extends MovableObject {
             this.throwRight();
         };
     };
-
     // wirft nach Links
     throwRight() {
         this.speedY = 20;
         super.applyGravity();
         // geschwindigkeit der Flasche in X richtung
         setInterval(() => {
-            this.x += 10;
+            this.x += this.x_movement;
         }, 25);
     };
-
     // wirft nach Rechts
     throwLeft() {
         this.speedY = 20;
         super.applyGravity();
         // geschwindigkeit der Flasche in X richtung
         setInterval(() => {
-            this.x -= 10;
+            this.x -= this.x_movement;
         }, 25);
     };
 
-
     animate() {
-        if (this.isAboveGround()) {
-            setInterval(() => {
+        setInterval(() => {
+            if (super.isAboveGround()) {
                 super.playAnimation(this.IMAGES_BOTTLES_THROWING);
-            }, 100);
-        } else {
-            setInterval(() => {
+            } else {
                 super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
-            }, 100);
-        };
+                this.x_movement = 0;
+            };
+        }, 100);
     };
 };

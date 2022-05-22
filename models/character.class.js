@@ -130,7 +130,7 @@ class Character extends MovableObject {
     walking_sound = new Audio('../audio/walking.mp3');
     jumping_sound = new Audio('../audio/jump.mp3');
     hurt_sound = new Audio('../audio/hurt.mp3');
-    lastPushAt = 0;
+
 
     /**
      * animate the Character move- and soundset

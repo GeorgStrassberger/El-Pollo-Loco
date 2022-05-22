@@ -14,16 +14,4 @@ class Level {
     level_end_x = 2200;
     coin;
     bottle;
-
-    //bottles; + in den Constructor übergeben
-
-
-    /*  so würde es auch funktionieren
-        constructor(a, b, c) {
-            this.enemies = a;
-            this.clouds = b;
-            this.backgroundObjects = c;
-
-        }
-    */
 };
