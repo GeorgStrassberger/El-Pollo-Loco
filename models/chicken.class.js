@@ -5,9 +5,8 @@ class Chicken extends MovableObject {
         // das Bild für Chicken laden
         super().loadImage('../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImages(this.IMAGES_WALKING_CHICKEN);
-        //Start Koordinate in X-Richtung angeben 
         this.x = x;
-        this.speed = this.speed + Math.random() * 0.25; // speed wird überschrieben mit speed 0.2 + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
+        this.speed = this.speed + Math.random() * 0.25; // speed wird überschrieben mit speed 0.2 aus MO + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
         this.animate();
     };
 
@@ -19,6 +18,10 @@ class Chicken extends MovableObject {
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/2-Ga_centro.png',
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png',
     ];
+    IMAGES_DEAD = [
+        '../img/basic_chicken_enemies/brown_chicken/dead.png'
+    ];
+
     /**
      *  Alle Hühnchen laufen nach links in dem alle 60 FPS die X-Koordinate verschoben wird und bei X -79 werden sie wieder an den anfang bei 700 + random gesetzt.
      */
@@ -28,7 +31,7 @@ class Chicken extends MovableObject {
             if (this.x < -79) { //WENN das Bild X-79 erreicht
                 this.x = (Math.random() * 10) + 2000; // setze es wieder auf X ... zurück
             }
-            this.x -= this.speed;
+            //this.x -= this.speed;
         }, 1000 / 60); // 60 FPS -< 60 mal pro Sekunde aufgerufen.
 
         setInterval(() => {

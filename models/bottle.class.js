@@ -9,5 +9,4 @@ class Bottle extends DrawableObject {
     width = 80; //Breite Coin
     height = 80; // Höhe Coin
 
-    amountBottles = 0; // Anzahl der eingesammelten Münzen
 };

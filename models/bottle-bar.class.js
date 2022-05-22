@@ -9,7 +9,6 @@ class BottleBar extends DrawableObject {
         this.width = 200;
         this.height = 60;
         this.setBottleBar();
-        //this.collectBottle();
     };
 
     IMAGES = [
@@ -34,7 +33,6 @@ class BottleBar extends DrawableObject {
      */
     setBottleBar(collectedBottles) {
         console.log('setBottleBar: ', this.collectedBottles);
-        //this.collectedBottles = collectedBottles; // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
         console.log('path: ', this.resolveImageIndex());
         this.img = this.imageCache[path];

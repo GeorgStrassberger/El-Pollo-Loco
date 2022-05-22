@@ -9,7 +9,7 @@ class DrawableObject {
     width = 100;
 
     draw(ctx) {
-        //Context Zeichne Bild (BIld, Start X, StartY, Breite, Höhe)
+        //Context Zeichne Bild (Bild, Start X, StartY, Breite, Höhe)
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     };
 

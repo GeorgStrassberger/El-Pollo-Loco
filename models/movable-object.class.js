@@ -1,13 +1,11 @@
 "use strict"
 class MovableObject extends DrawableObject {
     speed = 0.2;
-    otherDirection = false;
     speedY = 0;
+    otherDirection = false;
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
-
-
     // Schwerkraft anwenden
     applyGravity() {
         setInterval(
@@ -19,17 +17,25 @@ class MovableObject extends DrawableObject {
             }, 1000 / 25);
     };
     // Abfrage: befindet sich der Charcter am Boden?
+
     isAboveGround() {
         if (this instanceof ThrowableObject) { //WENN es aus der klasse TO kommt soll es immer falllen (aus dem spielfeld)
-            return true;
+            return this.y < 375;
         } else {
-            return this.y < 135;
+            return this.y < 235; // standart 135 mit original Bild
         };
     };
+
+
+
+
     // Kollisionsabfrage mit (MovableObject)
     // character.isColliding(Chicken)
-    isColliding(mo) {
-        return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y < mo.y + mo.height;
+    isColliding(mo) { // mo *aka* movableObject
+        return this.x + this.width > mo.x && // true sobald sich 1 MO links vom Character befindet;  
+            this.y + this.height > mo.y && // true sobald die füße vom Character unterhalb vom kopf des MO sind
+            this.x < mo.x + mo.width && // true solange sich rechts vom Character noch 1 MO befindet;
+            this.y < mo.y + mo.height; // true solange der Kopf vom Character über den Füßen vom MO ist  in dem fall nur für die COINS wichtig
     };
     // Treffer
     // bei Kollision wird Energie (HP) abgezogen
@@ -57,7 +63,6 @@ class MovableObject extends DrawableObject {
     //spiel Animation ab
     // Bewegugung 
     playAnimation(images) {
-        // Walk animation
         let i = this.currentImage % images.length; // let i = 7 % 6; => 1, Rest 1
         // i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, ...; 
         let path = images[i];

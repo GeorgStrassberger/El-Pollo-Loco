@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Straßberger Georg">
-    <meta name="descritption" content="Jump&Run">
+    <meta name="descritption" content="Jump&Run Game">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="../css/keyboard-style.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/Pepe/walk/W-21.png" />
 
     <noscript>Your browser does not support JavaScript!</noscript>
-
     <script src="../models/drawable-object.class.js"></script>
     <script src="../models/movable-object.class.js"></script>
 
@@ -38,10 +39,13 @@
     <script src="../js/fullscreen.js"></script>
 
 
+
     <title>El Pollo Loco</title>
 </head>
 
-<body onload="init()">
+<body onload="startGame()">
+    <!--Funzt ned WHY !!!!-->
+    <button onclick="startGame()">Start Game</button>
 
     <h1>El Pollo Loco</h1>
 
@@ -49,13 +53,19 @@
         <canvas id="canvas" width="720" height="480">
         Your browser does not support the canvas element.
         </canvas>
+
         <div class="screen_images" onclick="goFullScreen()" title="Fullscreen">
             <img src="../img/icons/fullscreen-12-32.png" alt="fullscreen">
         </div>
+        <div class="key-box">
+            <span onmousedown="mouseDownToMoveLeft()" onmouseup="mouseUpToMoveLeft()" id="btnLeft"><img src="../img/icons/arrow-102-24 (1).png" alt="arrow-left"><br><i>Left</i></span>
+            <span onmousedown="mouseDownToMoveRight()" onmouseup="mouseUpToMoveRight()" id="btnRight"><img src="../img/icons/arrow-37-24 (1).png" alt="arrow-right"><br><i>Right</i></span>
+            <span onmousedown="mouseDownToJump()" onmouseup="mouseUpToJump()" id="btnJump"><img src="../img/icons/arrow-155-24 (1).png" alt="arrow-up"><br><i>Jump</i></span>
+            <span onmousedown="mouseDownToThrow()" onmouseup="mouseUpToThrow()" id="btnThrow"><img src="../img/icons/myspace-24 (1).png" alt="space"><br><i>Throw</i></span>
+        </div>
+
     </div>
 
-    <br>
-    <button onclick="goFullScreen()">Vollbild</button>
 </body>
 
 </html>

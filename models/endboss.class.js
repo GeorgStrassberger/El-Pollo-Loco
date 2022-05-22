@@ -1,11 +1,11 @@
 "use strict"
 class Endboss extends MovableObject {
 
-    constructor() {
+    constructor(x) { //Start Koordinate in X-Richtung wird überangeben von level1
         // das Bild für ChickenBoss laden
         super().loadImage(this.IMAGES_WALKING_BOSS[0]);
         this.loadImages(this.IMAGES_WALKING_BOSS);
-        this.x = 2500;
+        this.x = x;
         this.animate();
     };
 
