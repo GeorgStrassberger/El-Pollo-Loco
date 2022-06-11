@@ -26,21 +26,15 @@ class World {
     coin_sound = new Audio('../audio/coin.wav');
     bottle_sound = new Audio('../audio/bottle.mp3');
     throw_sound = new Audio('../audio/throw.mp3');
-
+    bottle_hits = false;
     // Verbindung zwischen World und Character .class
     // Übergibt THIS als Objetct in WORLD
     setWorld() {
         this.character.world = this;
     };
-
-    timeToCheckCollisions() {
-        setInterval(() => {
-            this.checkCollisionsWithEnemies();
-            this.checkCollisionsWithBottles();
-            this.checkCollisionsWithCoins();
-            this.bottleHitEnemies();
-        }, 100);
-    };
+    restartGame() {
+        location.reload();
+    }
 
     timeBetweenToThrowObjects() {
         setInterval(() => {
@@ -58,50 +52,75 @@ class World {
             this.throwableObjects.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
             this.amountOfBottlesToThrow -= 1; //verringere hilfszähler
             this.bottle_bar.collectedBottles -= 1; // //verringere zähler
-            setTimeout(() => this.throwableObjects.splice(0, 1), 1300); // entferne im array an der stelle 0 um 1 
+            setTimeout(() => this.throwableObjects.splice(0, 1), 1000); // entferne im array an der stelle 0 um 1 
             this.bottle_bar.setBottleBar(); // flaschenAnzeige neu aufrufen zu aktuallisieren
         };
     };
-    /*
-    bottleHitEnemies() {
-        this.level.enemies.forEach((enemy, index) => {
-            this.throwableObjects.forEach(bottle => {
-                if (bottle.isColliding(enemy)) {
-                    console.log('Treffer');
-                    return;
-                };
+
+    checkCollisionsBottleWithChickens() {
+        this.throwableObjects.forEach(bottle => {
+            this.level.enemies.forEach(chicken => {
+                if (bottle.isCollidingWith(chicken)) {
+                    console.log('Flasche trifft Hünchen ', chicken);
+                    chicken.bottle_hits = true;
+                    console.log('Flasche trifft Hünchen mit ', chicken.energy);
+                    chicken.hit(20); // wurf schadeneinfügen noch zuschnell abgefragt 
+                    console.log('Flasche trifft Hünchen mit ', chicken.energy);
+                    //setTimeout(() => this.level.enemies.splice(chicken, 1), 300); // entfernt alle hünchen ???WHY???? 
+                }
             });
         });
+    }
+
+    timeToCheckCollisions() {
+        setInterval(() => {
+            this.checkCollisionsWithEnemies(); // wird noch zuschnell abgefragt 
+            this.checkCollisionWithObjects();
+        }, 100);
     };
-    */
-    bottleHitEnemies() {
-        this.level.enemies.forEach((enemy, index) => {
-            this.throwableObjects.forEach(bottle => {
-                if (bottle.isColliding(enemy)) {
-                    //enemy.hit();
-                    console.log('Treffer');
-                    if (this.level.enemies.energy <= 0) {
-                        console.log('Killed Chicken');
-                        //this.level.enemies.splice(index, 1);
-                    };
-                };
-            });
-        });
-    };
-    // Überprüfe Kollisionenen
-    // Abrage: Schleife geht alle Gegner durch ob eine Kollision besteht.
+
     checkCollisionsWithEnemies() {
+        this.checkCollisionsWithChickens();
+        this.checkCollisionsWithEndboss();
+        this.checkCollisionsBottleWithChickens();
+    };
+
+    //############### JUMP Versuch #############  switch abfrage
+    //### Sobald sie duch den intervall wieder aufgerufen wird kommter andere fall zu tragen
+    checkCollisionsWithChickens() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) { // bekommt nur schaden wenn er kolidiert und am boden ist 
-                this.character.hit();
+            switch (true) {
+                case (this.character.isCollidingFromTopWith(enemy)):
+                    //this.this.level.enemies.hit(50); // sprungschaden einbinden anstalle von boolien(is_Dead)
+                    console.log('Flatsch', this.character.energy);
+                    enemy.is_Dead = true;
+                    break;
+                case (this.character.isCollidingWith(enemy) && !this.character.isAboveGround()): // bekommt nur schaden wenn er kolidiert und am boden ist 
+                    this.character.hit(10); // wird noch zuschnell abgefragt 
+                    console.log('Kollision mit Hünchen', this.character.energy);
+                    this.life_bar.setLifeBar(this.character.energy);
+                    break;
+            };
+        });
+    };
+    //##############################################
+    checkCollisionsWithEndboss() {
+        this.level.endboss.forEach((enemy) => {
+            if (this.character.isCollidingWith(enemy) && !this.character.isAboveGround()) { // bekommt nur schaden wenn er kolidiert und am boden ist 
+                this.character.hit(10); // wird noch zuschnell abgefragt 
+                console.log('Kollision mit EndbossHünchen', this.character.energy);
                 this.life_bar.setLifeBar(this.character.energy);
             };
         });
     };
 
+    checkCollisionWithObjects() {
+        this.checkCollisionsWithBottles();
+        this.checkCollisionsWithCoins();
+    };
     checkCollisionsWithBottles() {
         this.level.bottle.forEach((bottles, index) => { // checkt alle 0,1sek alle flaschen im level
-            if (this.character.isColliding(bottles) && this.amountOfBottlesToThrow < 5) { // wenn eine collision zwischen char und flasche eintritt UND weniger als 5 flschen gesammelt wurden
+            if (this.character.isCollidingWith(bottles) && this.amountOfBottlesToThrow < 5) { // wenn eine collision zwischen char und flasche eintritt UND weniger als 5 flschen gesammelt wurden
                 this.bottle_sound.play();
                 this.level.bottle.splice(index, 1); // entferne die flasche aus dem level
                 this.bottle_bar.collectBottle(); // führe sammelFlasche aus und erhöhe um 1
@@ -113,7 +132,7 @@ class World {
 
     checkCollisionsWithCoins() {
         this.level.coin.forEach((coins, index) => {
-            if (this.character.isColliding(coins)) {
+            if (this.character.isCollidingWith(coins)) {
                 this.coin_sound.play();
                 this.level.coin.splice(index, 1);
                 this.coin_bar.collectCoin();
@@ -121,6 +140,7 @@ class World {
             };
         });
     };
+
 
 
     draw() { // es wird der reihe nach gezeichnet. -> 0)leer zeichnen 1) background 2) cloud 3) enemy 4) character.
@@ -139,6 +159,7 @@ class World {
         this.addToMap(this.character); // draw the Character        
         this.addObjectsToMap(this.level.clouds); // draw the clouds
         this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects); // draw the throwableObjects (Bottle'S)
 
         this.addObjectsToMap(this.level.coin);
@@ -181,19 +202,29 @@ class World {
     };
 
 
-    // Novh nicht aktive
+    // Noch nicht aktiv
     gameEnd() {
-        if (this.life_bar.percentageHealthPoints == 0) {
-            gameWon(); // muss noch erstellt werden
+        console.log('GAME END FUNCTION AUSGEFÜHRT');
+        if (this.character.energy <= 0) {
+            console.assert, log('Pepe ist TOT');
+            this.quitGame();
+            //gameWon(); // muss noch erstellt werden
         }
-        if (this.endbossHealthPoints == 0) {
-            gameLost(); // muss noch erstellt werden
+        if (this.level.endboss.energy <= 0) {
+            console.log('Endboss ist TOT');
+            //gameLost(); // muss noch erstellt werden
         }
-
     }
 
+    gameWon() {
+        quitGame();
+    };
 
-
-
+    quitGame() {
+        document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
+        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
+        //TON abspielen
+        //
+    }
 
 };

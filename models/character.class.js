@@ -9,15 +9,16 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WAIT);
         this.loadImages(this.IMAGES_SLEEP);
-        this.animate();
         this.applyGravity();
+        this.animate();
+        this.x = 120;
+        this.y = 235;
+        this.height = 200;
+        this.width = 100;
+        this.energy = 100;
+        this.speed = 10;
     };
-
-    height = 200; // standart 300 mit original Bild
-    width = 100;
-    y = 235; // standart 35 mit original Bild
-    speed = 10;
-
+    //Images
     IMAGES_WALKING = [
         '../img/Pepe/walk/W-21.png',
         '../img/Pepe/walk/W-22.png',
@@ -126,17 +127,23 @@ class Character extends MovableObject {
         //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
         //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png',
     ];
-    world;
+    //Sounds
     walking_sound = new Audio('../audio/walking.mp3');
     jumping_sound = new Audio('../audio/jump.mp3');
     hurt_sound = new Audio('../audio/hurt.mp3');
+    //Var
+    world;
+    current_time = 0;
+    afk_time = 0;
 
-
-    /**
-     * animate the Character move- and soundset
-     */
     animate() {
-        setInterval(() => {
+        this.characterMovments();
+        this.characterPresentation();
+    };
+
+    characterMovments() {
+        // Movement (Bewegeung)
+        this.characterMovement = setInterval(() => {
             this.walking_sound.pause(); //pausiere den TON immer wieder
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { //WENN taste rechts &UND& X-Koordinate nicht größer als _end_x
                 super.moveRight(); //bewege Character nach rechts
@@ -158,21 +165,38 @@ class Character extends MovableObject {
             };
             this.world.camera_x = -this.x + 100; // Character weiter nach rechts setzen -> Abstand zum rand
         }, 1000 / 60); // wird alle 1000/60 millisekunden aufgerufen (ausgeführt / 60FPS)
+    };
 
+    characterPresentation() {
+        // Presentation (Darstellung)
         setInterval(() => {
             if (super.isDead()) { // WENN die function isDead() true zurückgiebt
                 super.playAnimation(this.IMAGES_DEAD); // starte playAnimation( mit diesem Bilder array)
                 this.hurt_sound.pause(); // pauseire den TON für die trefferabfrage
+                this.gameOver()
             } else if (super.isHurt()) { // WENN die function isHurt() true zurückgiebt
                 super.playAnimation(this.IMAGES_HURT); // starte playAnimation( mit diesem Bilder array)
                 this.hurt_sound.play(); // spiele TON ab für treffer
             } else if (super.isAboveGround()) { // WENN die function isAboveGround() true zurückgiebt
                 super.playAnimation(this.IMAGES_JUMPING); // starte playAnimation( mit diesem Bilder array) 
-            } else { // SONST
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { //WENN  taste rechts |ODER| taste links gedrückt wird
-                    super.playAnimation(this.IMAGES_WALKING); // starte playAnimation( mit diesem Bilder array)
-                };
-            };
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { //WENN  taste rechts |ODER| taste links gedrückt wird
+                super.playAnimation(this.IMAGES_WALKING); // starte playAnimation( mit diesem Bilder array)
+            } else {
+                super.playAnimation(this.IMAGES_WAIT);
+            }
+            // afk animation gfehlt noch mit SLEEPING ARRAY
+
         }, 1000 / 10); // wird alle 1000/60 millisekunden aufgerufen (ausgeführt / 60FPS)
     };
+
+    //Wenn Character Tot ist 
+    gameOver() {
+        clearInterval(this.characterMovement)
+            //ton abspielen
+        document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
+        document.getElementById('endframe').classList.remove('d-none');
+        document.getElementById('startframe').classList.add('d-none');
+        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
+    }
+
 };

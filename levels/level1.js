@@ -1,18 +1,18 @@
-"use strict"
-
 let level1;
 let level2;
 
 function initLevel1() {
     level1 = new Level(
         [
-            new Chicken(700), //Die Start Koordinate X wird hier festgelegt
-            new Chicken(1000),
-            new Chicken(1300),
-            new Chicken(1600),
-            new Chicken(1900),
-            new Chicken(2200),
-            new Endboss(2500),
+            new Chicken(1700), //Die Start Koordinate X wird hier festgelegt
+            new Chicken(2000),
+            new Chicken(2300),
+            new Chicken(2600),
+            new Chicken(2900),
+            new Chicken(3200),
+            new Chicken(3600),
+        ], [
+            new Endboss(3800),
         ], [
             new Cloud(0),
             new Cloud(600),
@@ -20,7 +20,7 @@ function initLevel1() {
             new Cloud(1800),
             new Cloud(2200),
         ], [
-            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719),
+            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719), //imagePath , X Koordinate
             new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/2.png', -719),
             new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/2.png', -719),
             new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/2.png', -719),
@@ -42,6 +42,25 @@ function initLevel1() {
             new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 3),
             new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 3),
             new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 3),
+
+            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 4),
+            new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png', 719 * 4),
+            new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/1.png', 719 * 4),
+            new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/1.png', 719 * 4),
+            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 5),
+            new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 5),
+            new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 5),
+            new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 5),
+
+            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 6),
+            new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/1.png', 719 * 6),
+            new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/1.png', 719 * 6),
+            new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/1.png', 719 * 6),
+            new BackgroundObject('../img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 7),
+            new BackgroundObject('../img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 7),
+            new BackgroundObject('../img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 7),
+            new BackgroundObject('../img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 7),
+
         ], [
             new Coin(250, 250), // X, Y Koordinate 
             new Coin(450, 350),
@@ -49,14 +68,22 @@ function initLevel1() {
             new Coin(650, 250),
             new Coin(1200, 100),
         ], [
-            new Bottle(350, 350),
-            new Bottle(550, 380),
-            new Bottle(750, 360),
-            new Bottle(950, 380),
-            new Bottle(1250, 350),
-            new Bottle(1450, 370),
-            new Bottle(1650, 350),
-            new Bottle(1850, 380),
+            new Bottle(350, 350, 0), // X, Y Koordinate und array pos. 
+            new Bottle(550, 380, 1),
+            new Bottle(750, 360, 0),
+            new Bottle(950, 380, 1),
+            new Bottle(1250, 350, 0),
+            new Bottle(1450, 370, 1),
+            new Bottle(1650, 350, 0),
+            new Bottle(1850, 380, 1),
+            new Bottle(2050, 350, 1),
+            new Bottle(2250, 370, 0),
+            new Bottle(2450, 380, 0),
+            new Bottle(2650, 350, 1),
+            new Bottle(2850, 360, 0),
+            new Bottle(3050, 360, 1),
+            new Bottle(3350, 380, 1),
+            new Bottle(3650, 350, 0),
         ]
     );
 }

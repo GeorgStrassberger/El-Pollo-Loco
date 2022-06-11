@@ -1,10 +1,10 @@
 "use strict"
 class MovableObject extends DrawableObject {
-    speed = 0.2;
+    speed;
     speedY = 0;
+    energy;
     otherDirection = false;
     acceleration = 2.5; //Beschleunigung
-    energy = 100;
     lastHit = 0;
     // Schwerkraft anwenden
     applyGravity() {
@@ -17,7 +17,6 @@ class MovableObject extends DrawableObject {
             }, 1000 / 25);
     };
     // Abfrage: befindet sich der Charcter am Boden?
-
     isAboveGround() {
         if (this instanceof ThrowableObject) { //WENN es aus der klasse TO kommt soll es immer falllen (aus dem spielfeld)
             return this.y < 375;
@@ -25,21 +24,27 @@ class MovableObject extends DrawableObject {
             return this.y < 235; // standart 135 mit original Bild
         };
     };
-
     // Kollisionsabfrage mit (MovableObject)
-    // character.isColliding(Chicken)
-    isColliding(mo) { // mo *aka* movableObject
+    // character.isCollidingWith(Chicken)
+    isCollidingWith(mo) { // mo *aka* movableObject
         return this.x + this.width > mo.x && // true sobald sich 1 MO links vom Character befindet;  
             this.x < mo.x + mo.width && // true solange sich rechts vom Character noch 1 MO befindet;
             this.y + this.height > mo.y && // true sobald die füße vom Character unterhalb vom kopf des MO sind
             this.y < mo.y + mo.height; // true solange der Kopf vom Character über den Füßen vom MO ist  in dem fall nur für die COINS wichtig
     };
+    isCollidingFromTopWith(mo) {
+        return this.y + this.height > mo.y && //gleich
+            this.y + this.height < mo.y + mo.height &&
+            this.x + this.width > mo.x && // gleich 
+            this.x + this.width < mo.x + mo.width + 50;
+    };
     // Treffer
     // bei Kollision wird Energie (HP) abgezogen
-    hit() {
-        this.energy -= 10; //energy wird immer bei kolision abgezogen, immer wenn kolision true ist und das bild neu gemalt wird.
+    hit(dmg) {
+        this.energy -= dmg; //energy wird immer bei kolision abgezogen, immer wenn kolision true ist und das bild neu gemalt wird.
         if (this.energy <= 0) {
             this.energy = 0;
+            console.log('Tot');
         } else {
             this.lastHit = new Date().getTime();
         };

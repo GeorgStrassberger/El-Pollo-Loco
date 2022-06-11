@@ -6,10 +6,9 @@ class CoinBar extends DrawableObject {
         this.loadImages(this.IMAGES); // function aus DrawableObject 
         this.x = 40; //Start Punkt in X zum einfügen des Bildes
         this.y = 50; //Start Punkt in Y zum einfügen des Bildes
-        this.width = 200; //Bild breite
         this.height = 60; // Bild höhe
+        this.width = 200; //Bild breite
         this.setCoinBar(0); // Übergibt den start wert 0
-        //this.collectCoin();
     };
 
     IMAGES = [

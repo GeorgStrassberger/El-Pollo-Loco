@@ -5,12 +5,12 @@ class ThrowableObject extends MovableObject {
         super().loadImage('../img/7.Marcadores/Icono/Botella.png');
         this.loadImages(this.IMAGES_BOTTLES_THROWING);
         this.loadImages(this.IMAGES_BOTTLES_SPLASH);
+        this.directionToThrow();
+        this.animate();
         this.x = x;
         this.y = y;
         this.height = 60;
         this.width = 60;
-        this.directionToThrow();
-        this.animate();
     };
     IMAGES_BOTTLES_SPLASH = [
         '../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
@@ -26,7 +26,7 @@ class ThrowableObject extends MovableObject {
         '../img/6.botella/Rotación/Mesa de trabajo5.png',
         '../img/6.botella/Rotación/Mesa de trabajo6.png',
     ];
-
+    bottle_hits = false;
     x_movement = 10;
     // Richtung zu werfen
     // Abfrage: ob der Cjaracter nach Links oder Rechts sieht
@@ -58,12 +58,21 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         setInterval(() => {
+            if (!this.bottle_hits) {
+                super.playAnimation(this.IMAGES_BOTTLES_THROWING);
+            } else {
+                super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
+            }
+            /*
             if (super.isAboveGround()) {
                 super.playAnimation(this.IMAGES_BOTTLES_THROWING);
             } else {
                 super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x_movement = 0;
             };
+            */
         }, 100);
     };
+
+
 };

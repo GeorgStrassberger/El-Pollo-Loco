@@ -4,11 +4,11 @@ class BottleBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES);
+        this.setBottleBar();
         this.x = 40;
         this.y = 100;
-        this.width = 200;
         this.height = 60;
-        this.setBottleBar();
+        this.width = 200;
     };
 
     IMAGES = [
@@ -27,10 +27,7 @@ class BottleBar extends DrawableObject {
             this.collectedBottles = 5;
         }
     };
-    /**
-     * setPercentage says how much bottles are collected
-     * @param {number} collectedBottles 
-     */
+
     setBottleBar() {
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
