@@ -15,6 +15,7 @@ class Endboss extends MovableObject {
         this.width = 250;
         this.energy = 100;
         this.speed = 5;
+        this.vulnerable = 1.5;
     };
 
     IMAGES_WALKING_BOSS = [
@@ -56,11 +57,10 @@ class Endboss extends MovableObject {
 
     //Sounds
     win_sound = new Audio('../audio/win.mp3');
-    chicken_hit = new Audio('../audio/chicken_hit.mp3');
 
     //Var
+
     x_movement_speed = 2;
-    is_Dead = false;
 
     // Animation Endboss
     animate() {
@@ -68,14 +68,12 @@ class Endboss extends MovableObject {
             /*if (condition) {
                 super.playAnimation(this.IMAGES_ATTECKING_BOSS);
             } else*/
-            if (super.isDead() || this.is_Dead) {
+            if (super.isDead()) {
                 super.playAnimation(this.IMAGES_DEAD_BOSS);
-                this.chicken_hit.pause();
                 console.log('Boss isDead');
                 setTimeout(() => this.gameOver(), 1500);
             } else if (super.isHurt()) {
                 super.playAnimation(this.IMAGES_HURT_BOSS);
-                this.chicken_hit.play();
                 console.log('Boss isHurt');
             } else {
                 super.playAnimation(this.IMAGES_ALERT_BOSS);

@@ -16,6 +16,7 @@ class Character extends MovableObject {
         this.width = 100;
         this.energy = 100; //HP
         this.speed = 10;
+        this.vulnerable = 0.5;
     };
 
     //Images

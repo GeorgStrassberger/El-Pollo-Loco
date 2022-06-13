@@ -25,6 +25,7 @@ class World {
     coin_sound = new Audio('../audio/coin.wav');
     bottle_sound = new Audio('../audio/bottle.mp3');
     throw_sound = new Audio('../audio/throw.mp3');
+    chicken_hit = new Audio('../audio/chicken_hit.mp3');
     bottle_hits = false;
     // Verbindung zwischen World und Character .class
     // Übergibt THIS als Objetct in WORLD
@@ -77,15 +78,14 @@ class World {
     bottleWithChickens() {
         this.throwableObjects.forEach(bottle => {
             this.level.enemies.forEach(chicken => {
-                if (bottle.isCollidingWith(chicken) && !bottle.bottle_hits) {
+                if (bottle.isCollidingWith(chicken)) {
                     chicken.hit(20);
-                    console.log('hendl drofa', chicken.energy, 'HP');
-                    bottle.bottle_hits = true; // für den Animations wechsel am Treffer Ort
-                }
-                if (chicken.isDead()) {
-                    console.log('hendl is dod');
-                    setTimeout(() => this.level.enemies.splice(chicken, 1), 300); // entfernt mehrere hühnchen ???WHY???? 
-                }
+                    bottle.bottle_hits = true;
+                    setTimeout(() => {
+                        let index = this.level.enemies.indexOf(chicken);
+                        this.level.enemies.splice(index, 1)
+                    }, 500);
+                };
             });
         });
     };
@@ -94,15 +94,19 @@ class World {
     bottleWithEndboss() {
         this.throwableObjects.forEach(bottle => {
             this.level.endboss.forEach(boss => {
-                if (bottle.isCollidingWith(boss) && !bottle.bottle_hits) {
-                    boss.hit(15); //  zugefügter schaden 
-                    bottle.bottle_hits = true;
-                    console.log('Flasche hit Endboss und hat: ', boss.energy, 'HP');
-                }
-                if (boss.isDead()) {
-                    console.log('Hi is a :', boss.energy, 'HP');
-                    setTimeout(() => this.level.endboss.splice(boss, 1), 500);
-                }
+                if (bottle.isCollidingWith(boss) && !boss.isHurt()) {
+                    if (boss.isDead()) {
+                        this.chicken_hit.pause();
+                        setTimeout(() => {
+                            this.level.endboss.splice(0, 1);
+                        }, 1000);
+                    } else {
+                        boss.hit(18);
+                        //Ton abspielen
+                        this.chicken_hit.play();
+                        console.log('Flasche trifft Endboss: ', boss.energy, 'HP');
+                    };
+                };
             });
         });
     };
@@ -110,18 +114,18 @@ class World {
     //CHARACTER MIT HÜHNCHEN
     characterWithChickens() {
         this.level.enemies.forEach((chicken) => {
-            switch (true) {
-                case (this.character.isCollidingFromTopWith(chicken)):
+            if (!chicken.isDead() && !this.character.isDead() && !this.character.isHurt() && this.character.isCollidingWith(chicken)) {
+                if (this.character.isCollidingFromTopWith(chicken)) {
                     chicken.hit(30);
-                    break;
-                case (chicken.isDead()):
-                    setTimeout(() => this.level.enemies.splice(chicken, 1), 300);
-                    break;
-                case (this.character.isCollidingWith(chicken) && !this.character.isAboveGround() && !chicken.isDead()):
-                    this.character.hit(5); // wird noch zu schnell abgefragt!""
-                    console.log('Pepe: ', this.character.energy, 'HP');
+                    setTimeout(() => {
+                        let index = this.level.enemies.indexOf(chicken);
+                        this.level.enemies.splice(index, 1)
+                    }, 500);
+                } else {
+                    this.character.hit(5);
+                    console.log('Pepe hat noch: ', this.character.energy, 'HP übrig');
                     this.life_bar.setLifeBar(this.character.energy);
-                    break;
+                };
             };
         });
     };
@@ -129,9 +133,9 @@ class World {
     //CHARACTER MIT ENDBOSS
     characterWithEndboss() {
         this.level.endboss.forEach((bossenemy) => {
-            if (this.character.isCollidingWith(bossenemy) && !this.character.isAboveGround()) {
+            if (this.character.isCollidingWith(bossenemy) && !this.character.isAboveGround() && !this.character.isHurt()) {
                 this.character.hit(10); // wird noch zuschnell abgefragt 
-                console.log('Kollision mit Endboss Pepe hat noch: ', this.character.energy, 'HP');
+                console.log('Kollision mit Endboss Pepe hat noch: ', this.character.energy, 'HP übrig');
                 this.life_bar.setLifeBar(this.character.energy);
             };
         });

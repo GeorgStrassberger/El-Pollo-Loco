@@ -16,8 +16,9 @@ body {
 .cover {
     position: absolute;
     z-index: 5;
+    max-height: 100%;
+    height: 480px;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -32,8 +33,6 @@ body {
 
 .canvas_aera {
     position: relative;
-    max-width: 720px;
-    max-height: 480px;
 }
 
 canvas {
@@ -73,7 +72,6 @@ canvas {
 }
 
 .mobileButtos {
-    max-width: 720px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

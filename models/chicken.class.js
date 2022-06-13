@@ -9,8 +9,9 @@ class Chicken extends MovableObject {
         this.y = 350;
         this.height = 80;
         this.width = 80;
-        this.energy = 19;
+        this.energy = 20;
         this.speed = this.x_movement_speed + Math.random() * 0.25; // speed wird überschrieben mit x_movement_speed + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
+        this.vulnerable = 1;
     };
 
     //Var
@@ -30,7 +31,6 @@ class Chicken extends MovableObject {
         setInterval(() => {
             if (super.isDead()) {
                 super.playAnimation(this.IMAGES_DEAD_CHICKEN);
-                //setTimeout(() => this.y = -100, 250); // schiebt das bild aus der Leihnwand nach unten
             } else {
                 super.playAnimation(this.IMAGES_WALKING_CHICKEN);
                 super.moveLeft();
