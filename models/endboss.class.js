@@ -53,13 +53,16 @@ class Endboss extends MovableObject {
         '../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G25.png',
         '../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png#',
     ];
+
     //Sounds
     win_sound = new Audio('../audio/win.mp3');
     chicken_hit = new Audio('../audio/chicken_hit.mp3');
+
     //Var
     x_movement_speed = 2;
     is_Dead = false;
 
+    // Animation Endboss
     animate() {
         this.enbossAnimation = setInterval(() => {
             /*if (condition) {
@@ -81,8 +84,6 @@ class Endboss extends MovableObject {
         }, 1000 / 5);
     };
 
-    // benötigt noch eine HP pool bzw - min 3 falschen colisionen
-
     //Wenn Endboss Tot ist 
     gameOver() {
         clearInterval(this.enbossAnimation);
@@ -91,5 +92,5 @@ class Endboss extends MovableObject {
         document.getElementById('endframe').classList.remove('d-none');
         document.getElementById('startframe').classList.add('d-none');
         document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
-    }
+    };
 };

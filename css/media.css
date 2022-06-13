@@ -1,4 +1,9 @@
 @media only screen and (max-width: 720px) {
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     canvas {
         width: 100%;
     }
@@ -8,10 +13,17 @@
 }
 
 @media only screen and (max-height: 480px) {
-    h1 {
-        display: none;
+    .mobileButtos {
+        position: absolute;
+        bottom: 0;
+        max-width: 720px;
+        z-index: 9;
+        width: 100%;
+        opacity: 0.7;
+        transform: scale(0.5);
     }
     canvas {
         height: 100vh;
     }
+    #moveButtons {}
 }

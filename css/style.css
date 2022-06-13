@@ -32,8 +32,8 @@ body {
 
 .canvas_aera {
     position: relative;
-    width: 720px;
-    height: 480px;
+    max-width: 720px;
+    max-height: 480px;
 }
 
 canvas {
@@ -73,8 +73,9 @@ canvas {
 }
 
 .mobileButtos {
-    width: 720px;
+    max-width: 720px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 

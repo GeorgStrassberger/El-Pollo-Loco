@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
-        super().loadImage('../img/7.Marcadores/Icono/Botella.png');
+        super().loadImage(this.IMAGES_BOTTLES_THROWING[0]);
         this.loadImages(this.IMAGES_BOTTLES_THROWING);
         this.loadImages(this.IMAGES_BOTTLES_SPLASH);
         this.directionToThrow();
@@ -27,8 +27,8 @@ class ThrowableObject extends MovableObject {
     ];
     bottle_hits = false;
     x_movement = 10;
-    // Richtung zu werfen
-    // Abfrage: ob der Cjaracter nach Links oder Rechts sieht
+
+    // wurf Richtung
     directionToThrow() {
         if (world.character.otherDirection === true) {
             this.throwLeft();
@@ -36,6 +36,7 @@ class ThrowableObject extends MovableObject {
             this.throwRight();
         };
     };
+
     // wirft nach Links
     throwRight() {
         this.speedY = 20;
@@ -45,6 +46,7 @@ class ThrowableObject extends MovableObject {
             this.x += this.x_movement;
         }, 25);
     };
+
     // wirft nach Rechts
     throwLeft() {
         this.speedY = 20;
@@ -55,16 +57,16 @@ class ThrowableObject extends MovableObject {
         }, 25);
     };
 
+    // Animation der Falsche
     animate() {
         setInterval(() => {
             if (this.bottle_hits || !super.isAboveGround()) {
                 super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
-                this.x_movement = 0;
+                this.x_movement = 2; //SPLASH verläuft nach rechts
+                this.speedY = -2; //SPLASH verläuft nach unten
             } else {
                 super.playAnimation(this.IMAGES_BOTTLES_THROWING);
             }
         }, 50);
     };
-
-
 };

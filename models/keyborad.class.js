@@ -5,8 +5,4 @@ class Keyboard {
     UP = false; // jump, springen
     DOWN = false; // crouch, durcken
     SPACE = false; // trow, werfen
-
-
-
-
 };

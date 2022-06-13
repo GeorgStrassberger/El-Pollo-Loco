@@ -8,8 +8,6 @@ let bgSound = false;
 
 function startGame() {
     document.getElementById('cover').classList.add('d-none'); // blende start bild aus
-
-    //backgroundSound.play(); // starte hintergrundmusik
     initLevel1(); // lade level1 
     canvas = document.getElementById('canvas'); //weise canvas zu
     world = new World(canvas, keyboard); // übergebe canvas und keyboard

@@ -78,11 +78,9 @@ class World {
         this.throwableObjects.forEach(bottle => {
             this.level.enemies.forEach(chicken => {
                 if (bottle.isCollidingWith(chicken) && !bottle.bottle_hits) {
-                    console.log('Flasche trifft Hünchen mit ', chicken.energy, 'HP');
-                    chicken.hit(20); // wurf schadeneinfügen noch zuschnell abgefragt 
-                    //chicken.is_Dead = true; // wqill ich nicht brauchen sollte über HIT() gehen
-                    bottle.bottle_hits = true; // für den ANimations wechsel
-                    console.log('Flasche trifft Hünchen mit ', chicken.energy, 'HP');
+                    chicken.hit(20);
+                    console.log('hendl drofa', chicken.energy, 'HP');
+                    bottle.bottle_hits = true; // für den Animations wechsel am Treffer Ort
                 }
                 if (chicken.isDead()) {
                     console.log('hendl is dod');
@@ -107,8 +105,7 @@ class World {
                 }
             });
         });
-    }
-
+    };
 
     //CHARACTER MIT HÜHNCHEN
     characterWithChickens() {
@@ -170,8 +167,7 @@ class World {
         });
     };
 
-
-
+    //Zeichne
     draw() { // es wird der reihe nach gezeichnet. -> 0)leer zeichnen 1) background 2) cloud 3) enemy 4) character.
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // clear the Canvas from x,y ,x+breit, y+höhe (koordienaten = leihnwand größe)
 
@@ -179,10 +175,11 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects); // draw the backgroundObjects
         this.ctx.translate(-this.camera_x, 0); // Back
 
-        // ----Spoace for FIXED Objects ------
+        // ----Space for FIXED Objects ------
         this.addToMap(this.life_bar);
         this.addToMap(this.coin_bar);
         this.addToMap(this.bottle_bar);
+        // -----------------------------------
 
         this.ctx.translate(this.camera_x, 0); // Forwards
         this.addToMap(this.character); // draw the Character        
@@ -202,29 +199,33 @@ class World {
             self.draw();
         });
     };
+
+    //Füge Objekt hinzu
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     };
+
+
     addToMap(mo) { // MO = Movable Objects
         if (mo.otherDirection) {
             this.flipImage(mo);
         };
-
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImageBack(mo)
         };
-    }
+    };
+    // Spielgel das Bild um 180°
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1;
     };
+    //Spiegel das Bild zurück auf 0°
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

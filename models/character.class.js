@@ -1,7 +1,7 @@
 class Character extends MovableObject {
 
     constructor() {
-        super().loadImage('../img/Pepe/walk/W-21.png');
+        super().loadImage(this.IMAGES_WALKING[0]);
         super.loadImages(this.IMAGES_WALKING);
         super.loadImages(this.IMAGES_JUMPING);
         super.loadImages(this.IMAGES_DEAD);
@@ -17,6 +17,7 @@ class Character extends MovableObject {
         this.energy = 100; //HP
         this.speed = 10;
     };
+
     //Images
     IMAGES_WALKING = [
         '../img/Pepe/walk/W-21.png',
@@ -25,13 +26,6 @@ class Character extends MovableObject {
         '../img/Pepe/walk/W-24.png',
         '../img/Pepe/walk/W-25.png',
         '../img/Pepe/walk/W-26.png'
-        //Original Bilder
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-22.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-23.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-24.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png',
     ];
     IMAGES_JUMPING = [
         '../img/Pepe/jump/J-31.png',
@@ -42,18 +36,7 @@ class Character extends MovableObject {
         '../img/Pepe/jump/J-36.png',
         '../img/Pepe/jump/J-37.png',
         '../img/Pepe/jump/J-38.png',
-        '../img/Pepe/jump/J-39.png',
-        //Original Bilder
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-31.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-32.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-33.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-34.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-35.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-36.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-37.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',
-        //    '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png',
-        //   '../img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-40.png',
+        '../img/Pepe/jump/J-39.png'
     ];
     IMAGES_DEAD = [
         '../img/Pepe/dead/D-51.png',
@@ -61,24 +44,12 @@ class Character extends MovableObject {
         '../img/Pepe/dead/D-53.png',
         '../img/Pepe/dead/D-54.png',
         '../img/Pepe/dead/D-55.png',
-        '../img/Pepe/dead/D-56.png',
-        //Original Bilder
-        //'../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
-        //'../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
-        //   '../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
-        //   '../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
-        //   '../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
-        //   '../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
+        '../img/Pepe/dead/D-56.png'
     ];
     IMAGES_HURT = [
         '../img/Pepe/hurt/H-41.png',
         '../img/Pepe/hurt/H-42.png',
         '../img/Pepe/hurt/H-43.png'
-        //  Original Bilder
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png',
     ];
     IMAGES_WAIT = [
         '../img/Pepe/wait/I-1.png',
@@ -90,18 +61,7 @@ class Character extends MovableObject {
         '../img/Pepe/wait/I-7.png',
         '../img/Pepe/wait/I-8.png',
         '../img/Pepe/wait/I-9.png',
-        '../img/Pepe/wait/I-10.png',
-        //Original Bilder
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-2.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-3.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-4.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-5.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-6.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-7.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-8.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
-        //        '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png',
+        '../img/Pepe/wait/I-10.png'
     ];
     IMAGES_SLEEP = [
         '../img/Pepe/sleep/I-11.png',
@@ -113,28 +73,19 @@ class Character extends MovableObject {
         '../img/Pepe/sleep/I-17.png',
         '../img/Pepe/sleep/I-18.png',
         '../img/Pepe/sleep/I-19.png',
-        '../img/Pepe/sleep/I-20.png',
-        //  Original Bilder
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-11.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-12.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-13.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-14.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-15.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-16.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-17.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-18.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
-        //  '../img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png',
+        '../img/Pepe/sleep/I-20.png'
     ];
     //Sounds
     walking_sound = new Audio('../audio/walking.mp3');
     jumping_sound = new Audio('../audio/jump.mp3');
     hurt_sound = new Audio('../audio/hurt.mp3');
+
     //Var
     world;
     current_time = 0;
     afk_time = 0;
 
+    //Animation Character
     animate() {
         this.characterMovments();
         this.characterPresentation();
@@ -184,7 +135,7 @@ class Character extends MovableObject {
             } else {
                 super.playAnimation(this.IMAGES_WAIT);
             }
-            // afk animation gfehlt noch mit SLEEPING ARRAY
+            // afk animation fehlt noch mit SLEEPING ARRAY
 
         }, 1000 / 10); // wird alle 1000/60 millisekunden aufgerufen (ausgeführt / 60FPS)
     };
