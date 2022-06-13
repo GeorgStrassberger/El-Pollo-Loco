@@ -1,4 +1,3 @@
-"use strict"
 class Cloud extends MovableObject {
 
     constructor(x) {

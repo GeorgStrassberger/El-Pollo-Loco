@@ -1,4 +1,3 @@
-"use strict"
 class BackgroundObject extends MovableObject {
     constructor(imagePath, x) {
         super().loadImage(imagePath);

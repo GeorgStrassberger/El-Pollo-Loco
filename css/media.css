@@ -2,7 +2,9 @@
     canvas {
         width: 100%;
     }
-    .mobileButtos {}
+    .key-box span {
+        transform: scale(0.5);
+    }
 }
 
 @media only screen and (max-height: 480px) {

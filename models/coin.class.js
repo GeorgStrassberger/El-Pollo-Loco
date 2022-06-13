@@ -1,4 +1,3 @@
-"use strict"
 class Coin extends MovableObject {
 
     constructor(x, y) { // X, Y Koordinate

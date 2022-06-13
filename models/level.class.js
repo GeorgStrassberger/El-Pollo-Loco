@@ -1,4 +1,3 @@
-"use strict"
 class Level {
     constructor(chickens, endboss, clouds, backgroundObjects, coins, bottles) { //gleiche namens gebung um die lesbarkeit zu vereinfachen
         this.enemies = chickens;

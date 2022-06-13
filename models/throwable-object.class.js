@@ -1,4 +1,3 @@
-"use strict"
 class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
@@ -58,20 +57,13 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (!this.bottle_hits) {
-                super.playAnimation(this.IMAGES_BOTTLES_THROWING);
-            } else {
-                super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
-            }
-            /*
-            if (super.isAboveGround()) {
-                super.playAnimation(this.IMAGES_BOTTLES_THROWING);
-            } else {
+            if (this.bottle_hits || !super.isAboveGround()) {
                 super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x_movement = 0;
-            };
-            */
-        }, 100);
+            } else {
+                super.playAnimation(this.IMAGES_BOTTLES_THROWING);
+            }
+        }, 50);
     };
 
 

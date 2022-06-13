@@ -1,4 +1,3 @@
-"use strict"
 class Endboss extends MovableObject {
 
     constructor(x) { //Start Koordinate in X-Richtung wird überangeben von level1
@@ -54,12 +53,43 @@ class Endboss extends MovableObject {
         '../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G25.png',
         '../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png#',
     ];
+    //Sounds
+    win_sound = new Audio('../audio/win.mp3');
+    chicken_hit = new Audio('../audio/chicken_hit.mp3');
+    //Var
+    x_movement_speed = 2;
+    is_Dead = false;
 
     animate() {
-        setInterval(() => {
-            super.playAnimation(this.IMAGES_ALERT_BOSS);
+        this.enbossAnimation = setInterval(() => {
+            /*if (condition) {
+                super.playAnimation(this.IMAGES_ATTECKING_BOSS);
+            } else*/
+            if (super.isDead() || this.is_Dead) {
+                super.playAnimation(this.IMAGES_DEAD_BOSS);
+                this.chicken_hit.pause();
+                console.log('Boss isDead');
+                setTimeout(() => this.gameOver(), 1500);
+            } else if (super.isHurt()) {
+                super.playAnimation(this.IMAGES_HURT_BOSS);
+                this.chicken_hit.play();
+                console.log('Boss isHurt');
+            } else {
+                super.playAnimation(this.IMAGES_ALERT_BOSS);
+                console.log('Boss isALERT');
+            }
         }, 1000 / 5);
     };
 
     // benötigt noch eine HP pool bzw - min 3 falschen colisionen
+
+    //Wenn Endboss Tot ist 
+    gameOver() {
+        clearInterval(this.enbossAnimation);
+        this.win_sound.play();
+        document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
+        document.getElementById('endframe').classList.remove('d-none');
+        document.getElementById('startframe').classList.add('d-none');
+        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
+    }
 };

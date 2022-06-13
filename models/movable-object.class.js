@@ -1,4 +1,3 @@
-"use strict"
 class MovableObject extends DrawableObject {
     speed;
     speedY = 0;
@@ -18,12 +17,13 @@ class MovableObject extends DrawableObject {
     };
     // Abfrage: befindet sich der Charcter am Boden?
     isAboveGround() {
-        if (this instanceof ThrowableObject) { //WENN es aus der klasse TO kommt soll es immer falllen (aus dem spielfeld)
+        if (this instanceof ThrowableObject) { //WENN es aus der klasse TO kommt soll es bis .. fallen
             return this.y < 375;
         } else {
             return this.y < 235; // standart 135 mit original Bild
         };
     };
+
     // Kollisionsabfrage mit (MovableObject)
     // character.isCollidingWith(Chicken)
     isCollidingWith(mo) { // mo *aka* movableObject
@@ -44,7 +44,7 @@ class MovableObject extends DrawableObject {
         this.energy -= dmg; //energy wird immer bei kolision abgezogen, immer wenn kolision true ist und das bild neu gemalt wird.
         if (this.energy <= 0) {
             this.energy = 0;
-            console.log('Tot');
+            console.log('HIT: Tödlicher Schaden');
         } else {
             this.lastHit = new Date().getTime();
         };

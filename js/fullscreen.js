@@ -1,5 +1,3 @@
-"use strict"
-
 function goFullScreen() {
     let canvas = document.getElementById("canvas");
     if (canvas.requestFullScreen) {

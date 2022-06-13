@@ -1,4 +1,3 @@
-"use strict"
 class World {
 
     constructor(canvas, keyboard) {
@@ -32,19 +31,20 @@ class World {
     setWorld() {
         this.character.world = this;
     };
+
+    //Spiel wird neu geladen
     restartGame() {
         location.reload();
-    }
+    };
 
+    // Zeit zwischen dem Flaschen wurft 
     timeBetweenToThrowObjects() {
         setInterval(() => {
             this.throwObjects();
         }, 100);
     };
 
-    // Überprüfe Werfe Objekt (Flasche)
-    // Abfrage: -aktuell- Flasche werfen wenn die Leertaste gedrückt wird.
-    // Später: wenn Array gefüllt ist UND die Taste aktiv ist.
+    // Flasche werfen wenn eine gesammelt wurde
     throwObjects() {
         if (this.keyboard.SPACE && this.amountOfBottlesToThrow > 0) {
             this.throw_sound.play(); //Sound für Werfen abspielen
@@ -57,68 +57,97 @@ class World {
         };
     };
 
-    checkCollisionsBottleWithChickens() {
+    // Zeit fürs abfragen der Kollisionen
+    timeToCheckCollisions() {
+        setInterval(() => {
+            this.checkCollisionsWithEnemies();
+            this.collisionWithObjects();
+        }, 100);
+    };
+
+    // Kollisionen mit Gegnern
+    checkCollisionsWithEnemies() {
+        this.bottleWithChickens();
+        this.bottleWithEndboss();
+        this.characterWithChickens();
+        this.characterWithEndboss();
+    };
+
+    //Flasche trifft hühnchen
+    bottleWithChickens() {
         this.throwableObjects.forEach(bottle => {
             this.level.enemies.forEach(chicken => {
-                if (bottle.isCollidingWith(chicken)) {
-                    console.log('Flasche trifft Hünchen ', chicken);
-                    chicken.bottle_hits = true;
-                    console.log('Flasche trifft Hünchen mit ', chicken.energy);
+                if (bottle.isCollidingWith(chicken) && !bottle.bottle_hits) {
+                    console.log('Flasche trifft Hünchen mit ', chicken.energy, 'HP');
                     chicken.hit(20); // wurf schadeneinfügen noch zuschnell abgefragt 
-                    console.log('Flasche trifft Hünchen mit ', chicken.energy);
-                    //setTimeout(() => this.level.enemies.splice(chicken, 1), 300); // entfernt alle hünchen ???WHY???? 
+                    //chicken.is_Dead = true; // wqill ich nicht brauchen sollte über HIT() gehen
+                    bottle.bottle_hits = true; // für den ANimations wechsel
+                    console.log('Flasche trifft Hünchen mit ', chicken.energy, 'HP');
+                }
+                if (chicken.isDead()) {
+                    console.log('hendl is dod');
+                    setTimeout(() => this.level.enemies.splice(chicken, 1), 300); // entfernt mehrere hühnchen ???WHY???? 
+                }
+            });
+        });
+    };
+
+    //Flasche trifft BOSS
+    bottleWithEndboss() {
+        this.throwableObjects.forEach(bottle => {
+            this.level.endboss.forEach(boss => {
+                if (bottle.isCollidingWith(boss) && !bottle.bottle_hits) {
+                    boss.hit(15); //  zugefügter schaden 
+                    bottle.bottle_hits = true;
+                    console.log('Flasche hit Endboss und hat: ', boss.energy, 'HP');
+                }
+                if (boss.isDead()) {
+                    console.log('Hi is a :', boss.energy, 'HP');
+                    setTimeout(() => this.level.endboss.splice(boss, 1), 500);
                 }
             });
         });
     }
 
-    timeToCheckCollisions() {
-        setInterval(() => {
-            this.checkCollisionsWithEnemies(); // wird noch zuschnell abgefragt 
-            this.checkCollisionWithObjects();
-        }, 100);
-    };
 
-    checkCollisionsWithEnemies() {
-        this.checkCollisionsWithChickens();
-        this.checkCollisionsWithEndboss();
-        this.checkCollisionsBottleWithChickens();
-    };
-
-    //############### JUMP Versuch #############  switch abfrage
-    //### Sobald sie duch den intervall wieder aufgerufen wird kommter andere fall zu tragen
-    checkCollisionsWithChickens() {
-        this.level.enemies.forEach((enemy) => {
+    //CHARACTER MIT HÜHNCHEN
+    characterWithChickens() {
+        this.level.enemies.forEach((chicken) => {
             switch (true) {
-                case (this.character.isCollidingFromTopWith(enemy)):
-                    //this.this.level.enemies.hit(50); // sprungschaden einbinden anstalle von boolien(is_Dead)
-                    console.log('Flatsch', this.character.energy);
-                    enemy.is_Dead = true;
+                case (this.character.isCollidingFromTopWith(chicken)):
+                    chicken.hit(30);
                     break;
-                case (this.character.isCollidingWith(enemy) && !this.character.isAboveGround()): // bekommt nur schaden wenn er kolidiert und am boden ist 
-                    this.character.hit(10); // wird noch zuschnell abgefragt 
-                    console.log('Kollision mit Hünchen', this.character.energy);
+                case (chicken.isDead()):
+                    setTimeout(() => this.level.enemies.splice(chicken, 1), 300);
+                    break;
+                case (this.character.isCollidingWith(chicken) && !this.character.isAboveGround() && !chicken.isDead()):
+                    this.character.hit(5); // wird noch zu schnell abgefragt!""
+                    console.log('Pepe: ', this.character.energy, 'HP');
                     this.life_bar.setLifeBar(this.character.energy);
                     break;
             };
         });
     };
-    //##############################################
-    checkCollisionsWithEndboss() {
-        this.level.endboss.forEach((enemy) => {
-            if (this.character.isCollidingWith(enemy) && !this.character.isAboveGround()) { // bekommt nur schaden wenn er kolidiert und am boden ist 
+
+    //CHARACTER MIT ENDBOSS
+    characterWithEndboss() {
+        this.level.endboss.forEach((bossenemy) => {
+            if (this.character.isCollidingWith(bossenemy) && !this.character.isAboveGround()) {
                 this.character.hit(10); // wird noch zuschnell abgefragt 
-                console.log('Kollision mit EndbossHünchen', this.character.energy);
+                console.log('Kollision mit Endboss Pepe hat noch: ', this.character.energy, 'HP');
                 this.life_bar.setLifeBar(this.character.energy);
             };
         });
     };
 
-    checkCollisionWithObjects() {
-        this.checkCollisionsWithBottles();
-        this.checkCollisionsWithCoins();
+    //EINSAMMELN VON OBJEKTEN
+    collisionWithObjects() {
+        this.collisionsWithBottles();
+        this.collisionsWithCoins();
     };
-    checkCollisionsWithBottles() {
+
+    //EINSAMMELN VON FLASCHEN
+    collisionsWithBottles() {
         this.level.bottle.forEach((bottles, index) => { // checkt alle 0,1sek alle flaschen im level
             if (this.character.isCollidingWith(bottles) && this.amountOfBottlesToThrow < 5) { // wenn eine collision zwischen char und flasche eintritt UND weniger als 5 flschen gesammelt wurden
                 this.bottle_sound.play();
@@ -129,8 +158,8 @@ class World {
             };
         });
     };
-
-    checkCollisionsWithCoins() {
+    //EINSAMMELN VON MÜNZEN
+    collisionsWithCoins() {
         this.level.coin.forEach((coins, index) => {
             if (this.character.isCollidingWith(coins)) {
                 this.coin_sound.play();
@@ -200,31 +229,4 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     };
-
-
-    // Noch nicht aktiv
-    gameEnd() {
-        console.log('GAME END FUNCTION AUSGEFÜHRT');
-        if (this.character.energy <= 0) {
-            console.assert, log('Pepe ist TOT');
-            this.quitGame();
-            //gameWon(); // muss noch erstellt werden
-        }
-        if (this.level.endboss.energy <= 0) {
-            console.log('Endboss ist TOT');
-            //gameLost(); // muss noch erstellt werden
-        }
-    }
-
-    gameWon() {
-        quitGame();
-    };
-
-    quitGame() {
-        document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
-        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
-        //TON abspielen
-        //
-    }
-
 };

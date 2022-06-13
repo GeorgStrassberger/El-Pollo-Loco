@@ -1,4 +1,3 @@
-"use strict"
 class LifeBar extends DrawableObject {
 
     constructor() {

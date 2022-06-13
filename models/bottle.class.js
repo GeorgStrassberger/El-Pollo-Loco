@@ -1,4 +1,3 @@
-"use strict";
 class Bottle extends DrawableObject {
 
     constructor(x, y, j) { // X, Y Koordinate und array pos. übergeben

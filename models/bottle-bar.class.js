@@ -1,4 +1,3 @@
-"use strict"
 class BottleBar extends DrawableObject {
 
     constructor() {

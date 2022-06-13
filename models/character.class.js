@@ -1,21 +1,20 @@
-"use strict"
 class Character extends MovableObject {
 
     constructor() {
         super().loadImage('../img/Pepe/walk/W-21.png');
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_DEAD);
-        this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_WAIT);
-        this.loadImages(this.IMAGES_SLEEP);
-        this.applyGravity();
+        super.loadImages(this.IMAGES_WALKING);
+        super.loadImages(this.IMAGES_JUMPING);
+        super.loadImages(this.IMAGES_DEAD);
+        super.loadImages(this.IMAGES_HURT);
+        super.loadImages(this.IMAGES_WAIT);
+        super.loadImages(this.IMAGES_SLEEP);
+        super.applyGravity();
         this.animate();
         this.x = 120;
         this.y = 235;
         this.height = 200;
         this.width = 100;
-        this.energy = 100;
+        this.energy = 100; //HP
         this.speed = 10;
     };
     //Images
@@ -173,7 +172,8 @@ class Character extends MovableObject {
             if (super.isDead()) { // WENN die function isDead() true zurückgiebt
                 super.playAnimation(this.IMAGES_DEAD); // starte playAnimation( mit diesem Bilder array)
                 this.hurt_sound.pause(); // pauseire den TON für die trefferabfrage
-                this.gameOver()
+                this.walking_sound.pause();
+                this.gameLost()
             } else if (super.isHurt()) { // WENN die function isHurt() true zurückgiebt
                 super.playAnimation(this.IMAGES_HURT); // starte playAnimation( mit diesem Bilder array)
                 this.hurt_sound.play(); // spiele TON ab für treffer
@@ -190,13 +190,13 @@ class Character extends MovableObject {
     };
 
     //Wenn Character Tot ist 
-    gameOver() {
-        clearInterval(this.characterMovement)
-            //ton abspielen
+    gameLost() {
+        clearInterval(this.characterMovement);
+        //ton abspielen
         document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
         document.getElementById('endframe').classList.remove('d-none');
         document.getElementById('startframe').classList.add('d-none');
-        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/3.Game over.png`;
+        document.getElementById('coverimg').src = `../img/9.IntroOutroImage/GameOverScreen/1.you lost.png`;
     }
 
 };

@@ -81,7 +81,7 @@
 
 .container .btn:hover::before {
     bottom: 0;
-    height: 50%;
+    height: 20%;
     width: 80%;
     border-radius: 30px;
     transition-delay: 0.5s;
@@ -106,7 +106,7 @@
 
 .container .btn:hover::after {
     top: 0;
-    height: 50%;
+    height: 20%;
     width: 80%;
     border-radius: 30px;
     transition-delay: 0.5s;
@@ -117,7 +117,7 @@
 
 .container .btn:nth-child(1):before,
 .container .btn:nth-child(1)::after {
-    background: #ff1f71;
+    background: rgb(0, 255, 0, 1);
     /* Der Neon Hintergrund
     box-shadow: 0 0 5px #ff1f71, 0 0 15px #ff1f71, 0 0 30px #ff1f71, 0 0 60px #ff1f71;
     */
@@ -128,7 +128,7 @@
 
 .container .btn:nth-child(2):before,
 .container .btn:nth-child(2)::after {
-    background: #2bd2ff;
+    background: rgb(255, 255, 0, 1);
     /* Der Neon Hintergrund 
     box-shadow: 0 0 5px #2bd2ff, 0 0 15px #2bd2ff, 0 0 30px #2bd2ff, 0 0 60px #2bd2ff;
     */
@@ -139,7 +139,7 @@
 
 .container .btn:nth-child(3):before,
 .container .btn:nth-child(3)::after {
-    background: #1eff45;
+    background: rgb(255, 0, 0, 1);
     /*  Der Neon Hintergrund
     box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45, 0 0 60px #1eff45;
     */

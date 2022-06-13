@@ -1,4 +1,3 @@
-"use strict"
 class DrawableObject {
     img;
     imageCache = {};

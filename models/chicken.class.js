@@ -1,4 +1,3 @@
-"use strict"
 class Chicken extends MovableObject {
 
     constructor(x) {
@@ -16,7 +15,7 @@ class Chicken extends MovableObject {
 
     x_movement_speed = 2;
     is_Dead = false;
-    bottle_hits = false;
+    //bottle_hits = false;
     IMAGES_WALKING_CHICKEN = [
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png',
         '../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/2-Ga_centro.png',
@@ -41,13 +40,11 @@ class Chicken extends MovableObject {
         setInterval(() => {
             if (super.isDead()) {
                 super.playAnimation(this.IMAGES_DEAD_CHICKEN);
-                console.log('Hünchen hat', this.energy);
-                setTimeout(() => this.y = -100, 250); // schiebt das bild aus der Leihnwand nach unten
+                //setTimeout(() => this.y = -100, 250); // schiebt das bild aus der Leihnwand nach unten
             } else {
                 super.playAnimation(this.IMAGES_WALKING_CHICKEN);
                 super.moveLeft();
             }
-
         }, 1000 / 10);
     };
 };
