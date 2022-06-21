@@ -11,8 +11,12 @@ function initLevel1() {
             new Chicken(2900),
             new Chicken(3200),
             new Chicken(3600),
+            new Chicken(3800),
+            new Chicken(4100),
+            new Chicken(4350),
+            new Chicken(4600),
         ], [
-            new Endboss(3800),
+            new Endboss(4000),
         ], [
             new Cloud(0),
             new Cloud(600),
@@ -84,6 +88,10 @@ function initLevel1() {
             new Bottle(3050, 360, 1),
             new Bottle(3350, 380, 1),
             new Bottle(3650, 350, 0),
+            new Bottle(4000, 370, 0),
+            new Bottle(4200, 380, 1),
+            new Bottle(4400, 360, 0),
+            new Bottle(4600, 350, 1),
         ]
     );
 }

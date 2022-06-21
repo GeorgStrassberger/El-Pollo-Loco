@@ -9,12 +9,13 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT_BOSS);
         this.loadImages(this.IMAGES_DEAD_BOSS);
         this.animate();
+        //this.isAttacking();
         this.x = x;
         this.y = 45;
         this.height = 400;
         this.width = 250;
         this.energy = 100;
-        this.speed = 5;
+        this.speed = 15;
         this.vulnerable = 1.5;
     };
 
@@ -59,32 +60,51 @@ class Endboss extends MovableObject {
     win_sound = new Audio('../audio/win.mp3');
 
     //Var
-
     x_movement_speed = 2;
+    moving = true;
 
     // Animation Endboss
     animate() {
-        this.enbossAnimation = setInterval(() => {
-            /*if (condition) {
-                super.playAnimation(this.IMAGES_ATTECKING_BOSS);
-            } else*/
+        this.endbossAnimation = setInterval(() => {
             if (super.isDead()) {
                 super.playAnimation(this.IMAGES_DEAD_BOSS);
                 console.log('Boss isDead');
-                setTimeout(() => this.gameOver(), 1500);
+                setTimeout(() => {
+                    this.gameOver();
+                }, 1500);
             } else if (super.isHurt()) {
+                clearInterval(this.attack);
                 super.playAnimation(this.IMAGES_HURT_BOSS);
                 console.log('Boss isHurt');
-            } else {
+            } else if (this.energy == 100) {
                 super.playAnimation(this.IMAGES_ALERT_BOSS);
                 console.log('Boss isALERT');
+            } else {
+                this.isAttacking();
+                console.log('isAttacking');
             }
         }, 1000 / 5);
     };
 
+    // Angriff 
+    // wenn er verletzt wird geht er kurz vor und dann wieder  zurück
+    isAttacking() {
+        if (this.moving) {
+            console.log('Lauf los nach links');
+            super.playAnimation(this.IMAGES_ATTECKING_BOSS);
+            super.moveLeft();
+            setTimeout(() => this.moving = false, 3000);
+        } else {
+            console.log('Lauf los nach rechts');
+            super.playAnimation(this.IMAGES_WALKING_BOSS);
+            super.moveRight();
+            setTimeout(() => this.moving = true, 1000);
+        };
+    };
+
     //Wenn Endboss Tot ist 
     gameOver() {
-        clearInterval(this.enbossAnimation);
+        clearInterval(this.endbossAnimation);
         this.win_sound.play();
         document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
         document.getElementById('endframe').classList.remove('d-none');

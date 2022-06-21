@@ -53,7 +53,7 @@ class MovableObject extends DrawableObject {
         };
     };
 
-    //Pepe ist Verletzt worden
+    // ist Verletzt worden
     isHurt() {
         //Millisekunden Aktuell - Millisekunden lastHit
         let timepassed = new Date().getTime() - this.lastHit; //Unterschied ausrechnen wieviel Zeit ist vergangen? 
@@ -61,13 +61,6 @@ class MovableObject extends DrawableObject {
         //console.log(this.vulnerable, 'this.vulnerable');
         return timepassed < this.vulnerable;
         //return timepassed < 0.5; // true or false
-    };
-    //Endboss ist Verletzt worden
-    isHurtTimer() {
-        //Millisekunden Aktuell - Millisekunden lastHit
-        let timepassed = new Date().getTime() - this.lastHit; //Unterschied ausrechnen wieviel Zeit ist vergangen? 
-        timepassed = timepassed / 1000; // Millisekunden durch 1000 Teilen = Sekunden. 
-        return timepassed < super.vulnerable; // true or false
     };
 
     // ist Tot

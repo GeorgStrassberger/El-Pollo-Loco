@@ -30,7 +30,7 @@ class DrawableObject {
     };
     // Zeigt mir die HitBoxen an 
     drawFrame(ctx) {
-        if (this instanceof Chicken || this instanceof Endboss || this instanceof ThrowableObject) { // Rand wird nur noch auf die beiden Objecte CHARATER & CHICKEN angewannt
+        if (this instanceof LittleChicken || this instanceof Endboss) { // Rand wird nur noch auf die beiden Objecte CHARATER & CHICKEN angewannt
             // Blue rectangle
             ctx.beginPath();
             ctx.lineWidth = '1';
