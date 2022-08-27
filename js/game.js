@@ -11,8 +11,23 @@ function startGame() {
     initLevel1(); // lade level1 
     canvas = document.getElementById('canvas'); //weise canvas zu
     world = new World(canvas, keyboard); // übergebe canvas und keyboard
+
+    //hideElementsWithID('mobileButtons');
+    //showElementsWithID('desktopButtos');
     mobileButtos();
 }
+
+function showElementsWithID(id) {
+    document.getElementById(id).classList.remove('d-none');
+}
+
+function hideElementsWithID(id) {
+    document.getElementById(id).classList.add('d-none');
+}
+
+
+
+
 
 function quitGame() {
     document.getElementById('cover').classList.add('d-none');

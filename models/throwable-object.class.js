@@ -30,7 +30,7 @@ class ThrowableObject extends MovableObject {
 
     // wurf Richtung
     directionToThrow() {
-        if (world.character.otherDirection === true) {
+        if (world.character.otherDirection) {
             this.throwLeft();
         } else {
             this.throwRight();
@@ -41,7 +41,7 @@ class ThrowableObject extends MovableObject {
     throwRight() {
         this.speedY = 20;
         super.applyGravity();
-        // geschwindigkeit der Flasche in X richtung
+        // geschwindigkeit der Flasche in + X richtung
         setInterval(() => {
             this.x += this.x_movement;
         }, 25);
@@ -51,7 +51,7 @@ class ThrowableObject extends MovableObject {
     throwLeft() {
         this.speedY = 20;
         super.applyGravity();
-        // geschwindigkeit der Flasche in X richtung
+        // geschwindigkeit der Flasche in - X richtung
         setInterval(() => {
             this.x -= this.x_movement;
         }, 25);

@@ -29,8 +29,10 @@ class DrawableObject {
         });
     };
     // Zeigt mir die HitBoxen an 
+
     drawFrame(ctx) {
-        if (this instanceof LittleChicken || this instanceof Endboss) { // Rand wird nur noch auf die beiden Objecte CHARATER & CHICKEN angewannt
+        /*
+        if (this instanceof LittleChicken || this instanceof Endboss) { // Rand die Objecte angewannt
             // Blue rectangle
             ctx.beginPath();
             ctx.lineWidth = '1';
@@ -38,5 +40,7 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         };
+        */
     };
+
 };

@@ -29,13 +29,6 @@
     width: 160px;
 }
 
-
-/*
-.key-box span:last-child {
-    min-width: 200px;
-}
-*/
-
 .key-box span::before {
     content: '';
     position: absolute;

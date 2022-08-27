@@ -18,7 +18,7 @@
         justify-content: center;
         width: 100%;
     }
-    .mobileButtos {
+    .buttons {
         position: absolute;
         bottom: 0;
         z-index: 9;
@@ -38,8 +38,3 @@
         transform: scale(0.8);
     }
 }
-
-
-/*
-transform: scale(0.5);
-*/

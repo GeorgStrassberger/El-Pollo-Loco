@@ -48,7 +48,7 @@
 </head>
 
 <body>
-    <div class="canvas_aera">
+    <div id="canvas_aera" class="canvas_aera">
         <div id="cover" class="cover">
             <img id="coverimg" src="../img/9.IntroOutroImage/GameStartScreen/Opción1.png" alt="startscreen" alt="endscreen">
             <div id="startframe" class="container">
@@ -60,30 +60,48 @@
             <div id="endframe" class="container d-none">
                 <div class="btn" onclick="world.restartGame()"><a href="#">Main Menu</a></div>
             </div>
-
-
         </div>
 
 
-        <div class="screen_images" onclick="goFullScreen()" title="Fullscreen">
+
+
+        <div id="fullScreen" onclick="fullScreen()" class="screen_images" title="Fullscreen">
             <img src="../img/icons/fullscreen-12-32.png" alt="fullscreen">
         </div>
 
-        <canvas id="canvas" width="720" height="480">
+        <div id="normalScreen" onclick="normalScreen()" class="screen_images d-none" title="Normalscreen">
+            <img src="../img/icons/fullscreen-exit-32.png" alt="normalscreen">
+        </div>
+
+        <canvas id="canvas" class="canvas" width="720" height="480">
+
         Your browser does not support the canvas element.
         </canvas>
 
-        <div id="mobileButtos" class="mobileButtos">
-            <div id="moveButtons" class="key-box">
+
+        <div id="mobileButtons" class="buttons d-none">
+            <div class="key-box">
                 <span onmousedown="mouseDownToMoveLeft()" onmouseup="mouseUpToMoveLeft()" id="btnLeft"><img src="../img/icons/arrow-102-24 (1).png" alt="arrow-left"><br><i>Left</i></span>
                 <span onmousedown="mouseDownToMoveRight()" onmouseup="mouseUpToMoveRight()" id="btnRight"><img src="../img/icons/arrow-37-24 (1).png" alt="arrow-right"><br><i>Right</i></span>
             </div>
-            <div id="actionButtons" class="key-box">
+            <div class="key-box">
                 <span onmousedown="mouseDownToJump()" onmouseup="mouseUpToJump()" id="btnJump"><img src="../img/icons/arrow-155-24 (1).png" alt="arrow-up"><br><i>Jump</i></span>
                 <span class="space" onmousedown="mouseDownToThrow()" onmouseup="mouseUpToThrow()" id="btnThrow"><img src="../img/icons/myspace-24 (1).png" alt="space"><br><i>Throw</i></span>
             </div>
         </div>
 
+
+    </div>
+
+    <div id="desktopButtons" class="buttons">
+        <div class="key-box">
+            <span onmousedown="mouseDownToMoveLeft()" onmouseup="mouseUpToMoveLeft()" id="btnLeft"><img src="../img/icons/arrow-102-24 (1).png" alt="arrow-left"><br><i>Left</i></span>
+            <span onmousedown="mouseDownToMoveRight()" onmouseup="mouseUpToMoveRight()" id="btnRight"><img src="../img/icons/arrow-37-24 (1).png" alt="arrow-right"><br><i>Right</i></span>
+        </div>
+        <div class="key-box">
+            <span onmousedown="mouseDownToJump()" onmouseup="mouseUpToJump()" id="btnJump"><img src="../img/icons/arrow-155-24 (1).png" alt="arrow-up"><br><i>Jump</i></span>
+            <span class="space" onmousedown="mouseDownToThrow()" onmouseup="mouseUpToThrow()" id="btnThrow"><img src="../img/icons/myspace-24 (1).png" alt="space"><br><i>Throw</i></span>
+        </div>
     </div>
 
 </body>
