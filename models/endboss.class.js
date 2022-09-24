@@ -9,7 +9,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT_BOSS);
         this.loadImages(this.IMAGES_DEAD_BOSS);
         this.animate();
-        //this.isAttacking();
         this.x = x;
         this.y = 45;
         this.height = 400;
@@ -90,12 +89,12 @@ class Endboss extends MovableObject {
     // wenn er verletzt wird geht er kurz vor und dann wieder  zurück
     isAttacking() {
         if (this.moving) {
-            console.log('Lauf los nach links');
+            // console.log('Lauf los nach links');
             super.playAnimation(this.IMAGES_ATTECKING_BOSS);
             super.moveLeft();
             setTimeout(() => this.moving = false, 3000);
         } else {
-            console.log('Lauf los nach rechts');
+            // console.log('Lauf los nach rechts');
             super.playAnimation(this.IMAGES_WALKING_BOSS);
             super.moveRight();
             setTimeout(() => this.moving = true, 1000);

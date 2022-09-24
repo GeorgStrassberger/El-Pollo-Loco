@@ -1,6 +1,6 @@
 class Chicken extends MovableObject {
 
-    constructor(x) {
+    constructor(x, id) {
         super().loadImage(this.IMAGES_WALKING_CHICKEN[0]);
         this.loadImages(this.IMAGES_WALKING_CHICKEN);
         this.loadImages(this.IMAGES_DEAD_CHICKEN);
@@ -12,6 +12,7 @@ class Chicken extends MovableObject {
         this.energy = 20;
         this.speed = this.x_movement_speed + Math.random() * 6.0; // speed wird überschrieben mit x_movement_speed + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
         this.vulnerable = 1;
+        this.id = id;
     };
 
     //Var
@@ -31,6 +32,7 @@ class Chicken extends MovableObject {
         setInterval(() => {
             if (super.isDead()) {
                 super.playAnimation(this.IMAGES_DEAD_CHICKEN);
+                // console.log('id: ', this.id + ' is tot');
             } else {
                 super.playAnimation(this.IMAGES_WALKING_CHICKEN);
                 super.moveLeft();

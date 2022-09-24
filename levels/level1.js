@@ -4,17 +4,17 @@ let level2;
 function initLevel1() {
     level1 = new Level(
         [
-            new Chicken(1700), //Die Start Koordinate X wird hier festgelegt
-            new Chicken(2000),
-            new Chicken(2300),
-            new Chicken(2600),
-            new Chicken(2900),
-            new Chicken(3200),
-            new Chicken(3600),
-            new Chicken(3800),
-            new Chicken(4100),
-            new Chicken(4350),
-            new Chicken(4600),
+            new Chicken(1700, 1), //Die Start Koordinate X wird hier festgelegt + eine ID vergeben
+            new Chicken(2000, 2),
+            new Chicken(2300, 3),
+            new Chicken(2600, 4),
+            new Chicken(2900, 5),
+            new Chicken(3200, 6),
+            new Chicken(3600, 7),
+            new Chicken(3800, 8),
+            new Chicken(4100, 9),
+            new Chicken(4350, 10),
+            new Chicken(4600, 11),
         ], [
             new Endboss(4000),
         ], [

@@ -47,7 +47,7 @@ class MovableObject extends DrawableObject {
         this.energy -= dmg; //energy wird immer bei kolision abgezogen, immer wenn kolision true ist und das bild neu gemalt wird.
         if (this.energy <= 0) {
             this.energy = 0;
-            console.log('HIT: Tödlicher Schaden');
+            // console.log('HIT: Tödlicher Schaden');
         } else {
             this.lastHit = new Date().getTime();
         };

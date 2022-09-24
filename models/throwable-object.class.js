@@ -25,7 +25,7 @@ class ThrowableObject extends MovableObject {
         '../img/6.botella/Rotación/Mesa de trabajo5.png',
         '../img/6.botella/Rotación/Mesa de trabajo6.png',
     ];
-    bottle_hits = false;
+    // bottle_hits = false;
     x_movement = 10;
 
     // wurf Richtung
@@ -59,13 +59,15 @@ class ThrowableObject extends MovableObject {
 
     // Animation der Falsche
     animate() {
+        // console.log('Animate Flasche');
         setInterval(() => {
-            if (this.bottle_hits || !super.isAboveGround()) {
+            if (this.bottle_hits || !super.isAboveGround()) { // 
                 super.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x_movement = 2; //SPLASH verläuft nach rechts
                 this.speedY = -2; //SPLASH verläuft nach unten
             } else {
                 super.playAnimation(this.IMAGES_BOTTLES_THROWING);
+                // console.log('Animate Flasche Drehen');
             }
         }, 50);
     };

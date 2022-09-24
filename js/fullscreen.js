@@ -48,7 +48,6 @@ function checkDevice() {
     setInterval(() => {
         let screenW = screen.width;
         let screenH = screen.height;
-        let turnDevice = document.getElementById('turnDevice'); // id ändern#
         if (isMobile()) {
             if (screenW < 500 && screenH > 500) {
                 normalScreen()

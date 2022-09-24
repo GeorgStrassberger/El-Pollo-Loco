@@ -19,7 +19,7 @@ class World {
     life_bar = new LifeBar();
     coin_bar = new CoinBar();
     bottle_bar = new BottleBar();
-    throwableObjects = []; // bei kolisieon wird das Array gefüllt
+    collecdtedBottles = []; // bei kolisieon wird das Array gefüllt
     spawnChickens = [];
     amountOfBottlesToThrow = 0; // hilfszähler 
     throw_sound = new Audio('../audio/throw.mp3');
@@ -27,7 +27,8 @@ class World {
     bottle_sound = new Audio('../audio/bottle.mp3');
     throw_sound = new Audio('../audio/throw.mp3');
     chicken_hit = new Audio('../audio/chicken_hit.mp3');
-    bottle_hits = false;
+
+
     // Verbindung zwischen World und Character .class
     // Übergibt THIS als Objetct in WORLD
     setWorld() {
@@ -51,10 +52,10 @@ class World {
         if (this.keyboard.SPACE && this.amountOfBottlesToThrow > 0) {
             this.throw_sound.play(); //Sound für Werfen abspielen
             let bottle = new ThrowableObject(this.character.x + 30, this.character.y + 40); // erstelle neues FlasschenObject an der Koordinate x Y // this.character.y + 140 mit OriginalBild
-            this.throwableObjects.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
+            this.collecdtedBottles.push(bottle); // pushed bottle (throwableObject) in den array throwabloObjects[];
             this.amountOfBottlesToThrow -= 1; //verringere hilfszähler
             this.bottle_bar.collectedBottles -= 1; // //verringere zähler
-            setTimeout(() => this.throwableObjects.splice(0, 1), 1000); // entferne im array an der stelle 0 um 1 
+            setTimeout(() => this.collecdtedBottles.splice(0, 1), 1000); // entferne im array an der stelle 0 um 1 
             this.bottle_bar.setBottleBar(); // flaschenAnzeige neu aufrufen zu aktuallisieren
         };
     };
@@ -79,7 +80,7 @@ class World {
 
     //Flasche trifft kleines hühnchen
     bottleWithLittleChickens() {
-        this.throwableObjects.forEach(bottle => {
+        this.collecdtedBottles.forEach(bottle => {
             this.spawnChickens.forEach(lilchicken => {
                 if (bottle.isCollidingWith(lilchicken)) {
                     bottle.bottle_hits = true;
@@ -98,7 +99,7 @@ class World {
 
     //Flasche trifft hühnchen
     bottleWithChickens() {
-        this.throwableObjects.forEach(bottle => {
+        this.collecdtedBottles.forEach(bottle => {
             this.level.enemies.forEach(chicken => {
                 if (bottle.isCollidingWith(chicken)) {
                     bottle.bottle_hits = true;
@@ -116,7 +117,7 @@ class World {
 
     //Flasche trifft BOSS
     bottleWithEndboss() {
-        this.throwableObjects.forEach(bottle => {
+        this.collecdtedBottles.forEach(bottle => {
             this.level.endboss.forEach(boss => {
                 if (bottle.isCollidingWith(boss) && !boss.isHurt()) {
                     if (boss.isDead()) {
@@ -129,7 +130,7 @@ class World {
                         boss.hit(18);
                         this.chicken_hit.play();
                         this.spawnLittleChicken();
-                        console.log('Flasche trifft Endboss: ', boss.energy, 'HP');
+                        // console.log('Flasche trifft Endboss: ', boss.energy, 'HP');
                     };
                 };
             });
@@ -148,7 +149,7 @@ class World {
                     }, 500);
                 } else {
                     this.character.hit(5);
-                    console.log('Pepe hat noch ' + this.character.energy + ' HP');
+                    // console.log('Pepe hat noch ' + this.character.energy + ' HP');
                     this.life_bar.setLifeBar(this.character.energy);
                 };
             };
@@ -181,8 +182,8 @@ class World {
             if (this.character.isCollidingWith(bossenemy) && !this.character.isAboveGround() && !this.character.isHurt()) {
                 this.character.hit(10);
                 bossenemy.hit(5);
-                console.log('Kollision Pepe hat noch: ', this.character.energy, 'HP übrig');
-                console.log('Kollision Endboss hat noch: ', bossenemy.energy, 'HP übrig');
+                // console.log('Kollision Pepe hat noch: ', this.character.energy, 'HP übrig');
+                // console.log('Kollision Endboss hat noch: ', bossenemy.energy, 'HP übrig');
                 this.life_bar.setLifeBar(this.character.energy);
             };
         });
@@ -222,9 +223,9 @@ class World {
     spawnLittleChicken() {
         this.level.endboss.forEach(endboss => {
             if (endboss.isHurt()) {
-                console.log('a gigal kimmt jezd');
-                let spanLilChick = new LittleChicken(endboss.x + 100, endboss.y + 330);
-                this.spawnChickens.push(spanLilChick);
+                // console.log('a gigal kimmt jezd');
+                let spawnLilChick = new LittleChicken(endboss.x + 100, endboss.y + 330);
+                this.spawnChickens.push(spawnLilChick);
             };
         });
     }
@@ -248,7 +249,7 @@ class World {
         this.addObjectsToMap(this.level.clouds); // draw the clouds
         this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
         this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.throwableObjects); // draw the throwableObjects (Bottle'S)
+        this.addObjectsToMap(this.collecdtedBottles); // draw the collecdtedBottles (Bottle's)
         this.addObjectsToMap(this.spawnChickens);
 
         this.addObjectsToMap(this.level.coin);
@@ -276,9 +277,9 @@ class World {
             this.flipImage(mo);
         };
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
-            this.flipImageBack(mo)
+            this.flipImageBack(mo);
         };
     };
     // Spielgel das Bild um 180°
