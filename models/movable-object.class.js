@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     applyGravity() {
         setInterval(
             () => {
-                if (this.isAboveGround() || this.speedY > 0) {
+                if (this.isInAir() || this.speedY > 0) {
                     this.y -= this.speedY;
                     this.speedY -= this.acceleration;
                 }
@@ -18,7 +18,7 @@ class MovableObject extends DrawableObject {
     };
 
     // Abfrage: befindet sich der Charcter am Boden?
-    isAboveGround() {
+    isInAir() {
         if (this instanceof ThrowableObject) { //WENN es aus der klasse TO kommt soll es bis .. fallen
             return this.y < 375;
         } else {

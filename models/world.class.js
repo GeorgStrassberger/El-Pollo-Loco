@@ -85,7 +85,6 @@ class World {
                 if (bottle.isCollidingWith(lilchicken)) {
                     bottle.bottle_hits = true;
                     lilchicken.hit(20);
-                    //Ton abspielen
                     this.chicken_hit.play();
                     setTimeout(() => {
                         let index = this.spawnChickens.indexOf(lilchicken);
@@ -96,7 +95,6 @@ class World {
         });
     };
 
-
     //Flasche trifft hühnchen
     bottleWithChickens() {
         this.collecdtedBottles.forEach(bottle => {
@@ -104,7 +102,6 @@ class World {
                 if (bottle.isCollidingWith(chicken)) {
                     bottle.bottle_hits = true;
                     chicken.hit(20);
-                    //Ton abspielen
                     this.chicken_hit.play();
                     setTimeout(() => {
                         let index = this.level.enemies.indexOf(chicken);
@@ -130,12 +127,12 @@ class World {
                         boss.hit(18);
                         this.chicken_hit.play();
                         this.spawnLittleChicken();
-                        // console.log('Flasche trifft Endboss: ', boss.energy, 'HP');
                     };
                 };
             });
         });
     };
+
     //CHARACTER MIT KLEINEN HÜHNCHEN
     characterWithLittleChickens() {
         this.spawnChickens.forEach((lilchick) => {
@@ -149,7 +146,6 @@ class World {
                     }, 500);
                 } else {
                     this.character.hit(5);
-                    // console.log('Pepe hat noch ' + this.character.energy + ' HP');
                     this.life_bar.setLifeBar(this.character.energy);
                 };
             };
@@ -162,7 +158,6 @@ class World {
             if (!chicken.isDead() && !this.character.isDead() && !this.character.isHurt() && this.character.isCollidingWith(chicken)) {
                 if (this.character.isCollidingFromTopWith(chicken)) {
                     chicken.hit(30);
-                    //Ton abspielen
                     this.chicken_hit.play();
                     setTimeout(() => {
                         let index = this.level.enemies.indexOf(chicken);
@@ -179,11 +174,9 @@ class World {
     //CHARACTER MIT ENDBOSS
     characterWithEndboss() {
         this.level.endboss.forEach((bossenemy) => {
-            if (this.character.isCollidingWith(bossenemy) && !this.character.isAboveGround() && !this.character.isHurt()) {
+            if (this.character.isCollidingWith(bossenemy) && !this.character.isInAir() && !this.character.isHurt()) {
                 this.character.hit(10);
                 bossenemy.hit(5);
-                // console.log('Kollision Pepe hat noch: ', this.character.energy, 'HP übrig');
-                // console.log('Kollision Endboss hat noch: ', bossenemy.energy, 'HP übrig');
                 this.life_bar.setLifeBar(this.character.energy);
             };
         });
@@ -207,6 +200,7 @@ class World {
             };
         });
     };
+
     //EINSAMMELN VON MÜNZEN
     collisionsWithCoins() {
         this.level.coin.forEach((coins, index) => {
@@ -219,11 +213,10 @@ class World {
         });
     };
 
-    //Spawn LittleChicken's
+
     spawnLittleChicken() {
         this.level.endboss.forEach(endboss => {
             if (endboss.isHurt()) {
-                // console.log('a gigal kimmt jezd');
                 let spawnLilChick = new LittleChicken(endboss.x + 100, endboss.y + 330);
                 this.spawnChickens.push(spawnLilChick);
             };
@@ -244,12 +237,12 @@ class World {
         this.addToMap(this.bottle_bar);
         // -----------------------------------
 
-        this.ctx.translate(this.camera_x, 0); // Forwards
-        this.addToMap(this.character); // draw the Character        
-        this.addObjectsToMap(this.level.clouds); // draw the clouds
-        this.addObjectsToMap(this.level.enemies); // draw the chicken enemies
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.collecdtedBottles); // draw the collecdtedBottles (Bottle's)
+        this.addObjectsToMap(this.collecdtedBottles);
         this.addObjectsToMap(this.spawnChickens);
 
         this.addObjectsToMap(this.level.coin);
@@ -257,7 +250,6 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen
 
-        // Draw wird immer wieder aufgerufen so oft wie die Garfikkarte kann -> fps
         let self = this; //requestAnimationFrame kennt die this methode nicht und wird deshalb in eine Variable gepackt.
         requestAnimationFrame(function() {
             self.draw();
@@ -277,7 +269,7 @@ class World {
             this.flipImage(mo);
         };
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         };

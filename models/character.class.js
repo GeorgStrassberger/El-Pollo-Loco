@@ -93,24 +93,23 @@ class Character extends MovableObject {
     };
 
     characterMovments() {
-        // Movement (Bewegeung)
         this.characterMovement = setInterval(() => {
             this.walking_sound.pause(); //pausiere den TON immer wieder
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) { //WENN taste rechts &UND& X-Koordinate nicht größer als _end_x
                 super.moveRight(); //bewege Character nach rechts
                 this.otherDirection = false; // setze die variabele auf false
-                if (!super.isAboveGround()) { //WENN nicht in der luft
+                if (!super.isInAir()) { //WENN nicht in der luft
                     this.walking_sound.play(); // spiele TON ab fürs laufen
                 };
             };
             if (this.world.keyboard.LEFT && this.x > 0) { // WENN taste links && X-Koordinate ist größer als 0 --> bei NULL wird die (bedingung) FALSE und der Character kann nicht weiter Links laufen.
                 super.moveLeft(); // bewege Character nach links
                 this.otherDirection = true; // spiegelt das bild des characters 
-                if (!super.isAboveGround()) { // wenn nicht in der Luft
+                if (!super.isInAir()) { // wenn nicht in der Luft
                     this.walking_sound.play(); // spiele TON ab fürs laufen
                 };
             };
-            if (this.world.keyboard.UP && !super.isAboveGround()) { //WENN taste jump &UND& ist nicht auf dem Boden
+            if (this.world.keyboard.UP && !super.isInAir()) { //WENN taste jump &UND& ist nicht auf dem Boden
                 super.jump(); // bewege Character nach oben 
                 this.jumping_sound.play(); // und spiele TON ab fürs Hüpfen
             };
@@ -129,7 +128,7 @@ class Character extends MovableObject {
             } else if (super.isHurt()) { // WENN die function isHurt() true zurückgiebt
                 super.playAnimation(this.IMAGES_HURT); // starte playAnimation( mit diesem Bilder array)
                 this.hurt_sound.play(); // spiele TON ab für treffer
-            } else if (super.isAboveGround()) { // WENN die function isAboveGround() true zurückgiebt
+            } else if (super.isInAir()) { // WENN die function isInAir() true zurückgiebt
                 super.playAnimation(this.IMAGES_JUMPING); // starte playAnimation( mit diesem Bilder array) 
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { //WENN  taste rechts |ODER| taste links gedrückt wird
                 super.playAnimation(this.IMAGES_WALKING); // starte playAnimation( mit diesem Bilder array)
@@ -144,7 +143,7 @@ class Character extends MovableObject {
     //Wenn Character Tot ist 
     gameLost() {
         clearInterval(this.characterMovement);
-        //ton abspielen
+        // Ton abspielen
         document.getElementById('cover').classList.remove('d-none'); // blende start bild aus
         document.getElementById('endframe').classList.remove('d-none');
         document.getElementById('startframe').classList.add('d-none');

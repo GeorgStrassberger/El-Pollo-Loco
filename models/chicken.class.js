@@ -10,7 +10,8 @@ class Chicken extends MovableObject {
         this.height = 80;
         this.width = 80;
         this.energy = 20;
-        this.speed = this.x_movement_speed + Math.random() * 6.0; // speed wird überschrieben mit x_movement_speed + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
+        this.speed = 0;
+        // this.speed = this.x_movement_speed + Math.random() * 6.0;
         this.vulnerable = 1;
         this.id = id;
     };
