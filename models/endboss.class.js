@@ -110,6 +110,8 @@ class Endboss extends MovableObject {
 
 	//Wenn Endboss Tot ist
 	gameOver() {
+		stopGame();
+
 		clearInterval(this.endbossAnimation);
 		win_sound.play();
 		document.getElementById("cover").classList.remove("d-none"); // blende start bild aus

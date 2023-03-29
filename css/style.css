@@ -5,7 +5,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/* background-image: url("../img/background/mexico-flag.jpg"); */
+	background-image: url("../img/background/mexico-flag.jpg");
 	background-color: beige;
 	background-position: center;
 	background-size: cover;
@@ -76,10 +76,6 @@ canvas {
 	display: flex;
 	justify-content: space-evenly;
 	border: 1px black solid;
-}
-
-.margin {
-	margin-top: 300px;
 }
 
 #mobileButtons {

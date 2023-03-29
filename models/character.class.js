@@ -133,6 +133,7 @@ class Character extends MovableObject {
 
 	//Wenn Character Tot ist
 	gameLost() {
+		stopGame();
 		clearInterval(this.characterMovement);
 		// Ton abspielen fehlt noch
 		document.getElementById("cover").classList.remove("d-none"); // blende start bild aus
