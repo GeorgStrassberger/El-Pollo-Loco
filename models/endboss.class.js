@@ -35,6 +35,7 @@ class Endboss extends MovableObject {
 		"../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G25.png",
 		"../img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png#",
 	];
+
 	x;
 	y = 45;
 	height = 400;
@@ -42,11 +43,10 @@ class Endboss extends MovableObject {
 	energy = 100;
 	speed = 15;
 	x_movement_speed = 2;
-	isMovingLeft = false;
-	isMovingRight = false;
-
 	lastHit = 0;
 	invulnerableTime = 1.0;
+	isMovingLeft = false;
+	isMovingRight = false;
 
 	constructor(x) {
 		super().loadImage(this.IMAGES_ALERT_BOSS[0]);
@@ -59,21 +59,16 @@ class Endboss extends MovableObject {
 		this.x = x;
 	}
 
-	// Animation Endboss
 	animate() {
 		this.endbossAnimation = setInterval(() => {
 			if (this.isDead()) {
-				console.log("Boss Dead");
 				this.playAnimation(this.IMAGES_DEAD_BOSS);
 				setTimeout(() => {
 					this.gameOver();
 				}, 1500);
 			} else if (this.energy === 100) {
-				// console.log("Boss Alert");
 				this.playAnimation(this.IMAGES_ALERT_BOSS);
 			} else if (this.isHurt(this.invulnerableTime)) {
-				// console.log("isHurt", this.isHurt(this.invulnerableTime));
-				// console.log("Boss Hurt");
 				this.isMovingLeft = true;
 				this.playAnimation(this.IMAGES_HURT_BOSS);
 			} else if (
@@ -81,7 +76,6 @@ class Endboss extends MovableObject {
 				!this.isDead() &&
 				!this.isHurt(this.invulnerableTime)
 			) {
-				// console.log("Boss Attacking");
 				this.attacking();
 			}
 		}, 1000 / 5);
@@ -95,6 +89,7 @@ class Endboss extends MovableObject {
 			this.moveRight();
 		}
 	}
+
 	attacking() {
 		this.moveEndboss();
 		this.playAnimation(this.IMAGES_ATTECKING_BOSS);
@@ -108,7 +103,6 @@ class Endboss extends MovableObject {
 		}, 2000);
 	}
 
-	//Wenn Endboss Tot ist
 	gameOver() {
 		stopGame();
 

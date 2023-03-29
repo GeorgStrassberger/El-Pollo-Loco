@@ -1,6 +1,8 @@
 let level1;
-let level2;
 
+/**
+ * Initialize the level with Enimies- & Background-Images
+ */
 function initLevel1() {
 	level1 = new Level(
 		[

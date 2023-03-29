@@ -127,7 +127,6 @@ class Character extends MovableObject {
 			} else {
 				super.playAnimation(this.IMAGES_WAIT);
 			}
-			// afk animation fehlt noch mit SLEEPING ARRAY
 		}, 1000 / 10);
 	}
 

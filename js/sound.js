@@ -11,7 +11,10 @@ let bgSound = false;
 
 //volume
 backgroundSound.volume = 0.2;
-//Hintergrundmusik ON/OFF
+
+/**
+ * BackgroundMusic on/off
+ */
 function musicGame() {
 	const menuSoundBtn = document.getElementById("menu_sound_btn");
 	const gameSoundBtn = document.getElementById("game_sound_btn");

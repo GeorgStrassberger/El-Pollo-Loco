@@ -2,6 +2,9 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+/**
+ *  Start the Game with initilaize the World class
+ */
 function startGame() {
 	hideID("cover"); // blende start bild aus
 	showID("gameButtons");
@@ -12,11 +15,17 @@ function startGame() {
 	mobileButtos();
 }
 
+/**
+ * close browsertap
+ */
 function quitGame() {
 	hideID("cover");
 	window.close();
 }
 
+/**
+ * clears all Intervals to stop the game animations
+ */
 function stopGame() {
 	for (let i = 1; i < 9999; i++) {
 		window.clearInterval(i);

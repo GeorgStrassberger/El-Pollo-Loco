@@ -17,6 +17,7 @@ class Chicken extends MovableObject {
 	lastHit = 0;
 	invulnerableTime = 1;
 	id;
+
 	constructor(x, id) {
 		super().loadImage(this.IMAGES_WALKING_CHICKEN[0]);
 		this.loadImages(this.IMAGES_WALKING_CHICKEN);
@@ -26,7 +27,6 @@ class Chicken extends MovableObject {
 		this.id = id;
 	}
 
-	//Animation der Hühnchen
 	animate() {
 		setInterval(() => {
 			if (super.isDead()) {

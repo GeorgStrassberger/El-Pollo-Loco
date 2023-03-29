@@ -1,7 +1,6 @@
 class Collision extends DrawableObject {
 	//istKollidiertMit (MovableObject)
 	isCollidingWith(mo) {
-		// mo *aka* movableObject
 		return (
 			this.x + this.width > mo.x && // true sobald sich 1 MO links vom Character befindet;
 			this.x < mo.x + mo.width && // true solange sich rechts vom Character noch 1 MO befindet;

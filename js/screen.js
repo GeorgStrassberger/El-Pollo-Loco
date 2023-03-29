@@ -54,16 +54,12 @@ function checkDevice() {
 		let screenW = screen.width;
 		let screenH = screen.height;
 		if (isMobile()) {
-			console.log("isMobile");
 			showID("mobileButtons");
 			hideID("desktopButtons");
-			// document.getElementById("desktopButtons").classList.add("d-none");
 			if (screenW < screenH) {
-				console.log("rotate device");
 				showID("landscapeMode");
 				hideID("canvas_aera");
 			} else {
-				console.log("device OK");
 				hideID("landscapeMode");
 				showID("canvas_aera");
 				if (screenH < 480) {
@@ -72,11 +68,9 @@ function checkDevice() {
 					document.getElementById("canvas_aera").classList.add("vh");
 				} else {
 					document.getElementById("canvas_aera").classList.remove("vh");
-					// document.getElementById("desktopButtons").classList.remove("d-none");
 				}
 			}
 		} else if (!isMobile()) {
-			console.log("isDesktop");
 			hideID("landscapeMode");
 			showID("canvas_aera");
 			showID("desktopButtons");

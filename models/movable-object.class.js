@@ -75,7 +75,9 @@ class MovableObject extends Collision {
 		this.x -= this.speed;
 	}
 
-	// Sprung
+	/**
+	 * set the speed for Y
+	 */
 	jump() {
 		this.speedY = 30;
 	}

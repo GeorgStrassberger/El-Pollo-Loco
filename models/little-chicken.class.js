@@ -25,7 +25,6 @@ class LittleChicken extends MovableObject {
 		this.vulnerable = 1;
 	}
 
-	//Animation der Kleinen Hühnchen
 	animate() {
 		setInterval(() => {
 			if (super.isDead()) {

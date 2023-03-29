@@ -19,6 +19,7 @@ class World {
 		this.draw();
 		this.timeToCheckCollisions();
 		this.timeBetweenToThrowObjects();
+		console.log("TypeOf", typeof this.ctx);
 	}
 
 	//Spiel wird neu geladen
