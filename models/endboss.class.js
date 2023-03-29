@@ -47,7 +47,6 @@ class Endboss extends MovableObject {
 
 	lastHit = 0;
 	invulnerableTime = 1.0;
-	win_sound = new Audio("../audio/win.mp3");
 
 	constructor(x) {
 		super().loadImage(this.IMAGES_ALERT_BOSS[0]);
@@ -112,7 +111,7 @@ class Endboss extends MovableObject {
 	//Wenn Endboss Tot ist
 	gameOver() {
 		clearInterval(this.endbossAnimation);
-		this.win_sound.play();
+		win_sound.play();
 		document.getElementById("cover").classList.remove("d-none"); // blende start bild aus
 		document.getElementById("endframe").classList.remove("d-none");
 		document.getElementById("startframe").classList.add("d-none");

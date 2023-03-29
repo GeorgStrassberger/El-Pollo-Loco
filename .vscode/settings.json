@@ -1,3 +1,5 @@
 {
-    "liveServer.settings.port": 5501
+	"liveServer.settings.port": 5501,
+	"html.format.contentUnformatted": "pre,code,textarea",
+	"html.format.indentHandlebars": false
 }

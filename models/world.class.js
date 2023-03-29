@@ -12,25 +12,14 @@ class World {
 	spawnChickens = [];
 	throwedBottle = [];
 
-	throw_sound = new Audio("../audio/throw.mp3");
-	coin_sound = new Audio("../audio/coin.wav");
-	bottle_sound = new Audio("../audio/bottle.mp3");
-	throw_sound = new Audio("../audio/throw.mp3");
-	chicken_hit = new Audio("../audio/chicken_hit.mp3");
-
 	constructor(canvas, keyboard) {
 		this.ctx = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
 		this.draw();
-		// this.setWorld();
 		this.timeToCheckCollisions();
 		this.timeBetweenToThrowObjects();
 	}
-
-	// setWorld() {
-	// 	this.character.world = this;
-	// }
 
 	//Spiel wird neu geladen
 	restartGame() {
@@ -47,7 +36,7 @@ class World {
 	// Flasche werfen wenn eine gesammelt wurde
 	throwObjects() {
 		if (this.keyboard.SPACE && this.collecdtedBottles > 0) {
-			this.throw_sound.play();
+			throw_sound.play();
 
 			this.throwedBottle.push(
 				new ThrowableObject(this.character.x + 30, this.character.y + 40)
@@ -83,7 +72,7 @@ class World {
 	// 			if (bottle.isCollidingWith(lilchicken)) {
 	// 				bottle.bottle_hits = true;
 	// 				lilchicken.hit(20);
-	// 				this.chicken_hit.play();
+	// 				chicken_hit.play();
 	// 				setTimeout(() => {
 	// 					let index = this.spawnChickens.indexOf(lilchicken);
 	// 					this.spawnChickens.splice(index, 1);
@@ -100,7 +89,7 @@ class World {
 	// 			if (bottle.isCollidingWith(chicken)) {
 	// 				bottle.bottle_hits = true;
 	// 				chicken.hit(20);
-	// 				this.chicken_hit.play();
+	// 				chicken_hit.play();
 	// 				setTimeout(() => {
 	// 					let index = this.level.enemies.indexOf(chicken);
 	// 					this.level.enemies.splice(index, 1);
@@ -126,13 +115,12 @@ class World {
 				) {
 					bottle.bottle_hits = true;
 					boss.hit(18);
-					this.chicken_hit.play();
+					chicken_hit.play();
 					this.spawnLittleChicken();
 					setTimeout(() => {
 						this.throwedBottle.splice(index, 1);
 					}, 200);
 				} else if (boss.isDead()) {
-					this.chicken_hit.pause();
 					setTimeout(() => {
 						this.level.endboss.splice(0, 1);
 					}, 1000);
@@ -152,7 +140,7 @@ class World {
 			) {
 				if (this.character.isCollidingFromTopWith(lilchick)) {
 					lilchick.hit(15);
-					this.chicken_hit.play();
+					chicken_hit.play();
 					setTimeout(() => {
 						let index = this.spawnChickens.indexOf(lilchick);
 						this.spawnChickens.splice(index, 1);
@@ -176,7 +164,7 @@ class World {
 			) {
 				if (this.character.isCollidingFromTopWith(chicken)) {
 					chicken.hit(30);
-					this.chicken_hit.play();
+					chicken_hit.play();
 					setTimeout(() => {
 						let index = this.level.enemies.indexOf(chicken);
 						this.level.enemies.splice(index, 1);
@@ -217,7 +205,7 @@ class World {
 				this.character.isCollidingWith(bottle) &&
 				this.collecdtedBottles < 5
 			) {
-				this.bottle_sound.play();
+				bottle_sound.play();
 				this.collecdtedBottles++;
 				this.level.bottles.splice(index, 1);
 				this.bottle_bar.setBottleBar(this.collecdtedBottles);
@@ -229,7 +217,7 @@ class World {
 	collisionsWithCoins() {
 		this.level.coin.forEach((coins, index) => {
 			if (this.character.isCollidingWith(coins)) {
-				this.coin_sound.play();
+				coin_sound.play();
 				this.level.coin.splice(index, 1);
 				this.coin_bar.collectCoin();
 				this.coin_bar.setCoinBar(this.coin_bar.collectedCoins);
@@ -255,7 +243,7 @@ class World {
 		this.ctx.translate(this.camera_x, 0); // verschiebt das CTX nach links.
 		this.addObjectsToMap(this.level.backgroundObjects); // draw the backgroundObjects
 		this.ctx.translate(-this.camera_x, 0); // Back
-
+		this.addObjectsToMap(this.level.clouds);
 		// ----Space for FIXED Objects ------
 		this.addToMap(this.life_bar);
 		this.addToMap(this.coin_bar);
@@ -264,7 +252,7 @@ class World {
 
 		this.ctx.translate(this.camera_x, 0);
 		this.addToMap(this.character);
-		this.addObjectsToMap(this.level.clouds);
+
 		this.addObjectsToMap(this.level.enemies);
 		this.addObjectsToMap(this.level.endboss);
 		this.addObjectsToMap(this.throwedBottle);

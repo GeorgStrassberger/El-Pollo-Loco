@@ -64,10 +64,6 @@ class Character extends MovableObject {
 	energy = 100;
 	speed = 10;
 	invulnerableTime = 0.5;
-	//Sounds
-	walking_sound = new Audio("../audio/walking.mp3");
-	jumping_sound = new Audio("../audio/jump.mp3");
-	hurt_sound = new Audio("../audio/hurt.mp3");
 
 	constructor(world) {
 		super().loadImage(this.IMAGES_WALKING[0]);
@@ -90,24 +86,24 @@ class Character extends MovableObject {
 
 	characterMovments() {
 		this.characterMovement = setInterval(() => {
-			this.walking_sound.pause();
+			walking_sound.pause();
 			if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
 				super.moveRight();
 				this.otherDirection = false;
 				if (!super.isInAir()) {
-					this.walking_sound.play();
+					walking_sound.play();
 				}
 			}
 			if (this.world.keyboard.LEFT && this.x > 0) {
 				super.moveLeft();
 				this.otherDirection = true;
 				if (!super.isInAir()) {
-					this.walking_sound.play();
+					walking_sound.play();
 				}
 			}
 			if (this.world.keyboard.UP && !super.isInAir()) {
 				super.jump();
-				this.jumping_sound.play();
+				jumping_sound.play();
 			}
 			this.world.camera_x = -this.x + 100; // Character weiter nach rechts setzen -> Abstand zum rand
 		}, 1000 / 60);
@@ -118,12 +114,12 @@ class Character extends MovableObject {
 		setInterval(() => {
 			if (super.isDead()) {
 				super.playAnimation(this.IMAGES_DEAD);
-				this.hurt_sound.pause();
-				this.walking_sound.pause();
+				hurt_sound.pause();
+				walking_sound.pause();
 				this.gameLost();
 			} else if (super.isHurt(this.invulnerableTime)) {
 				super.playAnimation(this.IMAGES_HURT);
-				this.hurt_sound.play();
+				hurt_sound.play();
 			} else if (super.isInAir()) {
 				super.playAnimation(this.IMAGES_JUMPING);
 			} else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
