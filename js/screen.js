@@ -56,6 +56,7 @@ function checkDevice() {
 		if (isMobile()) {
 			showID("mobileButtons");
 			hideID("desktopButtons");
+			viewHeightMax("canvas_aera");
 			if (screenW < screenH) {
 				showID("landscapeMode");
 				hideID("canvas_aera");
@@ -65,15 +66,14 @@ function checkDevice() {
 				if (screenH < 480) {
 					hideID("landscapeMode");
 					showID("canvas_aera");
-					document.getElementById("canvas_aera").classList.add("vh");
 				} else {
-					document.getElementById("canvas_aera").classList.remove("vh");
 				}
 			}
 		} else if (!isMobile()) {
 			hideID("landscapeMode");
 			showID("canvas_aera");
 			showID("desktopButtons");
+			viewHeightNormal("canvas_aera");
 		}
 	}, 100);
 }

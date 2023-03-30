@@ -56,6 +56,7 @@ class ThrowableObject extends MovableObject {
 
 	animate(animation) {
 		if (!this.isInAir() || this.bottle_hits) {
+			this.x_movement = 0;
 			this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
 			setTimeout(() => {
 				clearTimeout(animation);

@@ -42,17 +42,16 @@ canvas {
 }
 /* Screen Btn */
 .screen_buttons {
-	height: 50px;
 	position: absolute;
 	z-index: 10;
 	top: 0;
 	right: 0;
 	display: flex;
 	flex-direction: row;
-	gap: 8px;
+	gap: 24px;
 	justify-content: center;
 	align-items: flex-end;
-	padding: 8px;
+	padding: 16px 32px;
 }
 
 .screen_buttons_box {
@@ -112,5 +111,6 @@ canvas {
 }
 
 .vh {
-	height: 100vh;
+	/* aspect-ratio: 3/2; */
+	height: 100vh !important;
 }

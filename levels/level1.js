@@ -6,19 +6,19 @@ let level1;
 function initLevel1() {
 	level1 = new Level(
 		[
-			// new Chicken(1700, 1), //Die Start Koordinate X wird hier festgelegt + eine ID vergeben
-			//            new Chicken(2000, 2),
-			//            new Chicken(2300, 3),
-			//            new Chicken(2600, 4),
-			//            new Chicken(2900, 5),
-			//            new Chicken(3200, 6),
-			//            new Chicken(3600, 7),
-			//            new Chicken(3800, 8),
-			//            new Chicken(4100, 9),
-			//            new Chicken(4350, 10),
-			//            new Chicken(4600, 11),
+			new Chicken(1700, 1),
+			new Chicken(2000, 2),
+			new Chicken(2300, 3),
+			new Chicken(2600, 4),
+			new Chicken(2900, 5),
+			new Chicken(3200, 6),
+			new Chicken(3600, 7),
+			new Chicken(3800, 8),
+			new Chicken(4100, 9),
+			new Chicken(4350, 10),
+			new Chicken(4600, 11),
 		],
-		[new Endboss(2000)],
+		[new Endboss(4000)],
 		[
 			new Cloud(0),
 			new Cloud(600),
@@ -30,7 +30,7 @@ function initLevel1() {
 			new BackgroundObject(
 				"../img/5.Fondo/Capas/5.cielo_1920-1080px.png",
 				-719
-			), //imagePath , X Koordinate
+			),
 			new BackgroundObject("../img/5.Fondo/Capas/3.Fondo3/2.png", -719),
 			new BackgroundObject("../img/5.Fondo/Capas/2.Fondo2/2.png", -719),
 			new BackgroundObject("../img/5.Fondo/Capas/1.suelo-fondo1/2.png", -719),
@@ -108,14 +108,14 @@ function initLevel1() {
 			),
 		],
 		[
-			new Coin(250, 250), // X, Y Koordinate
+			new Coin(250, 250),
 			new Coin(450, 350),
 			new Coin(450, 100),
 			new Coin(650, 250),
 			new Coin(1200, 100),
 		],
 		[
-			new Bottle(350, 350, 0), // X, Y Koordinate und array pos.
+			new Bottle(350, 350, 0),
 			new Bottle(550, 380, 1),
 			new Bottle(750, 360, 0),
 			new Bottle(950, 380, 1),

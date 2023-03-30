@@ -58,8 +58,8 @@ class World {
 
 	// Kollisionen mit Gegnern
 	checkCollisionsWithEnemies() {
-		// this.bottleWithLittleChickens();
-		// this.bottleWithChickens();
+		this.bottleWithLittleChickens();
+		this.bottleWithChickens();
 		this.bottleWithEndboss();
 		this.characterWithLittleChickens();
 		this.characterWithChickens();
@@ -67,47 +67,49 @@ class World {
 	}
 
 	//Flasche trifft kleines hühnchen
-	// bottleWithLittleChickens() {
-	// 	this.collecdtedBottles.forEach((bottle) => {
-	// 		this.spawnChickens.forEach((lilchicken) => {
-	// 			if (bottle.isCollidingWith(lilchicken)) {
-	// 				bottle.bottle_hits = true;
-	// 				lilchicken.hit(20);
-	// 				chicken_hit.play();
-	// 				setTimeout(() => {
-	// 					let index = this.spawnChickens.indexOf(lilchicken);
-	// 					this.spawnChickens.splice(index, 1);
-	// 				}, 500);
-	// 			}
-	// 		});
-	// 	});
-	// }
+	bottleWithLittleChickens() {
+		this.throwedBottle.forEach((bottle) => {
+			this.spawnChickens.forEach((lilchicken) => {
+				if (bottle.isCollidingWith(lilchicken)) {
+					bottle.bottle_hits = true;
+					lilchicken.hit(20);
+					chicken_hit.play();
+					setTimeout(() => {
+						let index = this.spawnChickens.indexOf(lilchicken);
+						this.spawnChickens.splice(index, 1);
+					}, 500);
+				}
+			});
+		});
+	}
 
 	//Flasche trifft hühnchen
-	// bottleWithChickens() {
-	// 	this.collecdtedBottles.forEach((bottle) => {
-	// 		this.level.enemies.forEach((chicken) => {
-	// 			if (bottle.isCollidingWith(chicken)) {
-	// 				bottle.bottle_hits = true;
-	// 				chicken.hit(20);
-	// 				chicken_hit.play();
-	// 				setTimeout(() => {
-	// 					let index = this.level.enemies.indexOf(chicken);
-	// 					this.level.enemies.splice(index, 1);
-	// 				}, 500);
-	// 			}
-	// 		});
-	// 	});
-	// }
+	bottleWithChickens() {
+		const enemies = this.level.enemies;
+		const bottles = this.throwedBottle;
+		bottles.forEach((bottle) => {
+			enemies.forEach((chicken) => {
+				if (bottle.isCollidingWith(chicken)) {
+					bottle.bottle_hits = true;
+					chicken.hit(20);
+					chicken_hit.play();
+					removeObjTimer(bottles, bottle, 200);
+				}
+				if (chicken.isDead()) {
+					removeObjTimer(enemies, chicken, 200);
+				}
+			});
+		});
+	}
 
 	//Flasche trifft Endboss
 	bottleWithEndboss() {
-		this.throwedBottle.forEach((bottle, index) => {
-			this.level.endboss.forEach((boss) => {
+		const bottles = this.throwedBottle;
+		const endboss = this.level.endboss;
+		bottles.forEach((bottle) => {
+			endboss.forEach((boss) => {
 				if (!bottle.isInAir() && !bottle.bottle_hits && !boss.isDead()) {
-					setTimeout(() => {
-						this.throwedBottle.splice(index, 1);
-					}, 200);
+					removeObjTimer(bottles, bottle, 200);
 				} else if (
 					!boss.isDead() &&
 					boss.isCollidingWith(bottle) &&
@@ -118,13 +120,9 @@ class World {
 					boss.hit(18);
 					chicken_hit.play();
 					this.spawnLittleChicken();
-					setTimeout(() => {
-						this.throwedBottle.splice(index, 1);
-					}, 200);
+					removeObjTimer(bottles, bottle, 200);
 				} else if (boss.isDead()) {
-					setTimeout(() => {
-						this.level.endboss.splice(0, 1);
-					}, 1000);
+					removeObjTimer(endboss, boss, 1000);
 				}
 			});
 		});
