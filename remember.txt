@@ -1,7 +1,0 @@
-Setting Buttons einbauen
-
-Spiel beschreibung einbauen 
-
-Ton ausschalten im Spiel
-
-Mit Game Over Keyboard disablen 
