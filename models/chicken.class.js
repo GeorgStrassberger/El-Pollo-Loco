@@ -7,6 +7,7 @@ class Chicken extends MovableObject {
 	IMAGES_DEAD_CHICKEN = [
 		"../img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png",
 	];
+
 	x;
 	y = 350;
 	height = 80;

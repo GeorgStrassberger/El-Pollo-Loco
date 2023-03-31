@@ -6,13 +6,17 @@ let keyboard = new Keyboard();
  *  Start the Game with initilaize the World class
  */
 function startGame() {
-	hideID("cover"); // blende start bild aus
+	hideID("cover");
 	showID("gameButtons");
-	initLevel1(); // lade level1
-	canvas = document.getElementById("canvas"); //weise canvas zu
-	world = new World(canvas, keyboard); // übergebe canvas und keyboard
+	canvas = document.getElementById("canvas");
+	world = new World(canvas, keyboard, level1);
+}
 
-	mobileButtos();
+function startGame2() {
+	hideID("cover");
+	showID("gameButtons");
+	canvas = document.getElementById("canvas");
+	world = new World(canvas, keyboard, level2);
 }
 
 /**
@@ -30,4 +34,11 @@ function stopGame() {
 	for (let i = 1; i < 9999; i++) {
 		window.clearInterval(i);
 	}
+}
+
+/**
+ * reload the page to restart the game
+ */
+function restartGame() {
+	location.reload();
 }

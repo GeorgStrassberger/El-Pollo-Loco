@@ -9,7 +9,12 @@ class DrawableObject {
 
 	draw(ctx) {
 		//Context Zeichne Bild (Bild, Start X, StartY, Breite, Höhe)
-		ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+		try {
+			ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+		} catch (error) {
+			console.warn("Draw Error: ", error);
+			console.warn("imagePath: ", this.img.src);
+		}
 	}
 
 	/**

@@ -7,9 +7,8 @@ const bottle_sound = new Audio("../audio/bottle.mp3");
 const chicken_hit = new Audio("../audio/chicken_hit.mp3");
 const win_sound = new Audio("../audio/win.mp3");
 const backgroundSound = new Audio("../audio/mexicosound.mp3");
-let bgSound = false;
+let bgSound = true;
 
-//volume
 backgroundSound.volume = 0.2;
 
 /**
@@ -20,13 +19,11 @@ function musicGame() {
 	const gameSoundBtn = document.getElementById("game_sound_btn");
 
 	if (bgSound === true) {
-		console.log("pause");
 		backgroundSound.pause();
 		menuSoundBtn.innerHTML = `Music ON`;
 		gameSoundBtn.src = "../img/icons/mute32.png";
 		bgSound = false;
 	} else {
-		console.log("play");
 		backgroundSound.play();
 		menuSoundBtn.innerHTML = `Music OFF`;
 		gameSoundBtn.src = "../img/icons/volume32.png";

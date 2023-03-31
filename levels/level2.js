@@ -1,4 +1,4 @@
-const level1 = new Level(
+const level2 = new Level(
 	[
 		new Chicken(1700, 1),
 		new Chicken(2000, 2),
@@ -82,9 +82,9 @@ const level1 = new Level(
 	],
 	[
 		new Coin(250, 250),
-		new Coin(450, 350),
-		new Coin(450, 100),
-		new Coin(650, 250),
+		new Coin(350, 250),
+		new Coin(450, 250),
+		new Coin(550, 250),
 		new Coin(1200, 100),
 	],
 	[

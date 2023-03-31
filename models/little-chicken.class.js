@@ -9,7 +9,15 @@ class LittleChicken extends MovableObject {
 		"../img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png",
 	];
 
+	x;
+	y;
+	height = 50;
+	width = 50;
 	x_movement_speed = 2;
+	energy = 10;
+	speed = this.x_movement_speed + Math.random() * 8.0;
+	lastHit = 0;
+	invulnerableTime = 1;
 
 	constructor(x, y) {
 		super().loadImage(this.IMAGES_WALKING_LITTLE_CHICKEN[0]);
@@ -18,11 +26,6 @@ class LittleChicken extends MovableObject {
 		this.animate();
 		this.x = x;
 		this.y = y;
-		this.height = 50;
-		this.width = 50;
-		this.energy = 10;
-		this.speed = this.x_movement_speed + Math.random() * 4.5; // speed wird überschrieben mit x_movement_speed + zufall * 0.25; Jedes Huhn ist uneterschiedlich schnell
-		this.vulnerable = 1;
 	}
 
 	animate() {
