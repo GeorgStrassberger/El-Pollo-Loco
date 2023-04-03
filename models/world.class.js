@@ -18,12 +18,12 @@ class World {
 		this.keyboard = keyboard;
 		this.level = level;
 		this.draw();
-		this.timeToCheckCollisions();
-		this.timeBetweenToThrowObjects();
+		this.collisionQuery();
+		this.throwQuery();
 	}
 
 	// Zeit zwischen dem Flaschen wurft
-	timeBetweenToThrowObjects() {
+	throwQuery() {
 		setInterval(() => {
 			this.throwObjects();
 		}, 100);
@@ -44,21 +44,27 @@ class World {
 	}
 
 	// Zeit fürs abfragen der Kollisionen
-	timeToCheckCollisions() {
+	collisionQuery() {
 		setInterval(() => {
-			this.checkCollisionsWithEnemies();
-			this.collisionWithObjects();
+			this.allCharacterCollisions();
+			this.allBottleCollisions();
 		}, 100);
 	}
 
 	// Kollisionen mit Gegnern
-	checkCollisionsWithEnemies() {
-		this.bottleWithLittleChickens();
-		this.bottleWithChickens();
-		this.bottleWithEndboss();
+	allCharacterCollisions() {
 		this.characterWithLittleChickens();
 		this.characterWithChickens();
 		this.characterWithEndboss();
+		this.characterWithCollectables();
+	}
+
+	// Kollisionen mit Flaschen
+	allBottleCollisions() {
+		this.bottleWithLittleChickens();
+		this.bottleWithChickens();
+		this.bottleWithEndboss();
+		this.bottleWithGround();
 	}
 
 	//Flasche trifft kleines hühnchen
@@ -113,36 +119,42 @@ class World {
 	bottleWithEndboss() {
 		const bottles = this.throwedBottle;
 		const endboss = this.level.endboss;
-		bottles.forEach((bottle, indexB) => {
-			endboss.forEach((boss, indexEB) => {
-				if (!bottle.isInAir() && !bottle.bottle_hits && !boss.isDead()) {
-					removeObjTimer(bottles, bottle, 200);
-				} else if (
-					!boss.isDead() &&
-					boss.isCollidingWith(bottle) &&
+
+		bottles.forEach((bottle) => {
+			endboss.forEach((boss) => {
+				if (
+					bottle.isCollidingWith(boss) &&
 					!bottle.bottle_hits &&
+					!boss.isDead() &&
 					!boss.isHurt(boss.invulnerableTime)
 				) {
 					bottle.bottle_hits = true;
 					boss.hit(18);
 					chicken_hit.play();
 					this.spawnLittleChicken();
-					setTimeout(() => {
-						removeByIndex(bottles, indexB);
-					}, 200);
-				} else if (boss.isDead()) {
-					setTimeout(() => {
-						removeByIndex(endboss, indexEB);
-					}, 1000);
+					removeObjTimer(bottles, bottle, 200);
+					if (boss.isDead()) {
+						removeObjTimer(endboss, boss, 1000);
+					}
 				}
 			});
+		});
+	}
+
+	// Falsche trifft nix
+	bottleWithGround() {
+		const bottles = this.throwedBottle;
+		bottles.forEach((bottle) => {
+			if (!bottle.isInAir() && !bottle.bottle_hits) {
+				removeObjTimer(bottles, bottle, 200);
+			}
 		});
 	}
 
 	//CHARACTER MIT KLEINEN HÜHNCHEN
 	characterWithLittleChickens() {
 		const littleCickens = this.spawnChickens;
-		littleCickens.forEach((littlechicken, indexLC) => {
+		littleCickens.forEach((littlechicken) => {
 			if (
 				!littlechicken.isDead() &&
 				!this.character.isDead() &&
@@ -152,12 +164,10 @@ class World {
 				if (this.character.isCollidingFromTopWith(littlechicken)) {
 					littlechicken.hit(15);
 					chicken_hit.play();
-					setTimeout(() => {
-						removeByIndex(littleCickens, indexLC);
-					}, 200);
+					removeObjTimer(littleCickens, littlechicken, 200);
 					this.character.bounce();
 				} else {
-					this.character.hit(5);
+					this.character.hit(10);
 					this.life_bar.setLifeBar(this.character.energy);
 				}
 			}
@@ -167,7 +177,7 @@ class World {
 	//CHARACTER MIT HÜHNCHEN
 	characterWithChickens() {
 		const chickens = this.level.enemies;
-		chickens.forEach((chicken, indexC) => {
+		chickens.forEach((chicken) => {
 			if (
 				!chicken.isDead() &&
 				!this.character.isDead() &&
@@ -177,12 +187,10 @@ class World {
 				if (this.character.isCollidingFromTopWith(chicken)) {
 					chicken.hit(30);
 					chicken_hit.play();
-					setTimeout(() => {
-						removeByIndex(chickens, indexC);
-					}, 200);
+					removeObjTimer(chickens, chicken, 200);
 					this.character.bounce();
 				} else {
-					this.character.hit(5);
+					this.character.hit(10);
 					this.life_bar.setLifeBar(this.character.energy);
 				}
 			}
@@ -205,13 +213,13 @@ class World {
 	}
 
 	//EINSAMMELN VON OBJEKTEN
-	collisionWithObjects() {
-		this.collisionsWithBottles();
-		this.collisionsWithCoins();
+	characterWithCollectables() {
+		this.characterWithBottles();
+		this.characterWithCoins();
 	}
 
 	//EINSAMMELN VON FLASCHEN
-	collisionsWithBottles() {
+	characterWithBottles() {
 		const bottles = this.level.bottles;
 		bottles.forEach((bottle) => {
 			if (
@@ -227,7 +235,7 @@ class World {
 	}
 
 	//EINSAMMELN VON MÜNZEN
-	collisionsWithCoins() {
+	characterWithCoins() {
 		const coins = this.level.coin;
 		coins.forEach((coin) => {
 			if (this.character.isCollidingWith(coin)) {
@@ -239,7 +247,7 @@ class World {
 		});
 	}
 
-	// LET SPAWN LITTLECHICKEN
+	// LET SPAWN A LITTLECHICKEN
 	spawnLittleChicken() {
 		const boss = this.level.endboss[0];
 		const littleCicken = new LittleChicken(boss.x + 100, boss.y + 330);
