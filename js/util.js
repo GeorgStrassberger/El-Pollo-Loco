@@ -34,8 +34,8 @@ function viewHeightNormal(id) {
 
 /**
  * Removes the current element from an array.
- * @param {*} arr
- * @param {*} element
+ * @param {any[]} arr
+ * @param {any} element
  */
 function removeObj(arr, element) {
 	arr.splice(currentIndex(arr, element), 1);
@@ -43,8 +43,8 @@ function removeObj(arr, element) {
 
 /**
  * Returns the index from element in the array
- * @param {*} arr
- * @param {*} obj
+ * @param {any[]} arr
+ * @param {any} obj
  * @returns {number}
  */
 function currentIndex(arr, obj) {
@@ -52,6 +52,21 @@ function currentIndex(arr, obj) {
 	return index;
 }
 
+/**
+ * remove one element on arr[index]
+ * @param {any[]} arr
+ * @param {number} index
+ */
+function removeByIndex(arr, index) {
+	arr.splice(index, 1);
+}
+
+/**
+ * remove element on pos[index] from arr after time passed
+ * @param {any[]} arr
+ * @param {any} element
+ * @param {number} time
+ */
 function removeObjTimer(arr, element, time = 0) {
 	setTimeout(() => {
 		arr.splice(currentIndex(arr, element), 1);

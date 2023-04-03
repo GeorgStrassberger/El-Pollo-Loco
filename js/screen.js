@@ -1,11 +1,26 @@
+let screen = false;
+
+/**
+ * Fullscreen On/Off
+ */
+function gameScren() {
+	screen = !screen;
+	const game_screen = document.getElementById("game_screen_btn");
+	console.log("screen is:", screen);
+	if (!screen) {
+		console.log("normal");
+		game_screen.src = "../img/icons/fullscreen-12-32.png";
+		exitFullscreen();
+	} else {
+		console.log("full");
+		game_screen.src = "../img/icons/fullscreen-exit-32.png";
+		fullScreen();
+	}
+}
+
 function fullScreen() {
 	const canvas_aera = document.getElementById("canvas_aera");
 	enterFullscreen(canvas_aera);
-
-	hideID("desktopButtons");
-	showID("mobileButtons");
-	hideID("fullScreen");
-	showID("normalScreen");
 }
 
 function enterFullscreen(element) {
@@ -20,15 +35,7 @@ function enterFullscreen(element) {
 	}
 }
 
-function normalScreen() {
-	exitFullscreen();
-}
-
 function exitFullscreen() {
-	hideID("mobileButtons");
-	showID("desktopButtons");
-	hideID("normalScreen");
-	showID("fullScreen");
 	if (document.exitFullscreen) {
 		document.exitFullscreen();
 	} else if (document.webkitExitFullscreen) {

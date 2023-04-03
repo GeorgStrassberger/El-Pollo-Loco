@@ -65,16 +65,21 @@ class World {
 	bottleWithLittleChickens() {
 		const bottles = this.throwedBottle;
 		const littleCickens = this.spawnChickens;
+
 		bottles.forEach((bottle) => {
 			littleCickens.forEach((littleCicken) => {
-				if (bottle.isCollidingWith(littleCicken)) {
+				if (
+					bottle.isCollidingWith(littleCicken) &&
+					!littleCicken.isDead() &&
+					!bottle.bottle_hits
+				) {
 					bottle.bottle_hits = true;
 					littleCicken.hit(20);
 					chicken_hit.play();
 					removeObjTimer(bottles, bottle, 200);
-				}
-				if (littleCicken.isDead()) {
-					removeObjTimer(littleCickens, littleCicken, 200);
+					if (littleCicken.isDead()) {
+						removeObjTimer(littleCickens, littleCicken, 200);
+					}
 				}
 			});
 		});
@@ -84,16 +89,21 @@ class World {
 	bottleWithChickens() {
 		const chickens = this.level.enemies;
 		const bottles = this.throwedBottle;
+
 		bottles.forEach((bottle) => {
 			chickens.forEach((chicken) => {
-				if (bottle.isCollidingWith(chicken)) {
+				if (
+					bottle.isCollidingWith(chicken) &&
+					!chicken.isDead() &&
+					!bottle.bottle_hits
+				) {
 					bottle.bottle_hits = true;
 					chicken.hit(20);
 					chicken_hit.play();
 					removeObjTimer(bottles, bottle, 200);
-				}
-				if (chicken.isDead()) {
-					removeObjTimer(chickens, chicken, 200);
+					if (chicken.isDead()) {
+						removeObjTimer(chickens, chicken, 200);
+					}
 				}
 			});
 		});
@@ -103,8 +113,8 @@ class World {
 	bottleWithEndboss() {
 		const bottles = this.throwedBottle;
 		const endboss = this.level.endboss;
-		bottles.forEach((bottle) => {
-			endboss.forEach((boss) => {
+		bottles.forEach((bottle, indexB) => {
+			endboss.forEach((boss, indexEB) => {
 				if (!bottle.isInAir() && !bottle.bottle_hits && !boss.isDead()) {
 					removeObjTimer(bottles, bottle, 200);
 				} else if (
@@ -117,9 +127,13 @@ class World {
 					boss.hit(18);
 					chicken_hit.play();
 					this.spawnLittleChicken();
-					removeObjTimer(bottles, bottle, 200);
+					setTimeout(() => {
+						removeByIndex(bottles, indexB);
+					}, 200);
 				} else if (boss.isDead()) {
-					removeObjTimer(endboss, boss, 1000);
+					setTimeout(() => {
+						removeByIndex(endboss, indexEB);
+					}, 1000);
 				}
 			});
 		});
@@ -128,7 +142,7 @@ class World {
 	//CHARACTER MIT KLEINEN HÜHNCHEN
 	characterWithLittleChickens() {
 		const littleCickens = this.spawnChickens;
-		littleCickens.forEach((littlechicken) => {
+		littleCickens.forEach((littlechicken, indexLC) => {
 			if (
 				!littlechicken.isDead() &&
 				!this.character.isDead() &&
@@ -138,7 +152,10 @@ class World {
 				if (this.character.isCollidingFromTopWith(littlechicken)) {
 					littlechicken.hit(15);
 					chicken_hit.play();
-					removeObjTimer(littleCickens, littlechicken, 200);
+					setTimeout(() => {
+						removeByIndex(littleCickens, indexLC);
+					}, 200);
+					this.character.bounce();
 				} else {
 					this.character.hit(5);
 					this.life_bar.setLifeBar(this.character.energy);
@@ -150,7 +167,7 @@ class World {
 	//CHARACTER MIT HÜHNCHEN
 	characterWithChickens() {
 		const chickens = this.level.enemies;
-		chickens.forEach((chicken) => {
+		chickens.forEach((chicken, indexC) => {
 			if (
 				!chicken.isDead() &&
 				!this.character.isDead() &&
@@ -160,7 +177,10 @@ class World {
 				if (this.character.isCollidingFromTopWith(chicken)) {
 					chicken.hit(30);
 					chicken_hit.play();
-					removeObjTimer(chickens, chicken, 200);
+					setTimeout(() => {
+						removeByIndex(chickens, indexC);
+					}, 200);
+					this.character.bounce();
 				} else {
 					this.character.hit(5);
 					this.life_bar.setLifeBar(this.character.energy);
@@ -254,7 +274,6 @@ class World {
 
 		this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen
 
-		// let self = this; //requestAnimationFrame kennt die this methode nicht und wird deshalb in eine Variable gepackt.
 		requestAnimationFrame(() => {
 			this.draw();
 		});
@@ -275,7 +294,7 @@ class World {
 			this.flipImage(mo);
 		}
 		mo.draw(this.ctx);
-		mo.drawFrame(this.ctx);
+		// mo.drawFrame(this.ctx);
 		if (mo.otherDirection) {
 			this.flipImageBack(mo);
 		}

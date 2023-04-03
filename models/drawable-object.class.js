@@ -18,8 +18,8 @@ class DrawableObject {
 	}
 
 	/**
-	 * to Load single Image
-	 * Create a instanz of a image and add the sourcepath
+	 * Create a instanz of a image and add the source path
+	 * fn playAnimation() set the path
 	 * @param {string} path
 	 */
 	loadImage(path) {
@@ -27,16 +27,19 @@ class DrawableObject {
 		this.img.src = path;
 	}
 
-	/**#
-	 * to lade all Images
-	 * Create a instanz for each image and add the sourcepath
-	 * @param {Array} arr
+	/**
+	 * 1) Create a instanz for each image and add the source path
+	 * 2) Store the newImage with path of a class instanz in an Object
+	 * 3) and store it in imageChache as Object
+	 * example {'../img/pepe.3.png': img}
+	 * @param {string[]} arr
 	 */
 	loadImages(arr) {
 		arr.forEach((path) => {
-			let img = new Image();
-			img.src = path;
-			this.imageCache[path] = img;
+			this.loadImage(path);
+			// let img = new Image();
+			// img.src = path;
+			this.imageCache[path] = this.img;
 		});
 	}
 
