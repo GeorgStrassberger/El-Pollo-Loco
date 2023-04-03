@@ -58,25 +58,29 @@ checkDevice();
 
 function checkDevice() {
 	setInterval(() => {
-		let screenW = screen.width;
-		let screenH = screen.height;
+		let screenW = window.screen.width;
+		let screenH = window.screen.height;
+		console.log(`Formate: ${screenW}<${screenH}`);
 		if (isMobile()) {
+			console.log("isMobile");
 			showID("mobileButtons");
 			hideID("desktopButtons");
 			viewHeightMax("canvas_aera");
 			if (screenW < screenH) {
+				console.log(`Hochformat${screenW}<${screenH}`);
 				showID("landscapeMode");
 				hideID("canvas_aera");
 			} else {
+				console.log(`Querformat${screenW}<${screenH}`);
 				hideID("landscapeMode");
 				showID("canvas_aera");
 				if (screenH < 480) {
 					hideID("landscapeMode");
 					showID("canvas_aera");
-				} else {
 				}
 			}
 		} else if (!isMobile()) {
+			console.log("isDesktop");
 			hideID("landscapeMode");
 			showID("canvas_aera");
 			showID("desktopButtons");
