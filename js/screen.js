@@ -86,5 +86,5 @@ function checkDevice() {
 			showID("desktopButtons");
 			viewHeightNormal("canvas_aera");
 		}
-	}, 100);
+	}, 1000);
 }

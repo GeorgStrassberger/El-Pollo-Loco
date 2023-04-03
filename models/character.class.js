@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-	// Images
 	IMAGES_WALKING = [
 		"../img/Pepe/walk/W-21.png",
 		"../img/Pepe/walk/W-22.png",
@@ -78,7 +77,6 @@ class Character extends MovableObject {
 		this.animate();
 	}
 
-	//Animation Character
 	animate() {
 		this.characterMovments();
 		this.characterPresentation();
@@ -105,12 +103,11 @@ class Character extends MovableObject {
 				super.jump();
 				jumping_sound.play();
 			}
-			this.world.camera_x = -this.x + 100; // Character weiter nach rechts setzen -> Abstand zum rand
+			this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 	}
 
 	characterPresentation() {
-		// Presentation (Darstellung)
 		setInterval(() => {
 			if (super.isDead()) {
 				super.playAnimation(this.IMAGES_DEAD);
@@ -130,12 +127,10 @@ class Character extends MovableObject {
 		}, 1000 / 10);
 	}
 
-	//Wenn Character Tot ist
 	gameLost() {
 		stopGame();
 		clearInterval(this.characterMovement);
-		// Ton abspielen fehlt noch
-		document.getElementById("cover").classList.remove("d-none"); // blende start bild aus
+		document.getElementById("cover").classList.remove("d-none");
 		document.getElementById("endframe").classList.remove("d-none");
 		document.getElementById("startframe").classList.add("d-none");
 		document.getElementById(

@@ -10,7 +10,7 @@ class LittleChicken extends MovableObject {
 	];
 
 	x;
-	y;
+	y = 375;
 	height = 50;
 	width = 50;
 	x_movement_speed = 2;

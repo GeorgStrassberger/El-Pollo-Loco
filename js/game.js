@@ -9,14 +9,14 @@ function startGame() {
 	hideID("cover");
 	showID("gameButtons");
 	canvas = document.getElementById("canvas");
-	world = new World(canvas, keyboard, level1);
+	world = new World(canvas, keyboard, levelOne());
 }
 
 function startGame2() {
 	hideID("cover");
 	showID("gameButtons");
 	canvas = document.getElementById("canvas");
-	world = new World(canvas, keyboard, level2);
+	world = new World(canvas, keyboard, levelTwo());
 }
 
 /**

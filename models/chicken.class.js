@@ -17,15 +17,13 @@ class Chicken extends MovableObject {
 	speed = this.x_movement_speed + Math.random() * 6.0;
 	lastHit = 0;
 	invulnerableTime = 1;
-	id;
 
-	constructor(x, id) {
+	constructor(x) {
 		super().loadImage(this.IMAGES_WALKING_CHICKEN[0]);
 		this.loadImages(this.IMAGES_WALKING_CHICKEN);
 		this.loadImages(this.IMAGES_DEAD_CHICKEN);
 		this.animate();
 		this.x = x;
-		this.id = id;
 	}
 
 	animate() {
