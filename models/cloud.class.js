@@ -1,7 +1,7 @@
 class Cloud extends MovableObject {
 	IMAGES_CLOUDS = [
-		"../img/5.Fondo/Capas/4.nubes/1.png",
-		"../img/5.Fondo/Capas/4.nubes/2.png",
+		"../img/backgounds/clouds/cloud1.png",
+		"../img/backgounds/clouds/cloud2.png",
 	];
 
 	constructor(x) {

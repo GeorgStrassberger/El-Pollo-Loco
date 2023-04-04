@@ -1,13 +1,11 @@
 class LittleChicken extends MovableObject {
 	IMAGES_WALKING_LITTLE_CHICKEN = [
-		"../img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png",
-		"../img/3.Secuencias_Enemy_básico/Versión_pollito/2.Centro.png",
-		"../img/3.Secuencias_Enemy_básico/Versión_pollito/3.Paso_izquierdo.png",
+		"../img/enemies/chick/chick_walk0.png",
+		"../img/enemies/chick/chick_walk1.png",
+		"../img/enemies/chick/chick_walk2.png",
 	];
 
-	IMAGES_DEAD_LITTLE_CHICKEN = [
-		"../img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png",
-	];
+	IMAGES_DEAD_LITTLE_CHICKEN = ["../img/enemies/chick/chick_dead.png"];
 
 	x;
 	y = 375;

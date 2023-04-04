@@ -1,17 +1,17 @@
 class ThrowableObject extends MovableObject {
 	IMAGES_BOTTLES_SPLASH = [
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png",
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png",
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 9.png",
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 10.png",
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 11.png",
-		"../img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 12.png",
+		"../img/bottle/splash/splash0.png",
+		"../img/bottle/splash/splash1.png",
+		"../img/bottle/splash/splash2.png",
+		"../img/bottle/splash/splash3.png",
+		"../img/bottle/splash/splash4.png",
+		"../img/bottle/splash/splash5.png",
 	];
 	IMAGES_BOTTLES_THROWING = [
-		"../img/6.botella/Rotación/Mesa de trabajo3.png",
-		"../img/6.botella/Rotación/Mesa de trabajo4.png",
-		"../img/6.botella/Rotación/Mesa de trabajo5.png",
-		"../img/6.botella/Rotación/Mesa de trabajo6.png",
+		"../img/bottle/rotate/rotate0.png",
+		"../img/bottle/rotate/rotate90.png",
+		"../img/bottle/rotate/rotate180.png",
+		"../img/bottle/rotate/rotate270.png",
 	];
 	triggerd = false;
 	x_movement = 20;

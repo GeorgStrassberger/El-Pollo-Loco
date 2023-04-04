@@ -1,11 +1,11 @@
 class CoinBar extends DrawableObject {
 	IMAGES = [
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/0_.png",
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/20_.png",
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/40_.png",
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/60_.png",
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/80_.png",
-		"../img/7.Marcadores/Barra/Marcador moneda/Verde/100_.png",
+		"../img/statusbars/coinbars/green/0_.png",
+		"../img/statusbars/coinbars/green/20_.png",
+		"../img/statusbars/coinbars/green/40_.png",
+		"../img/statusbars/coinbars/green/60_.png",
+		"../img/statusbars/coinbars/green/80_.png",
+		"../img/statusbars/coinbars/green/100_.png",
 	];
 	collectedCoins = 0;
 

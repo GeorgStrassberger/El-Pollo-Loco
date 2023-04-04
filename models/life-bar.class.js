@@ -1,11 +1,11 @@
 class LifeBar extends DrawableObject {
 	IMAGES_LIFE = [
-		"../img/7.Marcadores/Barra/Marcador vida/azul/0_.png",
-		"../img/7.Marcadores/Barra/Marcador vida/azul/20_.png",
-		"../img/7.Marcadores/Barra/Marcador vida/azul/40_.png",
-		"../img/7.Marcadores/Barra/Marcador vida/azul/60_.png",
-		"../img/7.Marcadores/Barra/Marcador vida/azul/80_.png",
-		"../img/7.Marcadores/Barra/Marcador vida/azul/100_.png",
+		"../img/statusbars/lifebars/blue/0_.png",
+		"../img/statusbars/lifebars/blue/20_.png",
+		"../img/statusbars/lifebars/blue/40_.png",
+		"../img/statusbars/lifebars/blue/60_.png",
+		"../img/statusbars/lifebars/blue/80_.png",
+		"../img/statusbars/lifebars/blue/100_.png",
 	];
 	percentageHealthPoints = 100;
 

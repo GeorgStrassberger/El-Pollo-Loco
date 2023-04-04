@@ -236,7 +236,7 @@ class World {
 
 	//EINSAMMELN VON MÜNZEN
 	characterWithCoins() {
-		const coins = this.level.coin;
+		const coins = this.level.coins;
 		coins.forEach((coin) => {
 			if (this.character.isCollidingWith(coin)) {
 				coin_sound.play();
@@ -277,7 +277,7 @@ class World {
 		this.addObjectsToMap(this.throwedBottle);
 		this.addObjectsToMap(this.spawnChickens);
 
-		this.addObjectsToMap(this.level.coin);
+		this.addObjectsToMap(this.level.coins);
 		this.addObjectsToMap(this.level.bottles);
 
 		this.ctx.translate(-this.camera_x, 0); // verschiebt das CTX wieder zurück, um den hintergrund zu begewegen

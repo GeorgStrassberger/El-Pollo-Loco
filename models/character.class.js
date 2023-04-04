@@ -1,59 +1,59 @@
 class Character extends MovableObject {
 	IMAGES_WALKING = [
-		"../img/Pepe/walk/W-21.png",
-		"../img/Pepe/walk/W-22.png",
-		"../img/Pepe/walk/W-23.png",
-		"../img/Pepe/walk/W-24.png",
-		"../img/Pepe/walk/W-25.png",
-		"../img/Pepe/walk/W-26.png",
+		"../img/pepe/walk/W-21.png",
+		"../img/pepe/walk/W-22.png",
+		"../img/pepe/walk/W-23.png",
+		"../img/pepe/walk/W-24.png",
+		"../img/pepe/walk/W-25.png",
+		"../img/pepe/walk/W-26.png",
 	];
 	IMAGES_JUMPING = [
-		"../img/Pepe/jump/J-31.png",
-		"../img/Pepe/jump/J-32.png",
-		"../img/Pepe/jump/J-33.png",
-		"../img/Pepe/jump/J-34.png",
-		"../img/Pepe/jump/J-35.png",
-		"../img/Pepe/jump/J-36.png",
-		"../img/Pepe/jump/J-37.png",
-		"../img/Pepe/jump/J-38.png",
-		"../img/Pepe/jump/J-39.png",
+		"../img/pepe/jump/J-31.png",
+		"../img/pepe/jump/J-32.png",
+		"../img/pepe/jump/J-33.png",
+		"../img/pepe/jump/J-34.png",
+		"../img/pepe/jump/J-35.png",
+		"../img/pepe/jump/J-36.png",
+		"../img/pepe/jump/J-37.png",
+		"../img/pepe/jump/J-38.png",
+		"../img/pepe/jump/J-39.png",
 	];
 	IMAGES_DEAD = [
-		"../img/Pepe/dead/D-51.png",
-		"../img/Pepe/dead/D-52.png",
-		"../img/Pepe/dead/D-53.png",
-		"../img/Pepe/dead/D-54.png",
-		"../img/Pepe/dead/D-55.png",
-		"../img/Pepe/dead/D-56.png",
+		"../img/pepe/dead/D-51.png",
+		"../img/pepe/dead/D-52.png",
+		"../img/pepe/dead/D-53.png",
+		"../img/pepe/dead/D-54.png",
+		"../img/pepe/dead/D-55.png",
+		"../img/pepe/dead/D-56.png",
 	];
 	IMAGES_HURT = [
-		"../img/Pepe/hurt/H-41.png",
-		"../img/Pepe/hurt/H-42.png",
-		"../img/Pepe/hurt/H-43.png",
+		"../img/pepe/hurt/H-41.png",
+		"../img/pepe/hurt/H-42.png",
+		"../img/pepe/hurt/H-43.png",
 	];
 	IMAGES_WAIT = [
-		"../img/Pepe/wait/I-1.png",
-		"../img/Pepe/wait/I-2.png",
-		"../img/Pepe/wait/I-3.png",
-		"../img/Pepe/wait/I-4.png",
-		"../img/Pepe/wait/I-5.png",
-		"../img/Pepe/wait/I-6.png",
-		"../img/Pepe/wait/I-7.png",
-		"../img/Pepe/wait/I-8.png",
-		"../img/Pepe/wait/I-9.png",
-		"../img/Pepe/wait/I-10.png",
+		"../img/pepe/wait/I-1.png",
+		"../img/pepe/wait/I-2.png",
+		"../img/pepe/wait/I-3.png",
+		"../img/pepe/wait/I-4.png",
+		"../img/pepe/wait/I-5.png",
+		"../img/pepe/wait/I-6.png",
+		"../img/pepe/wait/I-7.png",
+		"../img/pepe/wait/I-8.png",
+		"../img/pepe/wait/I-9.png",
+		"../img/pepe/wait/I-10.png",
 	];
 	IMAGES_SLEEP = [
-		"../img/Pepe/sleep/I-11.png",
-		"../img/Pepe/sleep/I-12.png",
-		"../img/Pepe/sleep/I-13.png",
-		"../img/Pepe/sleep/I-14.png",
-		"../img/Pepe/sleep/I-15.png",
-		"../img/Pepe/sleep/I-16.png",
-		"../img/Pepe/sleep/I-17.png",
-		"../img/Pepe/sleep/I-18.png",
-		"../img/Pepe/sleep/I-19.png",
-		"../img/Pepe/sleep/I-20.png",
+		"../img/pepe/sleep/I-11.png",
+		"../img/pepe/sleep/I-12.png",
+		"../img/pepe/sleep/I-13.png",
+		"../img/pepe/sleep/I-14.png",
+		"../img/pepe/sleep/I-15.png",
+		"../img/pepe/sleep/I-16.png",
+		"../img/pepe/sleep/I-17.png",
+		"../img/pepe/sleep/I-18.png",
+		"../img/pepe/sleep/I-19.png",
+		"../img/pepe/sleep/I-20.png",
 	];
 	world;
 	x = 120;
@@ -133,8 +133,6 @@ class Character extends MovableObject {
 		document.getElementById("cover").classList.remove("d-none");
 		document.getElementById("endframe").classList.remove("d-none");
 		document.getElementById("startframe").classList.add("d-none");
-		document.getElementById(
-			"coverimg"
-		).src = `../img/9.IntroOutroImage/GameOverScreen/1.you lost.png`;
+		document.getElementById("coverimg").src = "../img/backgounds/you-lost.png";
 	}
 }
