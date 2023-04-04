@@ -22,7 +22,7 @@ function levelOne() {
 			new Cloud(2200),
 		],
 		[
-			new BackgroundObject("../img/backgounds/bg0/bg0.png", -719 - 719),
+			new BackgroundObject("../img/backgounds/bg0/bg0.png", -719),
 			new BackgroundObject("../img/backgounds/bg2/bg2_2.png", -719),
 			new BackgroundObject("../img/backgounds/bg1/bg1_2.png", -719),
 			new BackgroundObject("../img/backgounds/ground/ground2.png", -719),
