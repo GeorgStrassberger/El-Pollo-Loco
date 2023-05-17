@@ -16,7 +16,7 @@ function hideID(id) {
 
 /**
  * Set height HTMLElement by ID.
- * Add CSS class .vh{height: 100vh;}
+ * Add CSS class .vh{height: 100dvh;}
  * @param {string} id
  */
 function viewHeightMax(id) {
@@ -25,7 +25,7 @@ function viewHeightMax(id) {
 
 /**
  * Set height of HTMLElement by ID.
- * Remove CSS class .vh{height: 100vh;}
+ * Remove CSS class .vh{height: 100dvh;}
  * @param {string} id
  */
 function viewHeightNormal(id) {

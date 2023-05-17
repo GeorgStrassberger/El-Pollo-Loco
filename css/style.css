@@ -10,7 +10,7 @@ body {
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	height: 100vh;
+	height: 100dvh;
 }
 .canvas_aera {
 	position: relative;
@@ -112,5 +112,5 @@ canvas {
 
 .vh {
 	/* aspect-ratio: 3/2; */
-	height: 100vh !important;
+	height: 100dvh !important;
 }
