@@ -6,6 +6,8 @@ class DrawableObject {
 	y;
 	height;
 	width;
+	imagesToLoad = 0;
+	imagesLoaded = 0;
 
 	draw(ctx) {
 		//Context Zeichne Bild (Bild, Start X, StartY, Breite, Höhe)
@@ -23,7 +25,13 @@ class DrawableObject {
 	 * @param {string} path
 	 */
 	loadImage(path) {
+		imagesToLoad++;
 		this.img = new Image();
+		this.img.onload = function(){
+			imagesLoaded++;
+			let percent = (imagesLoaded / imagesToLoad) * 100;
+			loadingProgress(percent);
+		}
 		this.img.src = path;
 	}
 
@@ -40,6 +48,7 @@ class DrawableObject {
 			// let img = new Image();
 			// img.src = path;
 			this.imageCache[path] = this.img;
+
 		});
 	}
 

@@ -8,6 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+	<link rel="stylesheet" href="../css/progressbar.css">
 	<link rel="stylesheet" href="../css/keyboard-style.css" />
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/media.css" />
@@ -40,20 +41,22 @@
 	<script src="../levels/level2.js"></script>
 	<script src="../models/world.class.js"></script>
 
-	<script src="../js/util.js"></script>
-	<script src="../js/controlle.js"></script>
+	<script src="../js/util.js" defer></script>
+	<script src="../js/controlle.js" defer></script>
 	<script src="../js/screen.js" defer></script>
-	<script src="../js/sound.js"></script>
-	<script src="../js/game.js"></script>
+	<script src="../js/sound.js" defer></script>
+	<script src="../js/game.js" defer></script>
 
 	<title>El Pollo Loco</title>
 </head>
 
 <body>
 	<div id="canvas_aera" class="canvas_aera">
-		<!-- Stat Screen -->
+
+		<!-- Covers -->
 		<div id="cover" class="cover">
 			<img id="coverimg" src="../img/backgounds/start-screen.png" alt="startscreen" alt="endscreen" />
+			<!-- Stat Screen -->
 			<div id="startframe" class="container">
 				<div class="btn" onclick="startGame()">
 					<a>Game Start</a>
@@ -80,8 +83,15 @@
 			</div>
 		</div>
 
+		<!-- Loading Progressbar -->
+		<div id="progress__frame" class="progress__container">
+			<label for="progressbar" class="progress__label">Loading Images:</label>
+			<progress id="progressbar" class="progress__bar" max="100" value="0"> 0% </progress>
+		</div>
+
+
 		<!-- Screen Btn -->
-		<div id="gameButtons" class="screen_buttons d-none">
+		<div id="settingButtons" class="screen_buttons">
 			<!-- Sound -->
 			<div onclick="musicGame()" class="screen_buttons_box">
 				<img id="game_sound_btn" src="../img/icons/mute32.png" alt="Music ON" />
@@ -114,6 +124,8 @@
 		</div>
 	</div>
 
+
+	
 	<!-- Desktop BTN -->
 	<div id="desktopButtons" class="buttons">
 		<div class="key-box">

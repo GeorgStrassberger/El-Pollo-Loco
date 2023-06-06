@@ -1,20 +1,37 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let imagesToLoad = 0;
+let imagesLoaded = 0;
+
+
+/**
+ * update the viewed progressbar in the template.
+ * @param {number} percent 
+ */
+function loadingProgress(percent){
+	const progressbar = document.getElementById('progressbar');
+	progressbar.value = percent;
+	progressbar.innerText = percent + '%';
+}
+
 
 /**
  *  Start the Game with initilaize the World class
  */
 function startGame() {
 	hideID("cover");
-	showID("gameButtons");
 	canvas = document.getElementById("canvas");
 	world = new World(canvas, keyboard, levelOne());
 }
 
+
+/**
+ * Start next level (2)
+ */
 function startGame2() {
 	hideID("cover");
-	showID("gameButtons");
+	// showID("settingButtons");
 	canvas = document.getElementById("canvas");
 	world = new World(canvas, keyboard, levelTwo());
 }
