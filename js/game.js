@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let imagesToLoad = 0;
 let imagesLoaded = 0;
+let isLoading = false;
 
 
 /**
@@ -13,6 +14,14 @@ function loadingProgress(percent){
 	const progressbar = document.getElementById('progressbar');
 	progressbar.value = percent;
 	progressbar.innerText = percent + '%';
+	if(percent !== 100){
+		console.log('loading....');
+		return isLoading = true;
+
+	}else{
+		hideID('progressFrame');
+		return isLoading = false;
+	}
 }
 
 

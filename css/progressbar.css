@@ -1,4 +1,5 @@
-.progress__container{
+.progress__container {
+    background-color: transparent;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -8,13 +9,10 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    /* background-color: transparent; */
-    /* padding: 2rem; */
-    /* border-radius: 0.5rem; */
-    /* border: 1px solid bslack; */
+    z-index: 10;
 }
 
-.progress__label{
+.progress__label {
     color: gold;
     font-size: 2rem;
     font-weight: bold;
@@ -23,25 +21,48 @@
 
 progress:not([value]) {
     /* Styling here */
- }
+}
 
- progress[value] {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-   appearance: none;
-  width: 20rem;
-  height: 2rem;
-  }
+progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Get rid of default border in Firefox. */
+    border: none;
+
+      /* Dimensions */
+    width: 20rem;
+    height: 2rem;
+
+      /* For IE10 */
+    color: blue; 
+}
 
 progress[value]::-webkit-progress-value {
     background-image:
-         -webkit-linear-gradient(-45deg, 
-                                 transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                                 rgba(0,0, 0, .1) 66%, transparent 66%),
-         -webkit-linear-gradient(top, 
-                                 rgba(255, 255, 255, .25), 
-                                 rgba(0, 0, 0, .25)),
-         -webkit-linear-gradient(left,lightgreen, green);
-      border-radius: 1rem; 
-    }
+        -webkit-linear-gradient(-45deg,
+            transparent 33%, rgba(0, 0, 0, .1) 33%,
+            rgba(0, 0, 0, .1) 66%, transparent 66%),
+        -webkit-linear-gradient(top,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .25)),
+        -webkit-linear-gradient(left, lightgreen, green);
+    border-radius: 1rem;
+}
 
+progress[value]::-moz-progress-bar {
+    background-image:
+        -moz-linear-gradient(135deg,
+            transparent 33%,
+            rgba(0, 0, 0, 0.1) 33%,
+            rgba(0, 0, 0, 0.1) 66%,
+            transparent 66%),
+        -moz-linear-gradient(top,
+            rgba(255, 255, 255, 0.25),
+            rgba(0, 0, 0, 0.25)),
+        -moz-linear-gradient(left, lightgreen, green);
+
+        border-radius: 1rem;
+}
